@@ -198,10 +198,52 @@ export default function Home() {
         </a>
       </nav>
 
-      {/* ── HERO — sticky so tabs scroll up over it ── */}
+      {/* ── MOBILE HERO — stacked layout ── */}
+      <section className="sm:hidden w-full bg-white overflow-hidden pt-6 pb-4 select-none">
+        <div className="flex flex-col items-center gap-2 px-4">
+
+          {/* Bunny stickynote — large, tilted left */}
+          <div className="w-[88%] self-start" style={{ transform: "rotate(-5deg)" }}>
+            <Image
+              src="/bunny-stickynote.png"
+              alt="lydia designs with intention, curiosity, and passion"
+              width={5919} height={5138}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+
+          {/* Carrot stickynote — large, tilted right */}
+          <div className="w-[88%] self-end" style={{ transform: "rotate(5deg)" }}>
+            <Image
+              src="/carrotstickynote.png"
+              alt="studying bfa graphic design and hci at WashU"
+              width={7475} height={8478}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+
+          {/* Logo + buttons */}
+          <div className="flex items-center justify-center gap-5 mt-4 w-full">
+            <Image src="/bunny-logo.png" alt="bunny logo" width={80} height={80} className="w-16 h-16" />
+            <div className="flex flex-col gap-2">
+              <button onClick={() => { setActiveTab("work"); scrollToTabs(); }}>
+                <Image src="/productdesignerbutton.png" alt="product designer" width={2562} height={1046} className="w-36 h-auto" />
+              </button>
+              <button onClick={() => { setActiveTab("about"); scrollToTabs(); }}>
+                <Image src="/aboutme-button.png" alt="about me" width={2553} height={939} className="w-32 h-auto" />
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── DESKTOP HERO — draggable canvas, sticky ── */}
       <section
         ref={heroWrapRef}
-        className="w-full select-none sticky top-20 z-10 bg-white overflow-hidden"
+        className="w-full select-none hidden sm:block sticky top-20 z-10 bg-white overflow-hidden"
         style={{ height: 580 * heroScale }}
       >
         <div
