@@ -669,9 +669,9 @@ export default function Home() {
                 <div id="about-experience" className="flex flex-col lg:flex-row gap-4 lg:gap-0 items-start mb-16">
                   <div className="lg:shrink-0 lg:w-1/2">
                     <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">Experience</h3>
-                    <a href="/Lydia-Park-Resume-2026.pdf" target="_blank" rel="noopener noreferrer"
+                    <a href="/Lydia-Park-Resume-2026.pdf" download="Lydia-Park-Resume-2026.pdf"
                       className="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-[#e8edff] text-[#1D4ED8] text-[11px] font-semibold hover:bg-[#d0daff] active:scale-95 transition-all duration-150">
-                      Resume ↗
+                      Resume ↓
                     </a>
                   </div>
                   <div className="flex-1 space-y-6">
