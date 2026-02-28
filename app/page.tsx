@@ -79,7 +79,9 @@ export default function Home() {
     const update = () => {
       if (heroWrapRef.current) {
         const w = heroWrapRef.current.offsetWidth;
-        setHeroScale(Math.min(1, w / 1100));
+        // Use smaller base on mobile so items appear bigger (accepts slight edge clipping)
+        const base = w < 640 ? 680 : 1100;
+        setHeroScale(Math.min(1, w / base));
       }
     };
     update();
@@ -218,7 +220,7 @@ export default function Home() {
           {/* Reset button */}
           <button
             onClick={resetLayout}
-            className="absolute top-5 right-4 z-50 text-[11px] text-[#6e6e73] hover:text-[#1D4ED8] transition-colors bg-[#f5f5f7] hover:bg-[#e8e8ed] border border-[#e5e5e7] rounded-full px-3 py-1.5 shadow-sm"
+            className="absolute top-5 right-4 z-50 text-sm text-[#6e6e73] hover:text-[#1D4ED8] transition-colors bg-[#f5f5f7] hover:bg-[#e8e8ed] border border-[#e5e5e7] rounded-full px-5 py-2.5 shadow-sm font-medium"
           >
             reset layout
           </button>
