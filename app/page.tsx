@@ -654,10 +654,6 @@ export default function Home() {
                         <p>Right now I&apos;m diving into <strong>visual storytelling, UI/UX, and interactive design</strong> — projects that mix strategy with emotion; designs that don&apos;t just look good, but feel right.</p>
                         <p>When I&apos;m not designing I&apos;m probably sipping matcha, listening to music, or daydreaming about my next painting.</p>
                       </div>
-                      <a href="mailto:liapaark@gmail.com" className="inline-flex items-center gap-2 pt-4 text-[13px] text-[#1D4ED8] font-medium hover:opacity-70 transition-opacity">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-                        Working on something cool? Get in <span className="w-2 h-2 rounded-full bg-[#4169e1] inline-block mx-1" /> <strong>touch!</strong>
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -671,17 +667,17 @@ export default function Home() {
                     <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">Experience</h3>
                     <a href="/Lydia-Park-Resume-2026.pdf" download="Lydia-Park-Resume-2026.pdf"
                       className="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-[#e8edff] text-[#1D4ED8] text-[11px] font-semibold hover:bg-[#d0daff] active:scale-95 transition-all duration-150">
-                      Resume ↓
+                      Resume ↗
                     </a>
                   </div>
                   <div className="flex-1 space-y-6">
                     {[
-                      { name: "Skandalaris Design Agency", role: "Creator / Product Designer", period: "Aug 2025–Present",  logo: "/images/about/logo-washu.png",         contain: false },
-                      { name: "SPARC",                     role: "UI/UX & Web Designer",  period: "Sept 2025–Present", logo: "/images/about/logo-sparc.png",         contain: false },
-                      { name: "Product Space",             role: "VP of Design",          period: "Aug 2025–Present",  logo: "/images/about/logo-product-space.png", contain: true  },
-                      { name: "Bear Studios LLC",          role: "Design Consultant",     period: "Aug 2025–Present",  logo: "/images/about/logo-bear-studios.png",  contain: false },
-                      { name: "PLOT App",                  role: "Lead Product Designer", period: "July 2025–Present", logo: null,                                   contain: false },
-                    ].map(({ name, role, period, logo, contain }) => (
+                      { name: "Skandalaris Design Agency", role: "Creator / Product Designer", period: "Aug 2025–Present",  logo: "/images/about/logo-washu.png",         contain: false, href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/" },
+                      { name: "SPARC",                     role: "UI/UX & Web Designer",  period: "Sept 2025–Present", logo: "/images/about/logo-sparc.png",         contain: false, href: null },
+                      { name: "Product Space",             role: "VP of Design",          period: "Aug 2025–Present",  logo: "/images/about/logo-product-space.png", contain: true,  href: "https://www.washuproduct.com/" },
+                      { name: "Bear Studios LLC",          role: "Design Consultant",     period: "Aug 2025–Present",  logo: "/images/about/logo-bear-studios.png",  contain: false, href: null },
+                      { name: "PLOT App",                  role: "Lead Product Designer", period: "July 2025–Present", logo: null,                                   contain: false, href: null },
+                    ].map(({ name, role, period, logo, contain, href }) => (
                       <div key={name} className="flex items-center gap-5">
                         <div className="w-16 h-16 rounded-full flex items-center justify-center shrink-0 border border-[#e8e8ed] overflow-hidden" style={{ background: "#f5f5f7" }}>
                           {logo ? (
@@ -692,7 +688,11 @@ export default function Home() {
                           )}
                         </div>
                         <div className="flex-1">
-                          <p className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{name}</p>
+                          {href ? (
+                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-[15px] font-semibold text-[#1d1d1f] hover:text-[#1D4ED8] transition-colors mb-0.5 block">{name} ↗</a>
+                          ) : (
+                            <p className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{name}</p>
+                          )}
                           <p className="text-[13px] text-[#6e6e73]">{role}<span className="text-[#c0c0c0] mx-1">,</span>{period}</p>
                         </div>
                       </div>
@@ -711,20 +711,20 @@ export default function Home() {
                       {
                         dot: "#1D4ED8", name: "Asian Multicultural Council", role: "Public Relations Chair",
                         desc: "Organizing cultural events and building community across WashU's diverse student population with 30+ events annually.",
-                        img: "/images/about/amc.png", alt: "AMC group photo",
+                        img: "/images/about/amc.png", alt: "AMC group photo", href: "https://www.instagram.com/wustlamc/",
                       },
                       {
                         dot: "#5c3fd1", name: "Skandalaris Design Agency", role: "Agency Web Designer",
                         desc: "Designing web experiences for student entrepreneurs at WashU's interdisciplinary innovation center.",
-                        img: "/images/about/skandalaris.png", alt: "Skandalaris Center",
+                        img: "/images/about/skandalaris.png", alt: "Skandalaris Center", href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/",
                       },
                       {
                         dot: "#e84a4a", name: "Product Space", role: "Product Design Fellow",
                         desc: "Selected as a fellow to develop product design skills through mentorship, workshops, and real-world projects.",
-                        img: "/images/about/product-space.png", alt: "Product Space fellows",
+                        img: "/images/about/product-space.png", alt: "Product Space fellows", href: "https://www.washuproduct.com/",
                       },
-                    ].map(({ dot, name, role, desc, img, alt }) => (
-                      <div key={name} className="border border-[#e5e5e7] rounded-2xl overflow-hidden bg-white hover:shadow-sm transition-shadow">
+                    ].map(({ dot, name, role, desc, img, alt, href }) => (
+                      <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block border border-[#e5e5e7] rounded-2xl overflow-hidden bg-white hover:shadow-sm transition-shadow">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={alt} className="w-full h-64 object-cover" />
                         <div className="p-4">
@@ -735,7 +735,7 @@ export default function Home() {
                           <p className="text-[11px] text-[#8e8e93] mb-2">{role}</p>
                           <p className="text-[11px] text-[#6e6e73] leading-relaxed">{desc}</p>
                         </div>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
