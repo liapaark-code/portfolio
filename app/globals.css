@@ -13,11 +13,15 @@
 
 html, body {
   scroll-behavior: smooth;
-  cursor: none;
 }
 
-*, *::before, *::after {
-  cursor: none !important;
+@media (pointer: fine) {
+  html, body {
+    cursor: none;
+  }
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 @keyframes bunny-walk {

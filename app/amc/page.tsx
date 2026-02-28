@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "../components/Footer";
 
 export default function AmcCaseStudy() {
   return (
@@ -275,25 +276,7 @@ export default function AmcCaseStudy() {
         </div>
 
         {/* ── FOOTER ── */}
-        <footer className="border-t border-[#d0daff] bg-[#e8edff] px-4 sm:px-8 py-12 mt-4">
-          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:justify-between gap-8 sm:gap-0">
-            <div>
-              <p className="text-sm font-bold text-[#1D4ED8] mb-1">lydia park</p>
-              <p className="text-xs text-gray-500">Thanks for dropping in, let&apos;s chat!</p>
-            </div>
-            <div className="flex gap-10 text-sm text-gray-500">
-              <a href="/" className="hover:text-[#1D4ED8] transition-colors">(work)</a>
-              <a href="#" className="hover:text-[#1D4ED8] transition-colors">(gallery)</a>
-              <a href="#" className="hover:text-[#1D4ED8] transition-colors">(about)</a>
-            </div>
-            <div className="sm:text-right">
-              <a href="mailto:liapaark@gmail.com" className="text-sm text-gray-500 hover:text-[#1D4ED8] transition-colors block mb-1">liapaark@gmail.com</a>
-              <a href="https://linkedin.com" className="text-sm text-gray-500 hover:text-[#1D4ED8] transition-colors block mb-3">LinkedIn</a>
-              <p className="text-xs text-gray-500">Built in Next.js &amp; with love</p>
-              <p className="text-xs text-gray-500">@Lydia Park 2026</p>
-            </div>
-          </div>
-        </footer>
+        <Footer />
 
       </main>
     </div>

@@ -6,6 +6,9 @@ export default function CustomCursor() {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
+    // Don't show custom cursor on touch/mobile devices
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
     const move = (e: MouseEvent) => {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {

@@ -23,7 +23,11 @@ export const metadata: Metadata = {
   title: "Lydia Park",
   description: "Portfolio",
   icons: {
-    icon: "/favicon2.png",
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon2.png",   sizes: "any" },
+    ],
   },
 };
 
@@ -33,8 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ cursor: "none" }}>
-      <body className={`${clother.variable} antialiased`} style={{ cursor: "none" }}>
+    <html lang="en">
+      <body className={`${clother.variable} antialiased`}>
         <CustomCursor />
         <SmoothScroll />
         <ScrollReveal />
