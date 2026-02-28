@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Lydia Park",
   description: "Portfolio",
   icons: {
-    icon: "/logo1.png",
+    icon: "/favicon2.png",
   },
 };
 
