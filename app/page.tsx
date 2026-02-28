@@ -855,8 +855,8 @@ export default function Home() {
       )}
 
       {/* ── FOOTER ── */}
-      <footer className="relative z-30 px-10 py-12 border-t border-[#e5e5e7] bg-white">
-        <div className="max-w-5xl mx-auto flex items-start justify-between">
+      <footer className="relative z-30 px-4 sm:px-10 py-12 border-t border-[#e5e5e7] bg-white">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:justify-between gap-8 sm:gap-0">
           <div>
             <p className="text-sm font-bold text-[#1D4ED8] mb-1">lydia park</p>
             <p className="text-xs text-[#8e8e93]">Thanks for dropping in, let&apos;s chat!</p>
@@ -866,7 +866,7 @@ export default function Home() {
             <button onClick={() => { setActiveTab("gallery"); scrollToTabs(); }} className="hover:text-[#1D4ED8] transition-colors">(gallery)</button>
             <button onClick={() => { setActiveTab("about");   scrollToTabs(); }} className="hover:text-[#1D4ED8] transition-colors">(about)</button>
           </div>
-          <div className="text-right">
+          <div className="sm:text-right">
             <a href="mailto:liapaark@gmail.com" className="text-sm text-[#8e8e93] hover:text-[#1D4ED8] transition-colors block mb-1">liapaark@gmail.com</a>
             <a href="https://linkedin.com"      className="text-sm text-[#8e8e93] hover:text-[#1D4ED8] transition-colors block mb-3">LinkedIn</a>
             <p className="text-xs text-[#8e8e93]">Built in Next.js &amp; with love</p>

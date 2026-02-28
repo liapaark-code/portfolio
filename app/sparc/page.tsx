@@ -949,8 +949,8 @@ export default function SparcCaseStudy() {
         </div>
 
         {/* ── FOOTER ── */}
-        <footer className="border-t border-[#d0daff] bg-[#e8edff] px-8 py-12 mt-4">
-          <div className="max-w-5xl mx-auto flex items-start justify-between">
+        <footer className="border-t border-[#d0daff] bg-[#e8edff] px-4 sm:px-8 py-12 mt-4">
+          <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:justify-between gap-8 sm:gap-0">
             <div>
               <p className="text-sm font-bold text-[#080CD6] mb-1">lydia park</p>
               <p className="text-xs text-gray-500">Thanks for dropping in, let&apos;s chat!</p>
@@ -960,7 +960,7 @@ export default function SparcCaseStudy() {
               <a href="#" className="hover:text-[#080CD6] transition-colors">(gallery)</a>
               <a href="#" className="hover:text-[#080CD6] transition-colors">(about)</a>
             </div>
-            <div className="text-right">
+            <div className="sm:text-right">
               <a href="mailto:liapaark@gmail.com" className="text-sm text-gray-500 hover:text-[#080CD6] transition-colors block mb-1">liapaark@gmail.com</a>
               <a href="https://linkedin.com" className="text-sm text-gray-500 hover:text-[#080CD6] transition-colors block mb-3">LinkedIn</a>
               <p className="text-xs text-gray-500">Built in Next.js &amp; with love</p>
