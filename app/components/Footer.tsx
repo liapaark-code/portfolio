@@ -2,19 +2,19 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#e5e5e7] bg-white px-10 py-10 mt-4">
+    <footer className="border-t border-[#e5e5e7] bg-white px-16 py-10 mt-4">
 
       {/* 3-column desktop, stacked mobile */}
       <div className="flex flex-col sm:grid sm:grid-cols-3 sm:items-start gap-8 mb-10">
 
         {/* Left: name */}
         <div>
-          <p className="text-base font-bold text-[#1d1d1f]">lydia park</p>
+          <p className="text-base font-bold text-[#1D4ED8]">lydia park</p>
         </div>
 
         {/* Center: nav */}
         <div className="flex flex-col gap-2.5">
-          <Link href="/"            className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(work)</Link>
+          <Link href="/"             className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(work)</Link>
           <Link href="/?tab=gallery" className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(gallery)</Link>
           <Link href="/?tab=about"   className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(about)</Link>
         </div>

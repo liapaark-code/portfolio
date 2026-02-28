@@ -857,14 +857,14 @@ export default function Home() {
       )}
 
       {/* ── FOOTER ── */}
-      <footer className="relative z-30 border-t border-[#e5e5e7] bg-white px-10 py-10 mt-4">
+      <footer className="relative z-30 border-t border-[#e5e5e7] bg-white px-16 py-10 mt-4">
 
         {/* 3-column desktop, stacked mobile */}
         <div className="flex flex-col sm:grid sm:grid-cols-3 sm:items-start gap-8 mb-10">
 
           {/* Left: name */}
           <div>
-            <p className="text-base font-bold text-[#1d1d1f]">lydia park</p>
+            <p className="text-base font-bold text-[#1D4ED8]">lydia park</p>
           </div>
 
           {/* Center: nav */}
