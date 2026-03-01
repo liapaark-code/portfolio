@@ -172,8 +172,7 @@ export default function CopilotCaseStudy() {
             We set out to understand how real users experience Copilot in their day-to-day Microsoft workflows — identifying friction points and designing toward an AI that feels like a natural extension of the tools they already use.
           </p>
           <div className="w-full rounded-2xl overflow-hidden border border-gray-100">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/copilot-ui-overview.gif" alt="Copilot UI overview" className="w-full h-auto" />
+            <video src="/images/copilot-ui-overview.mp4" autoPlay loop muted playsInline className="w-full h-auto" />
           </div>
         </Section>
 

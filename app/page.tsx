@@ -484,7 +484,7 @@ export default function Home() {
                 { id: "gallery-collage",  label: "Collage",  count: collages.length },
               ]},
               { group: "Digital", items: [
-                { id: "gallery-type",        label: "Type and Letterform", count: typeWork.length },
+                { id: "gallery-type",        label: "Type", count: typeWork.length },
                 { id: "gallery-digital-art", label: "Digital Art",         count: digitalArt.length },
               ]},
             ];
@@ -630,26 +630,26 @@ export default function Home() {
 
                 {/* ── BIO ── */}
                 <div id="about-bio" className="flex flex-col lg:flex-row gap-8 lg:items-stretch mb-16">
-                  <div className="lg:shrink-0 lg:w-64 flex flex-col">
+                  <div className="lg:shrink-0 lg:w-64 flex flex-col items-center lg:items-stretch">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/images/about/headshot.jpg"
                       alt="Lydia Park"
-                      className="w-full h-72 lg:h-0 lg:flex-1 rounded-2xl object-cover shadow-sm border border-[#e5e5e7]"
+                      className="w-64 h-72 lg:w-full lg:h-0 lg:flex-1 rounded-2xl object-cover shadow-sm border border-[#e5e5e7]"
                       style={{ objectPosition: "center top" }}
                     />
-                    <p className="text-[10px] text-[#8e8e93] mt-2 text-center leading-relaxed">At a hanok village in Korea ☁️</p>
+                    <p className="text-xs text-[#8e8e93] mt-2 text-center leading-relaxed">At a hanok village in Korea ☁️</p>
                   </div>
                   <div className="flex-1 min-w-0 lg:pt-1 flex flex-col">
-                    <h2 className="text-[22px] font-bold text-[#1d1d1f] mb-3">Hi, I&apos;m Lydia!</h2>
-                    <div className="flex items-center gap-1.5 text-[11px] text-[#8e8e93] mb-5 flex-wrap">
+                    <h2 className="text-[26px] font-bold text-[#1d1d1f] mb-3">Hi, I&apos;m Lydia!</h2>
+                    <div className="flex items-center gap-1.5 text-[13px] text-[#8e8e93] mb-5 flex-wrap">
                       <span>📍 St. Louis, MO</span>
                       <span className="text-[#d0d0d5]">/</span>
                       <span>🎓 Comm Design B.F.A. + HCI</span>
                       <span className="text-[#d0d0d5]">/</span>
                       <span>WashU &apos;28</span>
                     </div>
-                    <div className="flex-1 rounded-2xl bg-white border border-[#e5e5e7] p-6 flex flex-col justify-between text-[15px] text-[#3a3a3c] leading-[1.75]">
+                    <div className="flex-1 rounded-2xl bg-white border border-[#e5e5e7] p-6 flex flex-col justify-between text-[16px] text-[#3a3a3c] leading-[1.75]">
                       <div className="space-y-4">
                         <p>I&apos;m a <strong>Communication Design major (B.F.A.) with a minor in Human-Computer Interaction Design at WashU</strong> — but more than that, I&apos;m someone who&apos;s always creating.</p>
                         <p>My journey started doodling bunnies in notebook corners and evolved into painting murals, designing t-shirts, and building visual stories that connect people. I love finding that sweet spot where creativity meets purpose.</p>
@@ -666,7 +666,7 @@ export default function Home() {
                 {/* ── EXPERIENCE ── */}
                 <div id="about-experience" className="flex flex-col lg:flex-row gap-4 lg:gap-0 items-start mb-16">
                   <div className="lg:shrink-0 lg:w-1/2">
-                    <h3 className="text-lg font-bold text-[#1d1d1f] mb-1">Experience</h3>
+                    <h3 className="text-xl font-bold text-[#1d1d1f] mb-1">Experience</h3>
                     <a href="/Lydia-Park-Resume-2026.pdf" download="Lydia-Park-Resume-2026.pdf"
                       className="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-[#e8edff] text-[#1D4ED8] text-[11px] font-semibold hover:bg-[#d0daff] active:scale-95 transition-all duration-150">
                       Resume ↗
@@ -691,11 +691,11 @@ export default function Home() {
                         </div>
                         <div className="flex-1">
                           {href ? (
-                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-[15px] font-semibold text-[#1d1d1f] hover:text-[#1D4ED8] transition-colors mb-0.5 block">{name} ↗</a>
+                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-[17px] font-semibold text-[#1d1d1f] hover:text-[#1D4ED8] transition-colors mb-0.5 block">{name} ↗</a>
                           ) : (
-                            <p className="text-[15px] font-semibold text-[#1d1d1f] mb-0.5">{name}</p>
+                            <p className="text-[17px] font-semibold text-[#1d1d1f] mb-0.5">{name}</p>
                           )}
-                          <p className="text-[13px] text-[#6e6e73]">{role}<span className="text-[#c0c0c0] mx-1">,</span>{period}</p>
+                          <p className="text-[15px] text-[#6e6e73]">{role}<span className="text-[#c0c0c0] mx-1">,</span>{period}</p>
                         </div>
                       </div>
                     ))}
@@ -707,7 +707,7 @@ export default function Home() {
 
                 {/* ── COMMUNITY / LEADERSHIP ── */}
                 <div id="about-leadership" className="mb-16">
-                  <h3 className="text-lg font-bold text-[#1d1d1f] mb-6">Community</h3>
+                  <h3 className="text-xl font-bold text-[#1d1d1f] mb-6">Community</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {[
                       {
@@ -726,16 +726,16 @@ export default function Home() {
                         img: "/images/about/product-space.png", alt: "Product Space fellows", href: "https://www.washuproduct.com/",
                       },
                     ].map(({ dot, name, role, desc, img, alt, href }) => (
-                      <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block border border-[#e5e5e7] rounded-2xl overflow-hidden bg-white hover:shadow-sm transition-shadow">
+                      <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block border border-[#e5e5e7] rounded-2xl overflow-hidden bg-white hover:bg-[#f0f4ff] hover:border-[#d0daff] transition-colors">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={alt} className="w-full h-64 object-cover" />
                         <div className="p-4">
                           <div className="flex items-center gap-1.5 mb-1">
                             <span className="w-2 h-2 rounded-full shrink-0" style={{ background: dot }} />
-                            <p className="text-[12px] font-semibold text-[#1d1d1f]">{name}</p>
+                            <p className="text-sm font-semibold text-[#1d1d1f]">{name}</p>
                           </div>
-                          <p className="text-[11px] text-[#8e8e93] mb-2">{role}</p>
-                          <p className="text-[11px] text-[#6e6e73] leading-relaxed">{desc}</p>
+                          <p className="text-[13px] text-[#8e8e93] mb-2">{role}</p>
+                          <p className="text-[13px] text-[#6e6e73] leading-relaxed">{desc}</p>
                         </div>
                       </a>
                     ))}
@@ -748,7 +748,7 @@ export default function Home() {
                 {/* ── VALUES ── */}
                 <div id="about-values" className="flex flex-col lg:flex-row gap-4 lg:gap-12 items-start mb-16">
                   <div className="lg:shrink-0 lg:w-36">
-                    <h3 className="text-lg font-bold text-[#1d1d1f]">Values</h3>
+                    <h3 className="text-xl font-bold text-[#1d1d1f]">Values</h3>
                   </div>
                   <div className="flex-1 grid grid-cols-2 gap-3">
                     {[
@@ -759,8 +759,8 @@ export default function Home() {
                     ].map(({ title, desc }) => (
                       <div key={title} className="border border-[#d0daff] rounded-2xl p-4 bg-[#e8edff] hover:bg-[#d8e4ff] transition-colors">
                         <p className="text-[#1D4ED8] text-sm mb-2">✦</p>
-                        <p className="text-[12px] font-semibold text-[#1d1d1f] mb-1">{title}</p>
-                        <p className="text-[11px] text-[#8e8e93] leading-relaxed">{desc}</p>
+                        <p className="text-sm font-semibold text-[#1d1d1f] mb-1">{title}</p>
+                        <p className="text-xs text-[#8e8e93] leading-relaxed">{desc}</p>
                       </div>
                     ))}
                   </div>
@@ -773,8 +773,8 @@ export default function Home() {
                 <div id="about-photos">
                   <div className="flex flex-col lg:flex-row gap-4 lg:gap-12 items-start">
                     <div className="lg:shrink-0 lg:w-36">
-                      <h3 className="text-lg font-bold text-[#1d1d1f]">Life Photos!</h3>
-                      <p className="text-[10px] text-[#8e8e93] mt-1 leading-relaxed">doggo, art, beaches, fields, matcha</p>
+                      <h3 className="text-xl font-bold text-[#1d1d1f]">Life Photos!</h3>
+                      <p className="text-xs text-[#8e8e93] mt-1 leading-relaxed">doggo, art, beaches, fields, matcha</p>
                     </div>
                     <div className="flex-1">
                       <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: "none" }}>
