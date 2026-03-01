@@ -501,7 +501,7 @@ export default function Home() {
                   <div className="sticky top-24 space-y-5">
                     {navItems.map(({ group, items }) => (
                       <div key={group}>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-black opacity-30 mb-2">{group}</p>
+                        <p className="text-sm font-semibold uppercase tracking-[0.14em] text-black mb-2">{group}</p>
                         <div className="space-y-1.5">
                           {items.map(({ id, label, count }) => (
                             <button
@@ -509,8 +509,8 @@ export default function Home() {
                               onClick={() => scrollTo(id)}
                               className="flex items-center gap-1.5 text-left w-full transition-all duration-200"
                             >
-                              <span className={`text-xs transition-colors duration-200 ${activeGallerySection === id ? "text-[#1D4ED8] font-semibold" : "text-gray-400 hover:text-[#4169e1]"}`}>{label}</span>
-                              <span className={`text-[10px] transition-colors duration-200 ${activeGallerySection === id ? "text-[#4169e1]" : "text-gray-300"}`}>({count})</span>
+                              <span className={`text-base transition-colors duration-200 ${activeGallerySection === id ? "text-[#1D4ED8] font-semibold" : "text-gray-400 hover:text-[#4169e1]"}`}>{label}</span>
+                              <span className={`text-sm transition-colors duration-200 ${activeGallerySection === id ? "text-[#4169e1]" : "text-gray-300"}`}>({count})</span>
                             </button>
                           ))}
                         </div>
@@ -602,8 +602,8 @@ export default function Home() {
               <div className="hidden lg:block w-32 shrink-0">
                 <div className="sticky top-24 space-y-6">
                   <div>
-                    <p className="text-xs font-bold text-[#1d1d1f]">lydia park</p>
-                    <p className="text-[10px] text-[#8e8e93] mt-1 leading-relaxed">design + hci · washu ʼ28</p>
+                    <p className="text-base font-bold text-[#1d1d1f]">lydia park</p>
+                    <p className="text-sm text-[#8e8e93] mt-1 leading-relaxed">design + hci · washu ʼ28</p>
                   </div>
                   <nav className="space-y-2.5">
                     {[
@@ -616,7 +616,7 @@ export default function Home() {
                       <button
                         key={id}
                         onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
-                        className={`block text-xs text-left transition-colors duration-200 ${activeAboutSection === id ? "text-[#1D4ED8] font-semibold" : "text-[#8e8e93] hover:text-[#4169e1]"}`}
+                        className={`block text-base text-left transition-colors duration-200 ${activeAboutSection === id ? "text-[#1D4ED8] font-semibold" : "text-[#8e8e93] hover:text-[#4169e1]"}`}
                       >
                         {label}
                       </button>
