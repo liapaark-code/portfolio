@@ -868,7 +868,7 @@ export default function Home() {
           </div>
 
           {/* Center: nav */}
-          <div className="flex flex-col gap-2.5 sm:items-center">
+          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-6">
             <button onClick={() => { setActiveTab("work");    scrollToTabs(); }} className="text-left text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(work)</button>
             <button onClick={() => { setActiveTab("gallery"); scrollToTabs(); }} className="text-left text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(gallery)</button>
             <button onClick={() => { setActiveTab("about");   scrollToTabs(); }} className="text-left text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(about)</button>

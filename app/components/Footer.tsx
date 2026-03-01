@@ -13,7 +13,7 @@ export default function Footer() {
         </div>
 
         {/* Center: nav */}
-        <div className="flex flex-col gap-2.5 sm:items-center">
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-6">
           <Link href="/"             className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(work)</Link>
           <Link href="/?tab=gallery" className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(gallery)</Link>
           <Link href="/?tab=about"   className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(about)</Link>
