@@ -195,7 +195,7 @@ export default function Home() {
 
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0]">
-        <a href="/" className="text-sm font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
+        <a href="/" className="text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
           lydia park
         </a>
       </nav>
