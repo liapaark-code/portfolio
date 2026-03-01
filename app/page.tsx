@@ -23,6 +23,7 @@ export default function Home() {
   const [pos, setPos] = useState<Record<string, Pos>>(DEFAULTS);
   const [draggingKey, setDraggingKey] = useState<string | null>(null);
   const [heroScale, setHeroScale] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
   const [lightbox, setLightbox] = useState<{ images: { src: string; title: string }[]; index: number; category: string } | null>(null);
   const [activeGallerySection, setActiveGallerySection] = useState("gallery-painting");
   const [activeAboutSection, setActiveAboutSection] = useState("about-bio");
@@ -82,6 +83,7 @@ export default function Home() {
         // Use smaller base on mobile so items appear bigger (accepts slight edge clipping)
         const base = w < 640 ? 680 : 1100;
         setHeroScale(Math.min(1, w / base));
+        setIsMobile(w < 640);
       }
     };
     update();
@@ -283,7 +285,7 @@ export default function Home() {
 
           {/* ── 4. Walking bunny GIF ── */}
           <div
-            style={wrapStyle("gif", 4, 58)}
+            style={wrapStyle("gif", 4, isMobile ? 85 : 58)}
             onMouseDown={drag("gif")}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -296,7 +298,7 @@ export default function Home() {
 
           {/* ── 5. "product designer" button ── */}
           <div
-            style={wrapStyle("pdBtn", 5, 150, 5)}
+            style={wrapStyle("pdBtn", 5, isMobile ? 200 : 150, 5)}
             onMouseDown={drag("pdBtn", () => {
               setActiveTab("work");
               scrollToTabs();
@@ -314,7 +316,7 @@ export default function Home() {
 
           {/* ── 6. "about me" button — click navigates to about tab ── */}
           <div
-            style={wrapStyle("aboutBtn", 5, 145, -2)}
+            style={wrapStyle("aboutBtn", 5, isMobile ? 195 : 145, -2)}
             onMouseDown={drag("aboutBtn", () => {
               setActiveTab("about");
               scrollToTabs();

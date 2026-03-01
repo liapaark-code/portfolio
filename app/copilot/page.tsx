@@ -282,10 +282,10 @@ export default function CopilotCaseStudy() {
         <Section label="Design Explorations" heading="Inline Final Designs: Flow 1–4" fullWidth>
           <div className="flex flex-col gap-6">
             {[
-              { src: "/images/copilot-flow1.gif", feature: "Feature: Built-in Scheduling",  label: "Flow 1 — Schedule Meeting",   desc: "Copilot detects scheduling intent inline and surfaces available times directly in the compose window — no context switch required.",   outcome: "Reduced scheduling friction by surfacing meeting times inline, cutting the steps needed to book from 5+ actions to a single tap." },
-              { src: "/images/copilot-flow2.gif", feature: "Feature: Improve Writing",       label: "Flow 2 — Draft Email",         desc: "AI drafts a full email from a short prompt, keeping the user anchored in the compose flow while maintaining full editorial control.",    outcome: "Improved draft speed and writing confidence by generating complete emails inline — keeping users in the compose window from start to send." },
-              { src: "/images/copilot-flow3.gif", feature: "Feature: Improve Writing",       label: "Flow 3 — Smart Reply",         desc: "Copilot reads the incoming message and generates contextually appropriate reply options that match the user's tone and intent.",          outcome: "Increased reply relevance by grounding Copilot responses to the active thread, reducing back-and-forth and cutting response time." },
-              { src: "/images/copilot-flow4.gif", feature: "Feature: Response Templates",   label: "Flow 4 — Response Templates",  desc: "Frequently used reply patterns surface as one-tap templates, reducing repetitive writing and speeding up high-volume workflows.",       outcome: "Reduced repetitive writing effort for high-volume users by surfacing reusable reply patterns directly in the compose experience." },
+              { src: "/images/copilot-flow1.mp4", feature: "Feature: Built-in Scheduling",  label: "Flow 1 — Schedule Meeting",   desc: "Copilot detects scheduling intent inline and surfaces available times directly in the compose window — no context switch required.",   outcome: "Reduced scheduling friction by surfacing meeting times inline, cutting the steps needed to book from 5+ actions to a single tap." },
+              { src: "/images/copilot-flow2.mp4", feature: "Feature: Improve Writing",       label: "Flow 2 — Draft Email",         desc: "AI drafts a full email from a short prompt, keeping the user anchored in the compose flow while maintaining full editorial control.",    outcome: "Improved draft speed and writing confidence by generating complete emails inline — keeping users in the compose window from start to send." },
+              { src: "/images/copilot-flow3.mp4", feature: "Feature: Improve Writing",       label: "Flow 3 — Smart Reply",         desc: "Copilot reads the incoming message and generates contextually appropriate reply options that match the user's tone and intent.",          outcome: "Increased reply relevance by grounding Copilot responses to the active thread, reducing back-and-forth and cutting response time." },
+              { src: "/images/copilot-flow4.mp4", feature: "Feature: Response Templates",   label: "Flow 4 — Response Templates",  desc: "Frequently used reply patterns surface as one-tap templates, reducing repetitive writing and speeding up high-volume workflows.",       outcome: "Reduced repetitive writing effort for high-volume users by surfacing reusable reply patterns directly in the compose experience." },
             ].map((f) => (
               <div key={f.src} className="border border-gray-200 rounded-2xl overflow-hidden transition-colors duration-200 hover:border-[#4169e1] hover:bg-[#f0f4ff]/40">
                 <div className="px-6 pt-5 pb-3">
@@ -293,8 +293,7 @@ export default function CopilotCaseStudy() {
                   <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-1">{f.label}</p>
                   <p className="text-sm text-gray-500">{f.desc}</p>
                 </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={f.src} alt={f.label} className="w-full h-auto" />
+                <video src={f.src} autoPlay loop muted playsInline className="w-full h-auto" />
                 <div className="px-6 py-4 bg-[#f0f4ff] border-t border-[#d0daff]">
                   <p className="text-sm font-bold text-gray-600 leading-relaxed">
                     <strong className="text-[#4169e1]">OUTCOME:</strong>{" "}{f.outcome}
