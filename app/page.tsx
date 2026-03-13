@@ -15,7 +15,18 @@ const DEFAULTS: Record<string, Pos> = {
   aboutBtn: { x: 609, y: 347 },
 };
 
-const STORAGE_KEY = "lydia-hero-pos";
+/** Mobile default positions */
+const MOBILE_DEFAULTS: Record<string, Pos> = {
+  bunny:    { x: 194, y: 17  },
+  carrot:   { x: 444, y: 135 },
+  logo:     { x: 299, y: 391 },
+  gif:      { x: 241, y: 89  },
+  pdBtn:    { x: 619, y: 50  },
+  aboutBtn: { x: 551, y: 105 },
+};
+
+const STORAGE_KEY_DESKTOP = "lydia-hero-pos";
+const STORAGE_KEY_MOBILE  = "lydia-hero-pos-mobile";
 const STORAGE_VERSION = 2;
 
 export default function Home() {
@@ -27,6 +38,7 @@ export default function Home() {
   const [lightbox, setLightbox] = useState<{ images: { src: string; title: string }[]; index: number; category: string } | null>(null);
   const [activeGallerySection, setActiveGallerySection] = useState("gallery-painting");
   const [activeAboutSection, setActiveAboutSection] = useState("about-bio");
+  const [expandedExp, setExpandedExp] = useState<string | null>(null);
   // ref so hover handlers can read dragging state synchronously
   const draggingRef = useRef<string | null>(null);
   const heroWrapRef = useRef<HTMLElement>(null);
@@ -80,7 +92,7 @@ export default function Home() {
     const update = () => {
       if (heroWrapRef.current) {
         const w = heroWrapRef.current.offsetWidth;
-        const base = 1100;
+        const base = w < 640 ? 800 : 1100;
         setHeroScale(Math.min(1, w / base));
         setIsMobile(w < 640);
       }
@@ -90,20 +102,24 @@ export default function Home() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Load saved positions on mount, migrating carrot to new default if version is old
+  // Load saved positions on mount, using separate keys for mobile vs desktop
   useEffect(() => {
+    const mobile = window.innerWidth < 640;
+    const storageKey = mobile ? STORAGE_KEY_MOBILE : STORAGE_KEY_DESKTOP;
+    const fallback = mobile ? MOBILE_DEFAULTS : DEFAULTS;
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      const saved = localStorage.getItem(storageKey);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed.__version === STORAGE_VERSION) {
           setPos(parsed.pos);
         } else {
-          // Migrate: keep all positions except carrot, reset carrot to new default
-          const migrated = { ...DEFAULTS, ...parsed.pos ?? parsed, carrot: DEFAULTS.carrot };
+          const migrated = { ...fallback, ...parsed.pos ?? parsed, carrot: fallback.carrot };
           setPos(migrated);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify({ __version: STORAGE_VERSION, pos: migrated }));
+          localStorage.setItem(storageKey, JSON.stringify({ __version: STORAGE_VERSION, pos: migrated }));
         }
+      } else {
+        setPos(fallback);
       }
     } catch {}
   }, []);
@@ -138,7 +154,8 @@ export default function Home() {
       setDraggingKey(null);
       if (moved) {
         setPos(prev => {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify({ __version: STORAGE_VERSION, pos: prev }));
+          const key = isMobile ? STORAGE_KEY_MOBILE : STORAGE_KEY_DESKTOP;
+          localStorage.setItem(key, JSON.stringify({ __version: STORAGE_VERSION, pos: prev }));
           return prev;
         });
       } else {
@@ -185,15 +202,17 @@ export default function Home() {
   });
 
   const resetLayout = () => {
-    setPos(DEFAULTS);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ __version: STORAGE_VERSION, pos: DEFAULTS }));
+    const defaults = isMobile ? MOBILE_DEFAULTS : DEFAULTS;
+    setPos(defaults);
+    const key = isMobile ? STORAGE_KEY_MOBILE : STORAGE_KEY_DESKTOP;
+    localStorage.setItem(key, JSON.stringify({ __version: STORAGE_VERSION, pos: defaults }));
   };
 
   return (
     <div className="min-h-screen font-[family-name:var(--font-clother)] bg-white pt-20">
 
       {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0]">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-10 pt-6 pb-3 bg-white/80 backdrop-blur-md sm:border-b sm:border-[#f0f0f0]">
         <a href="/" className="text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
           lydia park
         </a>
@@ -228,7 +247,7 @@ export default function Home() {
 
           {/* ── 1. Bunny stickynote ── */}
           <div
-            style={wrapStyle("bunny", 2, 440, -5)}
+            style={wrapStyle("bunny", 2, isMobile ? 520 : 440, -5)}
             onMouseDown={drag("bunny")}
             {...hoverHandlers("bunny", -5)}
           >
@@ -244,10 +263,20 @@ export default function Home() {
 
           {/* ── 2. Carrot stickynote ── */}
           <div
-            style={wrapStyle("carrot", 1, 450, 7)}
+            style={wrapStyle("carrot", 1, isMobile ? 530 : 450, 7)}
             onMouseDown={drag("carrot")}
             {...hoverHandlers("carrot", 7)}
           >
+            {/* Pulsating dot with tooltip */}
+            <div className="absolute -top-3 -right-3 group z-30 flex items-center" style={{ pointerEvents: "auto" }}>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#93aff5" }} />
+                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#1D4ED8" }} />
+              </span>
+              <div className="absolute left-4 top-1/2 -translate-y-1/2 ml-1 px-4 py-2 rounded-xl border text-xs opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-50" style={{ background: "#c8d9fb", borderColor: "#93aff5", color: "#1D4ED8" }}>
+                I&apos;m a product designer specializing in visual interfaces, UI/UX design, brand systems, and graphic design.
+              </div>
+            </div>
             <Image
               src="/carrotstickynote.png"
               alt="studying bfa graphic design and hci at WashU"
@@ -284,7 +313,7 @@ export default function Home() {
 
           {/* ── 4. Walking bunny GIF ── */}
           <div
-            style={wrapStyle("gif", 4, 58)}
+            style={wrapStyle("gif", 4, isMobile ? 80 : 58)}
             onMouseDown={drag("gif")}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -297,7 +326,7 @@ export default function Home() {
 
           {/* ── 5. "product designer" button ── */}
           <div
-            style={wrapStyle("pdBtn", 5, 150, 5)}
+            style={wrapStyle("pdBtn", 5, isMobile ? 210 : 150, 5)}
             onMouseDown={drag("pdBtn", () => {
               setActiveTab("work");
               scrollToTabs();
@@ -315,7 +344,7 @@ export default function Home() {
 
           {/* ── 6. "about me" button — click navigates to about tab ── */}
           <div
-            style={wrapStyle("aboutBtn", 5, 145, -2)}
+            style={wrapStyle("aboutBtn", 5, isMobile ? 205 : 145, -2)}
             onMouseDown={drag("aboutBtn", () => {
               setActiveTab("about");
               scrollToTabs();
@@ -335,10 +364,10 @@ export default function Home() {
       </section>
 
       {/* ── FILE TABS — slides up over sticky hero ── */}
-      <div id="tabs-section" className="px-3 sm:px-10 pb-16 -mt-16 relative z-20" style={{ background: "linear-gradient(to bottom, transparent 0%, white 56px)" }}>
+      <div id="tabs-section" className="px-3 sm:px-10 pb-16 -mt-16 sm:-mt-24 relative z-20" style={{ background: "linear-gradient(to bottom, transparent 0%, white 56px)" }}>
 
         {/* Tab row */}
-        <div className="flex items-end gap-0">
+        <div className="flex items-end gap-0 mt-20 sm:mt-0">
           {(["work", "gallery", "about"] as const).map((tab, i) => (
             <button
               key={tab}
@@ -664,39 +693,49 @@ export default function Home() {
                 <div className="border-t border-[#e5e5e7] mb-14" />
 
                 {/* ── EXPERIENCE ── */}
-                <div id="about-experience" className="flex flex-col lg:flex-row gap-4 lg:gap-0 items-start mb-16">
-                  <div className="lg:shrink-0 lg:w-1/2">
+                <div id="about-experience" className="flex flex-col lg:flex-row gap-4 lg:gap-8 items-start mb-16">
+                  <div className="lg:shrink-0 lg:w-64">
                     <h3 className="text-xl font-bold text-[#1d1d1f] mb-1">Experience</h3>
                     <a href="/Lydia-Park-Resume-2026.pdf" download="Lydia-Park-Resume-2026.pdf"
                       className="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-[#e8edff] text-[#1D4ED8] text-[11px] font-semibold hover:bg-[#d0daff] active:scale-95 transition-all duration-150">
                       Resume ↗
                     </a>
                   </div>
-                  <div className="flex-1 space-y-6">
+                  <div className="flex-1 space-y-2">
                     {[
-                      { name: "Skandalaris Design Agency", role: "Creator / Product Designer", period: "Aug 2025–Present",  logo: "/images/about/logo-washu.png",         contain: false, href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/" },
-                      { name: "SPARC",                     role: "UI/UX & Web Designer",  period: "Sept 2025–Present", logo: "/images/about/logo-sparc.png",         contain: false, href: null },
-                      { name: "Product Space",             role: "VP of Design",          period: "Aug 2025–Present",  logo: "/images/about/logo-product-space.png", contain: true,  href: "https://www.washuproduct.com/" },
-                      { name: "Bear Studios LLC",          role: "Design Consultant",     period: "Aug 2025–Present",  logo: "/images/about/logo-bear-studios.png",  contain: false, href: null },
-                      { name: "PLOT App",                  role: "Lead Product Designer", period: "July 2025–Present", logo: null,                                   contain: false, href: null },
-                    ].map(({ name, role, period, logo, contain, href }) => (
-                      <div key={name} className="flex items-center gap-5">
-                        <div className="w-16 h-16 rounded-full flex items-center justify-center shrink-0 border border-[#e8e8ed] overflow-hidden" style={{ background: "#f5f5f7" }}>
-                          {logo ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img src={logo} alt={name} className={contain ? "w-10 h-10 object-contain" : "w-full h-full object-cover"} />
-                          ) : (
-                            <span className="text-[22px] font-bold" style={{ color: "#e67e22" }}>P</span>
-                          )}
+                      { name: "Skandalaris Design Agency", role: "Creator / Product Designer", period: "Aug 2025–Present",  logo: "/images/about/logo-washu.png",         contain: false, href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/", desc: "Designed brand identities and product interfaces for early-stage startups, translating founder goals into scalable digital experiences." },
+                      { name: "SPARC",                     role: "UI/UX & Web Designer",       period: "Sept 2025–Present", logo: "/images/about/logo-sparc.png",         contain: false, href: null,                                                                  desc: "Redesigned UI/UX and brand systems for an athlete recruiting platform, driving +60% athlete engagement through improved interface hierarchy and visual identity." },
+                      { name: "Product Space",             role: "VP of Design",               period: "Aug 2025–Present",  logo: "/images/about/logo-product-space.png", contain: true,  href: "https://www.washuproduct.com/",                                       desc: "Led design initiatives for a student product design community, mentoring designers and organizing product workshops for a growing cohort of fellows." },
+                      { name: "Bear Studios LLC",          role: "Design Consultant",          period: "Aug 2025–Present",  logo: "/images/about/logo-bear-studios.png",  contain: false, href: null,                                                                  desc: "Consulted in a 2-person design team to deliver product, brand, and strategy solutions for startup clients." },
+                      { name: "PLOT App",                  role: "Lead Product Designer",      period: "July 2025–Present", logo: null,                                   contain: false, href: null,                                                                  desc: "Led end-to-end design of a mobile app, producing 20+ iterative wireframes and prototypes while collaborating with 2 engineers to ship production-ready interfaces." },
+                    ].map(({ name, role, period, logo, contain, href, desc }) => (
+                      <div
+                        key={name}
+                        className={`border rounded-xl px-4 py-3 cursor-pointer transition-colors duration-200 ${expandedExp === name ? "bg-[#f0f4ff] border-[#d0daff]" : "bg-white border-[#f0f0f5] hover:bg-[#f0f4ff] hover:border-[#d0daff]"}`}
+                        onClick={() => setExpandedExp(expandedExp === name ? null : name)}
+                      >
+                        <div className="flex items-center gap-5">
+                          <div className="w-16 h-16 rounded-full flex items-center justify-center shrink-0 border border-[#e8e8ed] overflow-hidden" style={{ background: "#f5f5f7" }}>
+                            {logo ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img src={logo} alt={name} className={contain ? "w-10 h-10 object-contain" : "w-full h-full object-cover"} />
+                            ) : (
+                              <span className="text-[22px] font-bold" style={{ color: "#e67e22" }}>P</span>
+                            )}
+                          </div>
+                          <div className="flex-1">
+                            {href ? (
+                              <a href={href} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="text-[17px] font-semibold text-[#1d1d1f] hover:text-[#1D4ED8] transition-colors mb-0.5 block">{name} ↗</a>
+                            ) : (
+                              <p className="text-[17px] font-semibold text-[#1d1d1f] mb-0.5">{name}</p>
+                            )}
+                            <p className="text-[15px] text-[#6e6e73]">{role}<span className="text-[#c0c0c0] mx-1">,</span>{period}</p>
+                          </div>
+                          <span className="text-[#c0c0c0] text-sm shrink-0">{expandedExp === name ? "▲" : "▼"}</span>
                         </div>
-                        <div className="flex-1">
-                          {href ? (
-                            <a href={href} target="_blank" rel="noopener noreferrer" className="text-[17px] font-semibold text-[#1d1d1f] hover:text-[#1D4ED8] transition-colors mb-0.5 block">{name} ↗</a>
-                          ) : (
-                            <p className="text-[17px] font-semibold text-[#1d1d1f] mb-0.5">{name}</p>
-                          )}
-                          <p className="text-[15px] text-[#6e6e73]">{role}<span className="text-[#c0c0c0] mx-1">,</span>{period}</p>
-                        </div>
+                        {expandedExp === name && (
+                          <p className="mt-3 text-[13px] text-[#6e6e73] leading-relaxed pl-[84px]">{desc}</p>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -746,8 +785,8 @@ export default function Home() {
                 <div className="border-t border-[#e5e5e7] mb-14" />
 
                 {/* ── VALUES ── */}
-                <div id="about-values" className="flex flex-col lg:flex-row gap-4 lg:gap-12 items-start mb-16">
-                  <div className="lg:shrink-0 lg:w-36">
+                <div id="about-values" className="flex flex-col lg:flex-row gap-4 lg:gap-8 items-start mb-16">
+                  <div className="lg:shrink-0 lg:w-64">
                     <h3 className="text-xl font-bold text-[#1d1d1f]">Values</h3>
                   </div>
                   <div className="flex-1 grid grid-cols-2 gap-3">
@@ -771,8 +810,8 @@ export default function Home() {
 
                 {/* ── EXTRA PHOTOS ── */}
                 <div id="about-photos">
-                  <div className="flex flex-col lg:flex-row gap-4 lg:gap-12 items-start">
-                    <div className="lg:shrink-0 lg:w-36">
+                  <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 items-start">
+                    <div className="lg:shrink-0 lg:w-64">
                       <h3 className="text-xl font-bold text-[#1d1d1f]">Life Photos!</h3>
                       <p className="text-xs text-[#8e8e93] mt-1 leading-relaxed">doggo, art, beaches, fields, matcha</p>
                     </div>
