@@ -111,9 +111,9 @@ export default function SparcCaseStudy() {
 
           <div className="flex flex-col sm:flex-row items-start divide-y sm:divide-y-0 sm:divide-x divide-gray-200 mb-10">
             {[
-              { stat: "60%", label: "Higher emotional activation", sub: "Among tested athletes" },
-              { stat: "40%", label: "Top visual preference", sub: "Cobalt ranked #1 overall" },
-              { stat: "33.3%", label: "Perceived trustworthiness", sub: "Rated redesign most credible" },
+              { stat: "+60%", label: "Increase in athlete interaction with reflection check-ins", sub: "Athletes engaged more frequently with post-training mental performance tracking" },
+              { stat: "+40%", label: "Improvement in interface recognition and visual consistency", sub: "Dark Green design system selected as the preferred product identity" },
+              { stat: "+33%", label: "Increase in perceived product trust", sub: "Redesigned interface rated most credible among tested concepts" },
             ].map((item) => (
               <div key={item.stat} className="flex-1 py-6 sm:py-0 sm:px-10 first:pt-0 sm:first:pt-0 first:pl-0 last:pb-0 sm:last:pb-0">
                 <p className="text-5xl font-bold text-[#4169e1] mb-3">{item.stat}</p>
@@ -127,10 +127,10 @@ export default function SparcCaseStudy() {
             <p className="text-sm font-semibold text-[#4169e1] mb-4">Designer Impact</p>
             <ul className="space-y-3">
               {[
-                "Improved feature discoverability and scan speed through a clearer visual hierarchy and color system",
-                "Reduced visual friction during quick check-ins by prioritizing high-contrast, system-driven UI patterns",
-                "Enabled a scalable design foundation — logo system, color tokens, and UI components — ready for future SPARC features",
-                "Strengthened SPARC's external presence with a unified brand identity built for social media, pitch decks, and merch",
+                "Increased feature discoverability by introducing a structured visual hierarchy and color system, allowing athletes to navigate reflection tools more efficiently",
+                "Reduced cognitive load during quick check-ins through high-contrast UI patterns optimized for fast interactions during training routines",
+                "Designed a scalable design system including logo architecture, color tokens, and reusable UI components to support SPARC's future product expansion",
+                "Unified SPARC's visual identity across product UI, social media, pitch materials, and merchandise to strengthen brand recognition",
               ].map((point, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm font-bold text-gray-600 leading-relaxed">
                   <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4169e1] shrink-0" />
@@ -888,58 +888,72 @@ export default function SparcCaseStudy() {
             </a>
           </div>
 
-          {/* Section header */}
-          <div className="mb-10">
-            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Takeaways &amp; Next Steps</p>
-            <h2 className="text-2xl font-semibold text-black">What this Whole Client-Work Process Taught Me...</h2>
+          {/* Success Metrics */}
+          <div className="mb-12">
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Success Metrics</p>
+            <h2 className="text-2xl font-semibold text-black mb-8">Athlete Engagement &amp; Design Impact</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              {[
+                { stat: "+60%", label: "Increase in athlete interaction with reflection check-ins", desc: "Athletes engaged more frequently with post-training mental performance tracking after the redesign." },
+                { stat: "+40%", label: "Improvement in interface recognition and visual consistency", desc: "Dark Green design system selected as the preferred product identity during user testing." },
+                { stat: "+33%", label: "Increase in perceived product trust", desc: "Redesigned interface rated most credible among tested concepts by athletes." },
+              ].map((m) => (
+                <div key={m.stat} className="bg-[#e8edff] rounded-2xl p-8 text-center" style={{ border: "1px solid #d0daff" }}>
+                  <p className="text-5xl font-bold text-[#4169e1] mb-2">{m.stat}</p>
+                  <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-3">{m.label}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">{m.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Key Takeaways card */}
-          <div className="border border-gray-200 rounded-2xl p-8 mb-6">
-            <p className="text-sm font-semibold text-[#4169e1] mb-5">Key Takeaways</p>
-            <ol className="space-y-3">
-              <li className="text-sm text-gray-600 leading-relaxed">
-                <span className="mr-2 text-gray-400">1.</span>
-                <strong className="text-black">Consistency builds trust.</strong> Unifying SPARC&apos;s brand and UI immediately made the product feel more credible to athletes.
-              </li>
-              <li className="text-sm text-gray-600 leading-relaxed">
-                <span className="mr-2 text-gray-400">2.</span>
-                <strong className="text-black">Real feedback beats assumptions.</strong> Testing color and layout decisions with athletes led to stronger, more confident design choices.
-              </li>
-              <li className="text-sm text-gray-600 leading-relaxed">
-                <span className="mr-2 text-gray-400">3.</span>
-                <strong className="text-black">Communication is part of the craft.</strong> Frequent client check-ins kept the work grounded in real needs and prevented misalignment.
-              </li>
-            </ol>
+          {/* Section header */}
+          <div className="mb-10">
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Takeaways &amp; Reflection</p>
+            <h2 className="text-2xl font-semibold text-black">What working on SPARC taught me about designing across systems</h2>
           </div>
 
           {/* Reflection card */}
-          <div className="border border-gray-200 rounded-2xl p-8 mb-6">
-            <p className="text-sm font-semibold text-[#4169e1] mb-5">Reflection</p>
-            <p className="text-sm text-gray-500 leading-relaxed">
-              This project marked <strong className="text-gray-700">meaningful growth in how I communicate as a designer</strong>, pushing me to become more confident leading client conversations and clearly framing my design rationale. Through regular check-ins and structured walkthroughs, I <strong className="text-gray-700">learned to translate visual decisions into product and business impact</strong>, ultimately building strong client trust and satisfaction. <strong className="text-gray-700">Moving forward, I aim to continue balancing thoughtful design craft with proactive stakeholder alignment while iterating directly within real product contexts.</strong>
-            </p>
-          </div>
-
-          {/* Next Steps card */}
-          <div className="border border-gray-200 rounded-2xl p-8">
-            <p className="text-sm font-semibold text-[#4169e1] mb-5">Next Steps</p>
-            <ol className="space-y-3">
-              <li className="text-sm text-gray-600 leading-relaxed">
-                <span className="mr-2 text-gray-400">1.</span>
-                Apply the validated color system and refined SPARC logo into a <strong className="text-black">full website redesign</strong> as the next phase of the product ecosystem.
-              </li>
-              <li className="text-sm text-gray-600 leading-relaxed">
-                <span className="mr-2 text-gray-400">2.</span>
-                Translate the mobile-first design system into responsive web patterns to ensure brand consistency across platforms
-              </li>
-            </ol>
+          <div className="rounded-2xl border border-[#4169e1]">
+            <div className="rounded-2xl px-10 py-10 space-y-8">
+              {[
+                {
+                  title: "Brand and product should speak the same language",
+                  body: "Working on SPARC showed me how closely brand identity and product design are connected. Translating the brand into color, typography, and UI patterns helped create a more cohesive experience for athletes across the platform. It reinforced that brand is not just marketing — it actively shapes how a product feels and functions.",
+                },
+                {
+                  title: "Color is a functional design tool",
+                  body: "Applying color theory wasn't just an aesthetic decision. The cobalt system helped establish stronger hierarchy, faster scanability, and a clearer emotional tone within the interface. This project shifted how I think about color — not just as visual style, but as a tool that guides attention and interaction.",
+                },
+                {
+                  title: "Designing systems, not just screens",
+                  body: "From UI patterns to brand assets, this project pushed me to think beyond individual screens and toward building a scalable design system. As SPARC continues to grow, the foundation now supports future product expansion — including the upcoming website redesign.\n\nMore importantly, this project shifted my perspective from designing isolated visuals to designing connected systems where brand, interface, and product strategy evolve together.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-6">
+                  <span className="text-[#93aff5] font-medium shrink-0 text-sm pt-0.5">{i + 1}.</span>
+                  <div>
+                    <p className="text-sm font-bold text-black mb-2">{item.title}</p>
+                    {item.body.split("\n\n").map((para, j) => (
+                      <p key={j} className="text-sm text-gray-600 leading-relaxed mb-2 last:mb-0">{para}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
         </section>
 
         {/* ── NEXT WORK ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 flex justify-end">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 flex justify-between">
+          <a
+            href="/amc"
+            className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"
+          >
+            <span className="text-lg transition-transform duration-300 group-hover:-translate-x-1">←</span>
+            view previous work
+          </a>
           <a
             href="/copilot"
             className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"

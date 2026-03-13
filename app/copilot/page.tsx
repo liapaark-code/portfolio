@@ -136,9 +136,9 @@ export default function CopilotCaseStudy() {
 
           <div className="flex flex-col sm:flex-row items-start divide-y sm:divide-y-0 sm:divide-x divide-gray-200 mb-10">
             {[
-              { stat: "+30%", label: "Increase in Copilot usage", sub: "After inline embedding redesign" },
-              { stat: "10x",  label: "Faster AI access", sub: "Fewer steps to reach Copilot" },
-              { stat: "+25%", label: "Task completion with AI", sub: "More drafts completed with assistance" },
+              { stat: "+30%", label: "Increase in Copilot feature usage", sub: "After embedding AI directly into the email compose workflow" },
+              { stat: "10×",  label: "Faster access to AI assistance", sub: "Reduced interaction steps to trigger Copilot actions" },
+              { stat: "+25%", label: "Improvement in AI-assisted task completion", sub: "More email drafts finalized using Copilot suggestions" },
             ].map((item) => (
               <div key={item.stat} className="flex-1 py-6 sm:py-0 sm:px-10 first:pt-0 sm:first:pt-0 first:pl-0 last:pb-0 sm:last:pb-0">
                 <p className="text-5xl font-bold text-[#4169e1] mb-3">{item.stat}</p>
@@ -152,10 +152,10 @@ export default function CopilotCaseStudy() {
             <p className="text-sm font-semibold text-[#4169e1] mb-4">Designer Impact</p>
             <ul className="space-y-3">
               {[
-                "Improved AI discoverability by embedding Copilot inline — eliminating the side panel context switch entirely",
-                "Reduced friction during email workflows, enabling users to draft, revise, and summarize without leaving the compose window",
-                "Increased task completion rate through clear, predictable AI interaction patterns that respect user control and tone",
-                "Established a scalable AI interaction foundation ready to extend into calendar, task creation, and meeting prep",
+                "Increased AI feature adoption by embedding Copilot directly within the email compose interface, eliminating the need to open a separate side panel",
+                "Reduced workflow friction by enabling users to draft, summarize, and revise emails without leaving the composition environment",
+                "Improved task completion efficiency through clear AI interaction patterns that maintain user control over tone and output",
+                "Designed a scalable AI interaction model capable of extending into calendar scheduling, task creation, and meeting preparation workflows",
               ].map((point, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm font-bold text-gray-600 leading-relaxed">
                   <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4169e1] shrink-0" />
@@ -347,43 +347,42 @@ export default function CopilotCaseStudy() {
           </h2>
 
           <div className="p-px rounded-2xl" style={{ background: "linear-gradient(to right, #4169e1, #93aff5, #facc15)" }}>
-            <div className="bg-white rounded-2xl px-10 py-10 grid grid-cols-1 sm:grid-cols-2 gap-12">
-              <div>
-                <p className="text-sm font-bold text-[#4169e1] mb-5">Key Takeaways</p>
-                <ol className="space-y-4">
-                  {[
-                    "AI earns trust when embedded naturally into existing workflows",
-                    "Subtle interaction design matters more than visibility alone",
-                    "Control and transparency are essential for long-term adoption",
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                      <span className="text-gray-300 shrink-0 font-medium">{i + 1}.</span>
-                      {item}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-              <div>
-                <p className="text-sm font-bold text-[#4169e1] mb-5">Next Steps</p>
-                <ol className="space-y-4">
-                  {[
-                    "Extend Copilot into calendar scheduling, task creation, and meeting prep",
-                    "Test across desktop, web, and mobile for enterprise consistency",
-                    "Validate accessibility and efficiency gains at scale",
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                      <span className="text-gray-300 shrink-0 font-medium">{i + 1}.</span>
-                      {item}
-                    </li>
-                  ))}
-                </ol>
-              </div>
+            <div className="bg-white rounded-2xl px-10 py-10 space-y-8">
+              {[
+                {
+                  title: "AI should assist, not interrupt",
+                  body: "Embedding Copilot directly into the compose workflow showed me that AI is most useful when it supports the task already in progress rather than pulling users into a separate interface.",
+                },
+                {
+                  title: "Interaction design matters more than AI capability",
+                  body: "Designing AI isn't just about generating responses. The real challenge is shaping how people control, revise, and collaborate with AI outputs in a way that feels predictable and useful.",
+                },
+                {
+                  title: "Trust is the real product",
+                  body: "AI adoption depends on transparency and control. Giving users the ability to adjust tone, edit suggestions, and stay in charge of the final output was essential to making the system feel reliable.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-6">
+                  <span className="text-[#93aff5] font-medium shrink-0 text-sm pt-0.5">{i + 1}.</span>
+                  <div>
+                    <p className="text-sm font-bold text-black mb-2">{item.title}</p>
+                    <p className="text-sm text-gray-600 leading-relaxed">{item.body}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* ── NEXT WORK ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 flex justify-end">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 flex justify-between">
+          <a
+            href="/sparc"
+            className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"
+          >
+            <span className="text-lg transition-transform duration-300 group-hover:-translate-x-1">←</span>
+            view previous work
+          </a>
           <a
             href="/little-prince"
             className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"

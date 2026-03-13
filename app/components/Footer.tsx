@@ -9,7 +9,7 @@ export default function Footer() {
 
         {/* Left: name */}
         <div>
-          <p className="text-base font-bold text-[#1D4ED8]">lydia park</p>
+          <Link href="/" className="text-base font-bold text-[#1D4ED8] hover:opacity-70 transition-opacity">lydia park</Link>
         </div>
 
         {/* Center: nav */}

@@ -499,7 +499,14 @@ export default function LittlePrinceCaseStudy() {
         </section>
 
         {/* ── NEXT WORK ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 flex justify-end">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 flex justify-between">
+          <a
+            href="/copilot"
+            className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"
+          >
+            <span className="text-lg transition-transform duration-300 group-hover:-translate-x-1">←</span>
+            view previous work
+          </a>
           <a
             href="/amc"
             className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"

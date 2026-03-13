@@ -80,8 +80,7 @@ export default function Home() {
     const update = () => {
       if (heroWrapRef.current) {
         const w = heroWrapRef.current.offsetWidth;
-        // Use smaller base on mobile so items appear bigger (accepts slight edge clipping)
-        const base = w < 640 ? 680 : 1100;
+        const base = 1100;
         setHeroScale(Math.min(1, w / base));
         setIsMobile(w < 640);
       }
@@ -285,7 +284,7 @@ export default function Home() {
 
           {/* ── 4. Walking bunny GIF ── */}
           <div
-            style={wrapStyle("gif", 4, isMobile ? 85 : 58)}
+            style={wrapStyle("gif", 4, 58)}
             onMouseDown={drag("gif")}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -298,7 +297,7 @@ export default function Home() {
 
           {/* ── 5. "product designer" button ── */}
           <div
-            style={wrapStyle("pdBtn", 5, isMobile ? 200 : 150, 5)}
+            style={wrapStyle("pdBtn", 5, 150, 5)}
             onMouseDown={drag("pdBtn", () => {
               setActiveTab("work");
               scrollToTabs();
@@ -316,7 +315,7 @@ export default function Home() {
 
           {/* ── 6. "about me" button — click navigates to about tab ── */}
           <div
-            style={wrapStyle("aboutBtn", 5, isMobile ? 195 : 145, -2)}
+            style={wrapStyle("aboutBtn", 5, 145, -2)}
             onMouseDown={drag("aboutBtn", () => {
               setActiveTab("about");
               scrollToTabs();
@@ -336,19 +335,20 @@ export default function Home() {
       </section>
 
       {/* ── FILE TABS — slides up over sticky hero ── */}
-      <div id="tabs-section" className="px-10 pb-16 -mt-16 relative z-20" style={{ background: "linear-gradient(to bottom, transparent 0%, white 56px)" }}>
+      <div id="tabs-section" className="px-3 sm:px-10 pb-16 -mt-16 relative z-20" style={{ background: "linear-gradient(to bottom, transparent 0%, white 56px)" }}>
 
         {/* Tab row */}
-        <div className="flex items-end gap-0.5">
-          {(["work", "gallery", "about"] as const).map(tab => (
+        <div className="flex items-end gap-0">
+          {(["work", "gallery", "about"] as const).map((tab, i) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={[
-                "px-7 py-2 text-sm font-medium rounded-t-2xl transition-all duration-200",
+                "px-7 py-2 text-sm font-medium transition-all duration-200",
+                "rounded-t-2xl",
                 activeTab === tab
-                  ? "bg-[#f5f5f7] text-[#1D4ED8] border border-b-0 border-[#e5e5e7]"
-                  : "bg-transparent text-[#8e8e93] border border-transparent border-b-0 hover:bg-[#f0f0f5]/70 hover:text-[#6e6e73]",
+                  ? "bg-[#f5f5f7] text-[#1D4ED8] border border-b-0 border-[#e5e5e7] relative z-10"
+                  : "bg-white text-[#8e8e93] border border-[#e5e5e7] border-b-0 hover:bg-[#f0f0f5] hover:text-[#6e6e73]",
               ].join(" ")}
               style={{ marginBottom: "-1px" }}
             >
@@ -365,7 +365,7 @@ export default function Home() {
 
           {/* WORK */}
           {activeTab === "work" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
               <Link href="/sparc" className="group relative block rounded-2xl">
                 <div className="w-full aspect-[4/3] relative overflow-hidden rounded-2xl bg-[#0a2e1c] transition-transform duration-500 ease-in-out group-hover:scale-[0.993]">
@@ -381,7 +381,7 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Redesigning the athlete recruitment platform
+                    Led brand and UI redesign for SPARC — boosting athlete engagement by 60%
                   </p>
                 </div>
               </Link>
@@ -396,7 +396,7 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Integrating AI into enterprise workflows
+                    Redesigned Copilot interactions — enabling 10× faster AI access
                   </p>
                 </div>
               </Link>
@@ -411,7 +411,7 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Location-based storytelling experience
+                    Created a story-driven travel experience inspired by The Little Prince
                   </p>
                 </div>
               </Link>
@@ -426,7 +426,7 @@ export default function Home() {
                     </span>
                   </div>
                   <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Rebranding AMC's visual identity
+                    Designed a new brand identity system for AMC
                   </p>
                 </div>
               </Link>
