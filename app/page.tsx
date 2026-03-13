@@ -212,7 +212,7 @@ export default function Home() {
     <div className="min-h-screen font-[family-name:var(--font-clother)] bg-white pt-20">
 
       {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-10 pt-6 pb-3 bg-white/80 backdrop-blur-md sm:border-b sm:border-[#f0f0f0]">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md sm:border-b sm:border-[#f0f0f0]">
         <a href="/" className="text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
           lydia park
         </a>
