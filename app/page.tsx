@@ -36,7 +36,7 @@ export default function Home() {
   const [heroScale, setHeroScale] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const [lightbox, setLightbox] = useState<{ images: { src: string; title: string }[]; index: number; category: string } | null>(null);
-  const [activeGallerySection, setActiveGallerySection] = useState("gallery-painting");
+  const [activeGallerySection, setActiveGallerySection] = useState("gallery-clay");
   const [activeAboutSection, setActiveAboutSection] = useState("about-bio");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
   // ref so hover handlers can read dragging state synchronously
@@ -58,7 +58,8 @@ export default function Home() {
   // Track active gallery section via IntersectionObserver
   useEffect(() => {
     if (activeTab !== "gallery") return;
-    const ids = ["gallery-painting", "gallery-gestural", "gallery-collage", "gallery-type", "gallery-digital-art"];
+    setActiveGallerySection("gallery-clay");
+    const ids = ["gallery-clay", "gallery-painting", "gallery-gestural", "gallery-collage", "gallery-type", "gallery-digital-art"];
     const observers = ids.map(id => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -464,6 +465,13 @@ export default function Home() {
           )}
 
           {activeTab === "gallery" && (() => {
+            const clay = [
+              { src: "/images/gallery/clay/IMG_9299.jpg", title: "" },
+              { src: "/images/gallery/clay/IMG_9301.jpg", title: "" },
+              { src: "/images/gallery/clay/IMG_9307.jpg", title: "" },
+              { src: "/images/gallery/clay/IMG_9308.jpg", title: "" },
+              { src: "/images/gallery/clay/IMG_9309.jpg", title: "" },
+            ];
             const paintings = [
               { src: "/images/gallery/Out-of-Reach.JPG", title: "Out of Reach" },
               { src: "/images/gallery/My-Obsessions.JPG", title: "My Obsessions" },
@@ -508,6 +516,7 @@ export default function Home() {
 
             const navItems = [
               { group: "Fine Art", items: [
+                { id: "gallery-clay",     label: "Clay",     count: clay.length     },
                 { id: "gallery-painting", label: "Painting", count: paintings.length },
                 { id: "gallery-gestural", label: "Gestural", count: gesturals.length },
                 { id: "gallery-collage",  label: "Collage",  count: collages.length },
@@ -519,6 +528,7 @@ export default function Home() {
             ];
 
             const scrollTo = (id: string) => {
+              setActiveGallerySection(id);
               document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
             };
 
@@ -557,6 +567,7 @@ export default function Home() {
                       <div className="flex-1 h-px bg-gray-200" />
                     </div>
                     {[
+                      { id: "gallery-clay",     label: "Clay",     images: clay,     category: "Clay",     cols: "mb-10" },
                       { id: "gallery-painting", label: "Painting", images: paintings, category: "Painting", cols: "mb-10" },
                       { id: "gallery-gestural", label: "Gestural", images: gesturals, category: "Gestural", cols: "mb-10" },
                       { id: "gallery-collage",  label: "Collage",  images: collages,  category: "Collage",  cols: "mb-2"  },
@@ -672,9 +683,15 @@ export default function Home() {
                   <div className="flex-1 min-w-0 lg:pt-1 flex flex-col">
                     <h2 className="text-[26px] font-bold text-[#1d1d1f] mb-3">Hi, I&apos;m Lydia!</h2>
                     <div className="flex items-center gap-1.5 text-[13px] text-[#8e8e93] mb-5 flex-wrap">
-                      <span>📍 St. Louis, MO</span>
+                      <span className="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        St. Louis, MO
+                      </span>
                       <span className="text-[#d0d0d5]">/</span>
-                      <span>🎓 Comm Design B.F.A. + HCI</span>
+                      <span className="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 6 3 6 3s6-1 6-3v-5"/></svg>
+                        Comm Design B.F.A. + HCI
+                      </span>
                       <span className="text-[#d0d0d5]">/</span>
                       <span>WashU &apos;28</span>
                     </div>

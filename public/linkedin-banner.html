@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1584">
+  <title>Lydia Park — LinkedIn Banner</title>
+  <style>
+    @font-face {
+      font-family: 'TRYClother';
+      src: url('./fonts/TRYClother-Regular.ttf') format('truetype');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: 'TRYClother';
+      src: url('./fonts/TRYClother-Bold.ttf') format('truetype');
+      font-weight: 700;
+    }
+    @font-face {
+      font-family: 'TRYClother';
+      src: url('./fonts/TRYClother-Black.ttf') format('truetype');
+      font-weight: 900;
+    }
+    @font-face {
+      font-family: 'TRYClother';
+      src: url('./fonts/TRYClother-BoldItalic.ttf') format('truetype');
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1584px;
+      height: 396px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .banner {
+      width: 1584px;
+      height: 396px;
+      background: #ffffff;
+      position: relative;
+      font-family: 'TRYClother', 'Arial Rounded MT Bold', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Dot grid background */
+    .dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #c8d9fb 1.8px, transparent 1.8px);
+      background-size: 30px 30px;
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    /* ── Left: name + label ── */
+    .left {
+      position: absolute;
+      left: 88px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .name {
+      font-weight: 900;
+      font-size: 108px;
+      color: #1a1a2e;
+      line-height: 0.92;
+      letter-spacing: -3px;
+    }
+
+    .pill-wrap {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .pill {
+      display: inline-block;
+      border-radius: 100px;
+      padding: 9px 30px;
+      font-size: 26px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pill-blue {
+      background: #e8edff;
+      border: 2.5px solid #b4c3ff;
+      color: #2E5BE8;
+      transform: rotate(-3deg);
+    }
+
+    .pill-orange {
+      background: #fff0e6;
+      border: 2.5px solid #f4a46a;
+      color: #c24a0e;
+      transform: rotate(2.5deg);
+    }
+
+    /* ── Right: sticker cluster ── */
+
+    /* Bunny logo */
+    .bunny-logo {
+      position: absolute;
+      left: 720px;
+      top: -28px;
+      width: 230px;
+      height: 230px;
+      filter: drop-shadow(0 8px 24px rgba(77,103,137,0.18));
+      transform: rotate(6deg);
+      z-index: 12;
+    }
+
+    /* Bunny sticky note */
+    .bunny-sticky {
+      position: absolute;
+      left: 940px;
+      top: -22px;
+      width: 330px;
+      filter: drop-shadow(0 6px 18px rgba(100,130,200,0.16));
+      transform: rotate(4deg);
+      z-index: 11;
+    }
+
+    /* Carrot stickynote */
+    .carrot {
+      position: absolute;
+      left: 690px;
+      bottom: -48px;
+      width: 250px;
+      filter: drop-shadow(0 6px 16px rgba(240,140,80,0.18));
+      transform: rotate(-8deg);
+      z-index: 13;
+    }
+
+    /* Tagline */
+    .tagline {
+      position: absolute;
+      left: 90px;
+      bottom: 36px;
+      font-size: 17px;
+      font-weight: 400;
+      color: #8899bb;
+      letter-spacing: 0.3px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <div class="dots"></div>
+
+    <!-- Name + pills -->
+    <div class="left">
+      <div class="name">lydia park</div>
+      <div class="pill-wrap">
+        <span class="pill pill-blue">product designer</span>
+        <span class="pill pill-orange">@ WashU</span>
+      </div>
+    </div>
+
+    <!-- Tagline bottom-left -->
+    <div class="tagline">designing with intention, curiosity &amp; heart ♡°</div>
+
+    <!-- Sticker cluster (right side) -->
+    <img class="bunny-logo"   src="./bunny-logo.png"        alt="">
+    <img class="bunny-sticky" src="./bunny-stickynote.png"  alt="">
+    <img class="carrot"       src="./carrotstickynote.png"  alt="">
+  </div>
+</body>
+</html>
