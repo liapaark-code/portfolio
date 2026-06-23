@@ -89,7 +89,7 @@ export default function CopilotCaseStudy() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-8 pb-6">
             <div>
               <p className="text-xs text-gray-400 mb-1">Timeline</p>
-              <p className="text-sm text-black leading-relaxed">Aug 2025 –<br />Present</p>
+              <p className="text-sm text-black leading-relaxed">Aug 2025 –<br />Jan 2026</p>
             </div>
             <div>
               <p className="text-xs text-gray-400 mb-1">Client</p>

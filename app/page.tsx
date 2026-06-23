@@ -39,6 +39,7 @@ export default function Home() {
   const [activeGallerySection, setActiveGallerySection] = useState("gallery-clay");
   const [activeAboutSection, setActiveAboutSection] = useState("about-bio");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
+  const [cardCta, setCardCta] = useState<{ text: string; x: number; y: number } | null>(null);
   // ref so hover handlers can read dragging state synchronously
   const draggingRef = useRef<string | null>(null);
   const heroWrapRef = useRef<HTMLElement>(null);
@@ -211,6 +212,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen font-[family-name:var(--font-clother)] bg-white pt-20">
+
+      {/* Mouse-follow CTA shown when hovering a work card */}
+      {cardCta && (
+        <div
+          className="pointer-events-none fixed z-[2147483646] hidden sm:block px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-white shadow-lg whitespace-nowrap"
+          style={{ left: cardCta.x, top: cardCta.y, transform: "translate(16px, 16px)", background: "#1D4ED8" }}
+        >
+          {cardCta.text}
+        </div>
+      )}
 
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md sm:border-b sm:border-[#f0f0f0]">
@@ -386,69 +397,117 @@ export default function Home() {
 
           {/* WORK */}
           {activeTab === "work" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
 
-              <Link href="/sparc" className="group relative block rounded-2xl">
-                <div className="w-full aspect-[4/3] relative overflow-hidden rounded-2xl bg-[#0a2e1c] transition-transform duration-500 ease-in-out group-hover:scale-[0.993]">
+              <Link
+                href="/sparc"
+                onMouseMove={(e) => setCardCta({ text: "view case study!", x: e.clientX, y: e.clientY })}
+                onMouseLeave={() => setCardCta(null)}
+                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="w-full aspect-[4/3] relative overflow-hidden bg-[#0a2e1c]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/sparc/cover-frame.png" alt="SPARC Sports" className="absolute inset-0 w-full h-full object-cover" style={{ transform: "scale(1.08) translateY(-2px)", transformOrigin: "center center" }} />
                   {/* GIF on back iPhone screen */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/images/sparc/sparc-screen.gif" alt="" aria-hidden className="absolute" style={{ left: "calc(64% + 17px)", top: "calc(6% - 1px)", height: "80%", width: "auto", borderRadius: "22px" }} />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
-                  <div className="absolute bottom-4 left-4 transition-opacity duration-200 group-hover:opacity-0">
-                    <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-[#1d1d1f] shadow-sm">
-                      SPARC Sports <span className="text-[#8e8e93] font-normal text-xs">· 2026</span>
-                    </span>
+                </div>
+                <div className="px-4 py-3">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">SPARC Sports</p>
+                    <span className="text-xs text-[#8e8e93] shrink-0">2026</span>
                   </div>
-                  <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Led brand and UI redesign for SPARC — boosting athlete engagement by 60%
-                  </p>
+                  <p className="mt-1 text-sm text-[#6e6e73]">Led brand and UI redesign for SPARC — boosting athlete engagement by 60%</p>
+                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
+                    <div className="overflow-hidden">
+                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Role</span><span className="text-[#3a3a3c]">Lead Product Designer</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Team</span><span className="text-[#3a3a3c]">2 Product Designers</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">Aug 2025 – Present</span></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Link>
 
-              <Link href="/copilot" className="group relative block rounded-2xl">
-                <div className="w-full aspect-[4/3] relative overflow-hidden rounded-2xl transition-transform duration-500 ease-in-out group-hover:scale-[0.993]" style={{ background: "#d0e4ff" }}>
+              <Link
+                href="/copilot"
+                onMouseMove={(e) => setCardCta({ text: "view case study!", x: e.clientX, y: e.clientY })}
+                onMouseLeave={() => setCardCta(null)}
+                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="w-full aspect-[4/3] relative overflow-hidden" style={{ background: "#d0e4ff" }}>
                   <Image src="/images/copilot-hero.png" alt="Microsoft Copilot" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
-                  <div className="absolute bottom-4 left-4 transition-opacity duration-200 group-hover:opacity-0">
-                    <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-[#1d1d1f] shadow-sm">
-                      Microsoft Copilot <span className="text-[#8e8e93] font-normal text-xs">· 2025</span>
-                    </span>
+                </div>
+                <div className="px-4 py-3">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">Microsoft Copilot</p>
+                    <span className="text-xs text-[#8e8e93] shrink-0">2025</span>
                   </div>
-                  <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Redesigned Copilot interactions — enabling 10× faster AI access
-                  </p>
+                  <p className="mt-1 text-sm text-[#6e6e73]">Redesigned Copilot interactions — enabling 10× faster AI access</p>
+                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
+                    <div className="overflow-hidden">
+                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Role</span><span className="text-[#3a3a3c]">Product Designer</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Team</span><span className="text-[#3a3a3c]">2 Designers, 2 PMs</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">Aug 2025 – Jan 2026</span></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Link>
 
-              <Link href="/little-prince" className="group relative block rounded-2xl">
-                <div className="w-full aspect-[4/3] relative overflow-hidden rounded-2xl bg-[#1a1a2e] transition-transform duration-500 ease-in-out group-hover:scale-[0.993]">
+              <Link
+                href="/little-prince"
+                onMouseMove={(e) => setCardCta({ text: "view the journey!", x: e.clientX, y: e.clientY })}
+                onMouseLeave={() => setCardCta(null)}
+                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="w-full aspect-[4/3] relative overflow-hidden bg-[#1a1a2e]">
                   <Image src="/images/little-prince/lp-card-cover-v2.png" alt="Le Petite Route" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
-                  <div className="absolute bottom-4 left-4 transition-opacity duration-200 group-hover:opacity-0">
-                    <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-[#1d1d1f] shadow-sm">
-                      Le Petite Route <span className="text-[#8e8e93] font-normal text-xs">· 2025</span>
-                    </span>
+                </div>
+                <div className="px-4 py-3">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">Le Petite Route</p>
+                    <span className="text-xs text-[#8e8e93] shrink-0">2025</span>
                   </div>
-                  <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Created a story-driven travel experience inspired by The Little Prince
-                  </p>
+                  <p className="mt-1 text-sm text-[#6e6e73]">Created a story-driven travel experience inspired by The Little Prince</p>
+                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
+                    <div className="overflow-hidden">
+                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">March 2025</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Duration</span><span className="text-[#3a3a3c]">5 Weeks</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Tools</span><span className="text-[#3a3a3c]">Figma, Photoshop, Procreate</span></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Link>
 
-              <Link href="/amc" className="group relative block rounded-2xl">
-                <div className="w-full aspect-[4/3] relative overflow-hidden rounded-2xl transition-transform duration-500 ease-in-out group-hover:scale-[0.993]" style={{ background: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)" }}>
+              <Link
+                href="/amc"
+                onMouseMove={(e) => setCardCta({ text: "view rebrand!", x: e.clientX, y: e.clientY })}
+                onMouseLeave={() => setCardCta(null)}
+                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
+              >
+                <div className="w-full aspect-[4/3] relative overflow-hidden" style={{ background: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)" }}>
                   <Image src="/images/amc/amc-card-cover.png" alt="AMC Rebrand" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
-                  <div className="absolute bottom-4 left-4 transition-opacity duration-200 group-hover:opacity-0">
-                    <span className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-[#1d1d1f] shadow-sm">
-                      AMC Rebrand <span className="text-[#8e8e93] font-normal text-xs">· 2025</span>
-                    </span>
+                </div>
+                <div className="px-4 py-3">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">AMC Rebrand</p>
+                    <span className="text-xs text-[#8e8e93] shrink-0">2025</span>
                   </div>
-                  <p className="absolute bottom-5 left-5 right-5 text-white text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Designed a new brand identity system for AMC
-                  </p>
+                  <p className="mt-1 text-sm text-[#6e6e73]">Designed a new brand identity system for AMC</p>
+                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
+                    <div className="overflow-hidden">
+                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Role</span><span className="text-[#3a3a3c]">Brand Designer</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Client</span><span className="text-[#3a3a3c]">AMC @ WashU</span></div>
+                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">August 2025</span></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Link>
 
@@ -672,7 +731,10 @@ export default function Home() {
                     <p className="text-xs text-[#8e8e93] mt-2 text-center leading-relaxed">At a hanok village in Korea ☁️</p>
                   </div>
                   <div className="flex-1 min-w-0 lg:pt-1 flex flex-col">
-                    <h2 className="text-[26px] font-bold text-[#1d1d1f] mb-3">Hi, I&apos;m Lydia!</h2>
+                    <h2 className="flex items-center gap-2 text-[26px] font-bold text-[#1d1d1f] mb-3">
+                      <Image src="/nav-bunny-logo.png" alt="" width={28} height={28} className="w-7 h-7" />
+                      Hi, I&apos;m Lydia!
+                    </h2>
                     <div className="flex items-center gap-1.5 text-[13px] text-[#8e8e93] mb-5 flex-wrap">
                       <span className="flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
