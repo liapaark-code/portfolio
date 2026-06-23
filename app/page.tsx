@@ -269,16 +269,6 @@ export default function Home() {
             onMouseDown={drag("carrot")}
             {...hoverHandlers("carrot", 7)}
           >
-            {/* Pulsating dot with tooltip */}
-            <div className="absolute -top-3 -right-3 group z-30 flex items-center" style={{ pointerEvents: "auto" }}>
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#93aff5" }} />
-                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#1D4ED8" }} />
-              </span>
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 ml-1 px-4 py-2 rounded-xl border text-xs opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 whitespace-nowrap z-50" style={{ background: "#c8d9fb", borderColor: "#93aff5", color: "#1D4ED8" }}>
-                I&apos;m a product designer specializing in visual interfaces, UI/UX design, brand systems, and graphic design.
-              </div>
-            </div>
             <Image
               src="/carrotstickynote.png"
               alt="studying bfa graphic design and hci at WashU"
