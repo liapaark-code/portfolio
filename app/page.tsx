@@ -58,8 +58,8 @@ export default function Home() {
   // Track active gallery section via IntersectionObserver
   useEffect(() => {
     if (activeTab !== "gallery") return;
-    setActiveGallerySection("gallery-clay");
-    const ids = ["gallery-clay", "gallery-painting", "gallery-gestural", "gallery-collage", "gallery-type", "gallery-digital-art"];
+    setActiveGallerySection("gallery-painting");
+    const ids = ["gallery-painting", "gallery-clay", "gallery-gestural", "gallery-collage", "gallery-type", "gallery-digital-art"];
     const observers = ids.map(id => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -214,7 +214,8 @@ export default function Home() {
 
       {/* ── NAV ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md sm:border-b sm:border-[#f0f0f0]">
-        <a href="/" className="text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
+        <a href="/" className="inline-flex items-center gap-2 text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
+          <Image src="/nav-bunny-logo.png" alt="Lydia Park logo" width={24} height={24} priority className="w-6 h-6" />
           lydia park
         </a>
       </nav>
@@ -516,8 +517,8 @@ export default function Home() {
 
             const navItems = [
               { group: "Fine Art", items: [
-                { id: "gallery-clay",     label: "Clay",     count: clay.length     },
                 { id: "gallery-painting", label: "Painting", count: paintings.length },
+                { id: "gallery-clay",     label: "Clay",     count: clay.length     },
                 { id: "gallery-gestural", label: "Gestural", count: gesturals.length },
                 { id: "gallery-collage",  label: "Collage",  count: collages.length },
               ]},
@@ -567,8 +568,8 @@ export default function Home() {
                       <div className="flex-1 h-px bg-gray-200" />
                     </div>
                     {[
-                      { id: "gallery-clay",     label: "Clay",     images: clay,     category: "Clay",     cols: "mb-10" },
                       { id: "gallery-painting", label: "Painting", images: paintings, category: "Painting", cols: "mb-10" },
+                      { id: "gallery-clay",     label: "Clay",     images: clay,     category: "Clay",     cols: "mb-10" },
                       { id: "gallery-gestural", label: "Gestural", images: gesturals, category: "Gestural", cols: "mb-10" },
                       { id: "gallery-collage",  label: "Collage",  images: collages,  category: "Collage",  cols: "mb-2"  },
                     ].map(({ id, label, images, category, cols }) => (

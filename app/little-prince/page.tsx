@@ -79,7 +79,8 @@ export default function LittlePrinceCaseStudy() {
     <div className="min-h-screen bg-white font-[family-name:var(--font-clother)] pt-14">
 
       <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0]">
-        <a href="/" className="text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
+        <a href="/" className="inline-flex items-center gap-2 text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
+          <Image src="/nav-bunny-logo.png" alt="Lydia Park logo" width={24} height={24} priority className="w-6 h-6" />
           lydia park
         </a>
       </nav>
