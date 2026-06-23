@@ -721,18 +721,20 @@ export default function Home() {
                 {/* ── BIO ── */}
                 <div id="about-bio" className="flex flex-col lg:flex-row gap-8 lg:items-stretch mb-16">
                   <div className="lg:shrink-0 lg:w-64 flex flex-col items-center lg:items-stretch">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/images/about/headshot.jpg"
-                      alt="Lydia Park"
-                      className="w-64 h-72 lg:w-full lg:h-0 lg:flex-1 rounded-2xl object-cover shadow-sm border border-[#e5e5e7]"
-                      style={{ objectPosition: "center top" }}
-                    />
+                    <div className="relative w-64 h-72 md:w-72 md:h-80 lg:w-full lg:h-0 lg:flex-1">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/images/about/headshot.jpg"
+                        alt="Lydia Park"
+                        className="w-full h-full rounded-2xl object-cover shadow-sm border border-[#e5e5e7]"
+                        style={{ objectPosition: "center top" }}
+                      />
+                    </div>
                     <p className="text-xs text-[#8e8e93] mt-2 text-center leading-relaxed">At a hanok village in Korea ☁️</p>
                   </div>
                   <div className="flex-1 min-w-0 lg:pt-1 flex flex-col">
-                    <h2 className="flex items-center gap-2 text-[26px] font-bold text-[#1d1d1f] mb-3">
-                      <Image src="/nav-bunny-logo.png" alt="" width={28} height={28} className="w-7 h-7" />
+                    <h2 className="flex flex-col items-start gap-2 text-[26px] font-bold text-[#1d1d1f] mb-3">
+                      <Image src="/nav-bunny-logo.png" alt="" width={56} height={56} className="w-14 h-14 bunny-bob" />
                       Hi, I&apos;m Lydia!
                     </h2>
                     <div className="flex items-center gap-1.5 text-[13px] text-[#8e8e93] mb-5 flex-wrap">

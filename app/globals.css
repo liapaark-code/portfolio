@@ -48,6 +48,15 @@ html {
   animation: bunny-walk 8s linear infinite;
 }
 
+@keyframes bunny-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.bunny-bob {
+  animation: bunny-bob 1.8s ease-in-out infinite;
+}
+
 
 body {
   background: var(--background);
