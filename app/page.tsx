@@ -405,7 +405,7 @@ export default function Home() {
                     <div className="relative w-64 h-72 md:w-72 md:h-80 lg:w-full lg:h-0 lg:flex-1">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src="/images/about/headshot.jpg"
+                        src="/images/about/headshot.webp"
                         alt="Lydia Park"
                         className="w-full h-full rounded-2xl object-cover shadow-sm border border-[#e5e5e7]"
                         style={{ objectPosition: "center top" }}
@@ -455,10 +455,10 @@ export default function Home() {
                   </div>
                   <div className="flex-1 space-y-2">
                     {[
-                      { name: "Skandalaris Design Agency", role: "Creator / Product Designer", period: "Aug 2025–Present",  logo: "/images/about/logo-washu.png",         contain: false, href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/", desc: "Designed brand identities and product interfaces for early-stage startups, translating founder goals into scalable digital experiences." },
-                      { name: "SPARC",                     role: "UI/UX & Web Designer",       period: "Sept 2025–Present", logo: "/images/about/logo-sparc.png",         contain: false, href: null,                                                                  desc: "Redesigned UI/UX and brand systems for an athlete recruiting platform, driving +60% athlete engagement through improved interface hierarchy and visual identity." },
-                      { name: "Product Space",             role: "VP of Design",               period: "Aug 2025–Present",  logo: "/images/about/logo-product-space.png", contain: true,  href: "https://www.washuproduct.com/",                                       desc: "Led design initiatives for a student product design community, mentoring designers and organizing product workshops for a growing cohort of fellows." },
-                      { name: "Bear Studios LLC",          role: "Design Consultant",          period: "Aug 2025–Present",  logo: "/images/about/logo-bear-studios.png",  contain: false, href: null,                                                                  desc: "Consulted in a 2-person design team to deliver product, brand, and strategy solutions for startup clients." },
+                      { name: "Skandalaris Design Agency", role: "Creator / Product Designer", period: "Aug 2025–Present",  logo: "/images/about/logo-washu.webp",         contain: false, href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/", desc: "Designed brand identities and product interfaces for early-stage startups, translating founder goals into scalable digital experiences." },
+                      { name: "SPARC",                     role: "UI/UX & Web Designer",       period: "Sept 2025–Present", logo: "/images/about/logo-sparc.webp",         contain: false, href: null,                                                                  desc: "Redesigned UI/UX and brand systems for an athlete recruiting platform, driving +60% athlete engagement through improved interface hierarchy and visual identity." },
+                      { name: "Product Space",             role: "VP of Design",               period: "Aug 2025–Present",  logo: "/images/about/logo-product-space.webp", contain: true,  href: "https://www.washuproduct.com/",                                       desc: "Led design initiatives for a student product design community, mentoring designers and organizing product workshops for a growing cohort of fellows." },
+                      { name: "Bear Studios LLC",          role: "Design Consultant",          period: "Aug 2025–Present",  logo: "/images/about/logo-bear-studios.webp",  contain: false, href: null,                                                                  desc: "Consulted in a 2-person design team to deliver product, brand, and strategy solutions for startup clients." },
                       { name: "PLOT App",                  role: "Lead Product Designer",      period: "July 2025–Present", logo: null,                                   contain: false, href: null,                                                                  desc: "Led end-to-end design of a mobile app, producing 20+ iterative wireframes and prototypes while collaborating with 2 engineers to ship production-ready interfaces." },
                     ].map(({ name, role, period, logo, contain, href, desc }) => (
                       <div
@@ -504,22 +504,22 @@ export default function Home() {
                       {
                         dot: "#1D4ED8", name: "Asian Multicultural Council", role: "Public Relations Chair",
                         desc: "Organizing cultural events and building community across WashU's diverse student population with 30+ events annually.",
-                        img: "/images/about/amc.png", alt: "AMC group photo", href: "https://www.instagram.com/wustlamc/",
+                        img: "/images/about/amc.webp", alt: "AMC group photo", href: "https://www.instagram.com/wustlamc/",
                       },
                       {
                         dot: "#5c3fd1", name: "Skandalaris Design Agency", role: "Agency Web Designer",
                         desc: "Designing web experiences for student entrepreneurs at WashU's interdisciplinary innovation center.",
-                        img: "/images/about/skandalaris.png", alt: "Skandalaris Center", href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/",
+                        img: "/images/about/skandalaris.webp", alt: "Skandalaris Center", href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/",
                       },
                       {
                         dot: "#e84a4a", name: "Product Space", role: "Product Design Fellow",
                         desc: "Selected as a fellow to develop product design skills through mentorship, workshops, and real-world projects.",
-                        img: "/images/about/product-space.png", alt: "Product Space fellows", href: "https://www.washuproduct.com/",
+                        img: "/images/about/product-space.webp", alt: "Product Space fellows", href: "https://www.washuproduct.com/",
                       },
                     ].map(({ dot, name, role, desc, img, alt, href }) => (
                       <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block border border-[#e5e5e7] rounded-2xl overflow-hidden bg-white hover:bg-[#f0f4ff] hover:border-[#d0daff] transition-colors">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={img} alt={alt} className="w-full h-64 object-cover" />
+                        <img src={img} alt={alt} loading="lazy" className="w-full h-64 object-cover" />
                         <div className="p-4">
                           <div className="flex items-center gap-1.5 mb-1">
                             <span className="w-2 h-2 rounded-full shrink-0" style={{ background: dot }} />
@@ -570,14 +570,14 @@ export default function Home() {
                     <div className="flex-1">
                       <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: "none" }}>
                         {[
-                          { src: "/images/about/gangeung.png", alt: "Gangeung beach" },
-                          { src: "/images/about/areum.png", alt: "Areum the dog" },
-                          { src: "/images/about/painting.png", alt: "Painting" },
-                          { src: "/images/about/pullman.png", alt: "Pullman fields" },
-                          { src: "/images/about/matcha.png", alt: "Matcha" },
+                          { src: "/images/about/gangeung.webp", alt: "Gangeung beach" },
+                          { src: "/images/about/areum.webp", alt: "Areum the dog" },
+                          { src: "/images/about/painting.webp", alt: "Painting" },
+                          { src: "/images/about/pullman.webp", alt: "Pullman fields" },
+                          { src: "/images/about/matcha.webp", alt: "Matcha" },
                         ].map(({ src, alt }) => (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img key={src} src={src} alt={alt} className="shrink-0 h-40 w-auto rounded-2xl object-cover" />
+                          <img key={src} src={src} alt={alt} loading="lazy" className="shrink-0 h-40 w-auto rounded-2xl object-cover" />
                         ))}
                       </div>
                     </div>
