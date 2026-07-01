@@ -9,6 +9,14 @@ export default function CustomCursor() {
     // Don't show custom cursor on touch/mobile devices
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
+    // Hide the native cursor everywhere so only the blue dot shows.
+    // Injected via JS so it applies reliably regardless of CSS hot-reload.
+    const hideStyle = document.createElement("style");
+    hideStyle.setAttribute("data-cursor-hide", "");
+    hideStyle.textContent =
+      "html, body { cursor: none; } *, *::before, *::after { cursor: none !important; }";
+    document.head.appendChild(hideStyle);
+
     const move = (e: MouseEvent) => {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(() => {
@@ -21,12 +29,14 @@ export default function CustomCursor() {
     return () => {
       window.removeEventListener("mousemove", move);
       cancelAnimationFrame(rafRef.current);
+      hideStyle.remove();
     };
   }, []);
 
   return (
     <div
       ref={cursorRef}
+      id="lydia-cursor-dot"
       style={{
         position:        "fixed",
         width:           9,

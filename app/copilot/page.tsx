@@ -3,12 +3,12 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
-// Label:   text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1]
+// Label:   text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8]
 // Heading: text-2xl font-semibold text-black
 // Body:    text-sm text-gray-600 leading-relaxed
 // Layout:  max-w-5xl, grid-cols-[180px_1fr] gap-16, py-16, border-t border-gray-100
 // Cards:   bg-[#f0f4ff] rounded-2xl   |   border border-gray-200 rounded-2xl
-// Accent:  #4169e1
+// Accent:  #1D4ED8
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Reusable section wrapper
@@ -21,7 +21,7 @@ function Section({ label, heading, children, fullWidth = false }: {
   if (fullWidth) {
     return (
       <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-        <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">{label}</p>
+        <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
         {heading && <h2 className="text-2xl font-semibold text-black mb-10">{heading}</h2>}
         {children}
       </section>
@@ -33,7 +33,7 @@ function Section({ label, heading, children, fullWidth = false }: {
       <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">{label}</p>
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
             <h2 className="text-2xl font-semibold text-black">{heading}</h2>
           </div>
           <div className="pt-8">
@@ -46,7 +46,7 @@ function Section({ label, heading, children, fullWidth = false }: {
   // No heading: label on top, children below full-width
   return (
     <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-      <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">{label}</p>
+      <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
       {children}
     </section>
   );
@@ -54,29 +54,19 @@ function Section({ label, heading, children, fullWidth = false }: {
 
 export default function CopilotCaseStudy() {
   return (
-    <div className="min-h-screen bg-white font-[family-name:var(--font-clother)] pt-14">
-
-      <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0]">
-        <a href="/" className="inline-flex items-center gap-2 text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
-          <Image src="/nav-bunny-logo.png" alt="Lydia Park logo" width={24} height={24} priority className="w-6 h-6" />
-          lydia park
-        </a>
-      </nav>
+    <div className="min-h-screen bg-white font-[family-name:var(--font-clother)]">
 
       <main>
 
-        {/* ── BREADCRUMB ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-8">
-          <div className="flex items-end border-b border-[#e5e5e7]">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 bg-[#f5f5f7] hover:bg-[#e8e8ed] transition-colors border border-[#e5e5e7] border-b-0 rounded-t-lg px-4 py-1.5 text-xs text-[#6e6e73] mb-[-1px]"
-            >
-              <span className="text-[#1D4ED8] font-medium">(work)</span>
-              <span className="text-[#c0c0c0]">›</span>
-              <span>Copilot</span>
-            </Link>
-          </div>
+        {/* ── BACK ── */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-10">
+          <Link
+            href="/?tab=work"
+            className="group inline-flex items-center gap-2 rounded-full border border-[#c3d0ff] bg-[#eef2ff] hover:bg-[#e0e8ff] px-4 py-2 text-sm font-semibold text-[#1D4ED8] transition-colors"
+          >
+            <span className="text-base leading-none transition-transform duration-200 group-hover:-translate-x-0.5">←</span>
+            back
+          </Link>
         </div>
 
         {/* ── HERO ── */}
@@ -142,7 +132,7 @@ export default function CopilotCaseStudy() {
               { stat: "+25%", label: "Improvement in AI-assisted task completion", sub: "More email drafts finalized using Copilot suggestions" },
             ].map((item) => (
               <div key={item.stat} className="flex-1 py-6 sm:py-0 sm:px-10 first:pt-0 sm:first:pt-0 first:pl-0 last:pb-0 sm:last:pb-0">
-                <p className="text-5xl font-bold text-[#4169e1] mb-3">{item.stat}</p>
+                <p className="text-5xl font-bold text-[#1D4ED8] mb-3">{item.stat}</p>
                 <p className="text-base font-semibold text-black mb-1">{item.label}</p>
                 <p className="text-sm text-gray-400">{item.sub}</p>
               </div>
@@ -150,7 +140,7 @@ export default function CopilotCaseStudy() {
           </div>
 
           <div className="bg-[#f0f4ff] border border-[#d0daff] rounded-2xl p-8">
-            <p className="text-sm font-semibold text-[#4169e1] mb-4">Designer Impact</p>
+            <p className="text-sm font-semibold text-[#1D4ED8] mb-4">Designer Impact</p>
             <ul className="space-y-3">
               {[
                 "Increased AI feature adoption by embedding Copilot directly within the email compose interface, eliminating the need to open a separate side panel",
@@ -158,8 +148,8 @@ export default function CopilotCaseStudy() {
                 "Improved task completion efficiency through clear AI interaction patterns that maintain user control over tone and output",
                 "Designed a scalable AI interaction model capable of extending into calendar scheduling, task creation, and meeting preparation workflows",
               ].map((point, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm font-bold text-gray-600 leading-relaxed">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4169e1] shrink-0" />
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#1D4ED8] shrink-0" />
                   {point}
                 </li>
               ))}
@@ -186,7 +176,7 @@ export default function CopilotCaseStudy() {
               { tag: "Language",  title: "Low AI Language",       desc: "Responses feel impersonal and disconnected from Microsoft's product voice and design language." },
             ].map((c) => (
               <div key={c.title} className="bg-[#f0f4ff] rounded-2xl p-6">
-                <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">{c.tag}</p>
+                <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{c.tag}</p>
                 <p className="text-sm font-semibold text-black mb-2">{c.title}</p>
                 <p className="text-sm text-gray-600 leading-relaxed">{c.desc}</p>
               </div>
@@ -196,18 +186,18 @@ export default function CopilotCaseStudy() {
 
         {/* ── THE OPPORTUNITY ── */}
         <Section label="The Opportunity">
-          <div className="border-l-4 border-[#4169e1] pl-6 mb-8">
+          <div className="border-l-4 border-[#1D4ED8] pl-6 mb-8">
             <p className="text-xl font-medium text-black leading-snug">
               How might Copilot integrate directly into users&apos; own workflows while preserving and addressing pain points?
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-[#f0f4ff] rounded-2xl p-8 text-center">
-              <p className="text-5xl font-bold text-[#4169e1] mb-3">61%</p>
+              <p className="text-5xl font-bold text-[#1D4ED8] mb-3">61%</p>
               <p className="text-sm text-gray-600 leading-relaxed">of users said Copilot felt invisible or easy to ignore during their daily workflow</p>
             </div>
             <div className="bg-[#f0f4ff] rounded-2xl p-8 text-center">
-              <p className="text-5xl font-bold text-[#4169e1] mb-3">73%</p>
+              <p className="text-5xl font-bold text-[#1D4ED8] mb-3">73%</p>
               <p className="text-sm text-gray-600 leading-relaxed">wanted AI assistance that felt more context-aware and less interruptive</p>
             </div>
           </div>
@@ -222,13 +212,13 @@ export default function CopilotCaseStudy() {
               "I don\u2019t want to switch contexts just to ask AI to help write.",
             ].map((q, i) => (
               <div key={i} className="bg-[#f0f4ff] border border-[#d0daff] rounded-2xl p-6 flex flex-col">
-                <span className="text-4xl text-[#4169e1] leading-none mb-3 font-serif">&ldquo;</span>
+                <span className="text-4xl text-[#1D4ED8] leading-none mb-3 font-serif">&ldquo;</span>
                 <p className="text-sm font-semibold text-black leading-relaxed">{q}</p>
               </div>
             ))}
           </div>
           <div className="bg-[#f0f4ff] border border-[#d0daff] rounded-2xl p-6">
-            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Key Insight</p>
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Key Insight</p>
             <div className="space-y-2">
               {[
                 "Copilot's purpose and capabilities were unclear",
@@ -236,7 +226,7 @@ export default function CopilotCaseStudy() {
                 "The interface felt inconsistent with Outlook's design",
               ].map((item, i) => (
                 <div key={i} className="flex gap-3 items-start">
-                  <span className="text-[#4169e1] font-semibold text-sm shrink-0">{i + 1}.</span>
+                  <span className="text-[#1D4ED8] font-semibold text-sm shrink-0">{i + 1}.</span>
                   <p className="text-sm text-gray-600">{item}</p>
                 </div>
               ))}
@@ -249,7 +239,7 @@ export default function CopilotCaseStudy() {
           {/* Two-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Product Decisions</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Product Decisions</p>
               <h2 className="text-2xl font-semibold text-black">Designing a Scalable AI Foundation</h2>
             </div>
             <div className="flex items-center">
@@ -287,16 +277,16 @@ export default function CopilotCaseStudy() {
               { src: "/images/copilot-flow3.mp4", feature: "Feature: Improve Writing",       label: "Flow 3 — Smart Reply",         desc: "Copilot reads the incoming message and generates contextually appropriate reply options that match the user's tone and intent.",          outcome: "Increased reply relevance by grounding Copilot responses to the active thread, reducing back-and-forth and cutting response time." },
               { src: "/images/copilot-flow4.mp4", feature: "Feature: Response Templates",   label: "Flow 4 — Response Templates",  desc: "Frequently used reply patterns surface as one-tap templates, reducing repetitive writing and speeding up high-volume workflows.",       outcome: "Reduced repetitive writing effort for high-volume users by surfacing reusable reply patterns directly in the compose experience." },
             ].map((f) => (
-              <div key={f.src} className="border border-gray-200 rounded-2xl overflow-hidden transition-colors duration-200 hover:border-[#4169e1] hover:bg-[#f0f4ff]/40">
+              <div key={f.src} className="border border-gray-200 rounded-2xl overflow-hidden transition-colors duration-200 hover:border-[#1D4ED8] hover:bg-[#f0f4ff]/40">
                 <div className="px-6 pt-5 pb-3">
-                  <span className="inline-block bg-[#e8edff] text-[#4169e1] text-[10px] font-semibold px-3 py-1 rounded-full tracking-wide mb-2">{f.feature}</span>
-                  <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-1">{f.label}</p>
+                  <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-[10px] font-semibold px-3 py-1 rounded-full tracking-wide mb-2">{f.feature}</span>
+                  <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-1">{f.label}</p>
                   <p className="text-sm text-gray-500">{f.desc}</p>
                 </div>
                 <video src={f.src} autoPlay loop muted playsInline className="w-full h-auto" />
                 <div className="px-6 py-4 bg-[#f0f4ff] border-t border-[#d0daff]">
-                  <p className="text-sm font-bold text-gray-600 leading-relaxed">
-                    <strong className="text-[#4169e1]">OUTCOME:</strong>{" "}{f.outcome}
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    <strong className="text-[#1D4ED8]">OUTCOME:</strong>{" "}{f.outcome}
                   </p>
                 </div>
               </div>
@@ -313,8 +303,8 @@ export default function CopilotCaseStudy() {
               { stat: "+25%", label: "Task completion with AI",    desc: "More drafts and summaries were completed with Copilot assistance after the workflow integration redesign." },
             ].map((m) => (
               <div key={m.stat} className="bg-[#f0f4ff] rounded-2xl p-8 text-center">
-                <p className="text-5xl font-bold text-[#4169e1] mb-2">{m.stat}</p>
-                <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-3">{m.label}</p>
+                <p className="text-5xl font-bold text-[#1D4ED8] mb-2">{m.stat}</p>
+                <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-3">{m.label}</p>
                 <p className="text-sm text-gray-600 leading-relaxed">{m.desc}</p>
               </div>
             ))}
@@ -331,7 +321,7 @@ export default function CopilotCaseStudy() {
               { type: "Mitigation", title: "Contextual Anchoring",    desc: "Ground responses to the active document or thread, with explanations for why a suggestion was shown." },
             ].map((r, i) => (
               <div key={i} className={`rounded-2xl p-6 border ${r.type === "Risk" ? "bg-[#fff5f5] border-red-100" : "bg-[#f0f4ff] border-[#d0daff]"}`}>
-                <p className={`text-[11px] uppercase tracking-[0.14em] font-medium mb-4 ${r.type === "Risk" ? "text-red-400" : "text-[#4169e1]"}`}>{r.type}</p>
+                <p className={`text-[11px] uppercase tracking-[0.14em] font-medium mb-4 ${r.type === "Risk" ? "text-red-400" : "text-[#1D4ED8]"}`}>{r.type}</p>
                 <p className="text-sm font-semibold text-black mb-2">{r.title}</p>
                 <p className="text-sm text-gray-600 leading-relaxed">{r.desc}</p>
               </div>
@@ -341,13 +331,13 @@ export default function CopilotCaseStudy() {
 
         {/* ── TAKEAWAYS & NEXT STEPS ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Takeaways &amp; Next Steps</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Takeaways &amp; Next Steps</p>
 
           <h2 className="text-2xl font-semibold text-black mb-10">
             What working on Copilot taught me about designing with AI
           </h2>
 
-          <div className="p-px rounded-2xl" style={{ background: "linear-gradient(to right, #4169e1, #93aff5, #facc15)" }}>
+          <div className="p-px rounded-2xl" style={{ background: "linear-gradient(to right, #1D4ED8, #93aff5, #facc15)" }}>
             <div className="bg-white rounded-2xl px-10 py-10 space-y-8">
               {[
                 {

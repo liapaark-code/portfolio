@@ -2,47 +2,27 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-type Pos = { x: number; y: number };
-
-/** Default pixel positions (left, top) inside the 1100×520 hero container */
-const DEFAULTS: Record<string, Pos> = {
-  bunny:    { x: 184, y: 3   },
-  carrot:   { x: 443, y: -62 },
-  logo:     { x: 215, y: 301 },
-  gif:      { x: 792, y: 243 },
-  pdBtn:    { x: 707, y: 312 },
-  aboutBtn: { x: 609, y: 347 },
-};
-
-/** Mobile default positions */
-const MOBILE_DEFAULTS: Record<string, Pos> = {
-  bunny:    { x: 194, y: 17  },
-  carrot:   { x: 444, y: 135 },
-  logo:     { x: 299, y: 391 },
-  gif:      { x: 241, y: 89  },
-  pdBtn:    { x: 619, y: 50  },
-  aboutBtn: { x: 551, y: 105 },
-};
-
-const STORAGE_KEY_DESKTOP = "lydia-hero-pos";
-const STORAGE_KEY_MOBILE  = "lydia-hero-pos-mobile";
-const STORAGE_VERSION = 2;
+import HeadphoneBunny from "./components/HeadphoneBunny";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"work" | "gallery" | "about">("work");
-  const [pos, setPos] = useState<Record<string, Pos>>(DEFAULTS);
-  const [draggingKey, setDraggingKey] = useState<string | null>(null);
-  const [heroScale, setHeroScale] = useState(1);
-  const [isMobile, setIsMobile] = useState(false);
   const [lightbox, setLightbox] = useState<{ images: { src: string; title: string }[]; index: number; category: string } | null>(null);
   const [activeGallerySection, setActiveGallerySection] = useState("gallery-clay");
   const [activeAboutSection, setActiveAboutSection] = useState("about-bio");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
-  const [cardCta, setCardCta] = useState<{ text: string; x: number; y: number } | null>(null);
-  // ref so hover handlers can read dragging state synchronously
-  const draggingRef = useRef<string | null>(null);
-  const heroWrapRef = useRef<HTMLElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const [navInd, setNavInd] = useState({ left: 0, width: 0, ready: false });
+
+  // Slide the nav's active pill smoothly to the selected tab
+  useEffect(() => {
+    const measure = () => {
+      const btn = navRef.current?.querySelector<HTMLElement>(`[data-tab="${activeTab}"]`);
+      if (btn) setNavInd({ left: btn.offsetLeft, width: btn.offsetWidth, ready: true });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [activeTab]);
 
   // Lightbox keyboard navigation
   useEffect(() => {
@@ -89,428 +69,129 @@ export default function Home() {
     return () => observers.forEach(obs => obs?.disconnect());
   }, [activeTab]);
 
-  // Scale hero to fit viewport width
+  // Honor /?tab=work|gallery|about (e.g. nav links from sub-pages)
   useEffect(() => {
-    const update = () => {
-      if (heroWrapRef.current) {
-        const w = heroWrapRef.current.offsetWidth;
-        const base = w < 640 ? 800 : 1100;
-        setHeroScale(Math.min(1, w / base));
-        setIsMobile(w < 640);
-      }
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  // Load saved positions on mount, using separate keys for mobile vs desktop
-  useEffect(() => {
-    const mobile = window.innerWidth < 640;
-    const storageKey = mobile ? STORAGE_KEY_MOBILE : STORAGE_KEY_DESKTOP;
-    const fallback = mobile ? MOBILE_DEFAULTS : DEFAULTS;
-    try {
-      const saved = localStorage.getItem(storageKey);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.__version === STORAGE_VERSION) {
-          setPos(parsed.pos);
-        } else {
-          const migrated = { ...fallback, ...parsed.pos ?? parsed, carrot: fallback.carrot };
-          setPos(migrated);
-          localStorage.setItem(storageKey, JSON.stringify({ __version: STORAGE_VERSION, pos: migrated }));
-        }
-      } else {
-        setPos(fallback);
-      }
-    } catch {}
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    if (tab === "work" || tab === "gallery" || tab === "about") {
+      setActiveTab(tab);
+      setTimeout(() => document.getElementById("tabs-section")?.scrollIntoView({ behavior: "smooth" }), 120);
+    }
   }, []);
 
   const scrollToTabs = () =>
     document.getElementById("tabs-section")?.scrollIntoView({ behavior: "smooth" });
 
-  /** Attach drag behaviour to an element. Optional onClick fires only on a real click (no drag). */
-  const drag = (key: string, onClickFn?: () => void) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    const startMX = e.clientX;
-    const startMY = e.clientY;
-    const origX   = pos[key].x;
-    const origY   = pos[key].y;
-    let moved = false;
-
-    const onMove = (ev: MouseEvent) => {
-      const dx = (ev.clientX - startMX) / heroScale;
-      const dy = (ev.clientY - startMY) / heroScale;
-      if (!moved && (Math.abs(dx) > 3 || Math.abs(dy) > 3)) {
-        moved = true;
-        draggingRef.current = key;
-        setDraggingKey(key);
-      }
-      if (moved) {
-        setPos(prev => ({ ...prev, [key]: { x: origX + dx, y: origY + dy } }));
-      }
-    };
-
-    const onUp = () => {
-      draggingRef.current = null;
-      setDraggingKey(null);
-      if (moved) {
-        setPos(prev => {
-          const key = isMobile ? STORAGE_KEY_MOBILE : STORAGE_KEY_DESKTOP;
-          localStorage.setItem(key, JSON.stringify({ __version: STORAGE_VERSION, pos: prev }));
-          return prev;
-        });
-      } else {
-        onClickFn?.();
-      }
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-  };
-
-  /** Shared style for every draggable wrapper div */
-  const wrapStyle = (
-    key: string,
-    zBase: number,
-    width: number,
-    rotation = 0
-  ): React.CSSProperties => ({
-    position: "absolute",
-    left: pos[key].x,
-    top:  pos[key].y,
-    width,
-    zIndex: draggingKey === key ? 20 : zBase,
-    cursor: draggingKey === key ? "grabbing" : "grab",
-    userSelect: "none",
-    transform: `rotate(${rotation}deg)`,
-    transition: draggingKey === key ? "none" : "transform 0.3s ease",
-  });
-
-  /** Hover handlers that play nicely with drag (use ref for sync check) */
-  const hoverHandlers = (key: string, rotation = 0, scaleAmt = 1.04) => ({
-    onMouseEnter: (e: React.MouseEvent<HTMLDivElement>) => {
-      if (draggingRef.current !== key)
-        (e.currentTarget as HTMLElement).style.transform =
-          `rotate(${rotation}deg) scale(${scaleAmt})`;
-    },
-    onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
-      if (draggingRef.current !== key)
-        (e.currentTarget as HTMLElement).style.transform =
-          `rotate(${rotation}deg) scale(1)`;
-    },
-  });
-
-  const resetLayout = () => {
-    const defaults = isMobile ? MOBILE_DEFAULTS : DEFAULTS;
-    setPos(defaults);
-    const key = isMobile ? STORAGE_KEY_MOBILE : STORAGE_KEY_DESKTOP;
-    localStorage.setItem(key, JSON.stringify({ __version: STORAGE_VERSION, pos: defaults }));
-  };
-
   return (
-    <div className="min-h-screen font-[family-name:var(--font-clother)] bg-white pt-20">
+    <div className="min-h-screen font-[family-name:var(--font-clother)] bg-white">
 
-      {/* Mouse-follow CTA shown when hovering a work card */}
-      {cardCta && (
-        <div
-          className="pointer-events-none fixed z-[2147483646] hidden sm:block px-4 py-2 rounded-full text-xs font-semibold tracking-wide text-white shadow-lg whitespace-nowrap"
-          style={{ left: cardCta.x, top: cardCta.y, transform: "translate(16px, 16px)", background: "#1D4ED8" }}
-        >
-          {cardCta.text}
-        </div>
-      )}
-
-      {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md sm:border-b sm:border-[#f0f0f0]">
-        <a href="/" className="inline-flex items-center gap-2 text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
-          <Image src="/nav-bunny-logo.png" alt="Lydia Park logo" width={24} height={24} priority className="w-6 h-6" />
-          lydia park
-        </a>
-      </nav>
-
-      {/* ── HERO — sticky so tabs scroll up over it ── */}
-      <section
-        ref={heroWrapRef}
-        className="w-full select-none sticky top-20 z-10 bg-white overflow-hidden"
-        style={{ height: 580 * heroScale }}
-      >
-        <div
-          className="relative"
-          style={{
-            width: 1100,
-            height: 580,
-            paddingTop: 60,
-            transform: `scale(${heroScale})`,
-            transformOrigin: "top center",
-            position: "absolute",
-            left: "50%",
-            marginLeft: -550,
-          }}
-        >
-          {/* Reset button */}
-          <button
-            onClick={resetLayout}
-            className="absolute top-5 right-4 z-50 text-sm text-[#6e6e73] hover:text-[#1D4ED8] transition-colors bg-[#f5f5f7] hover:bg-[#e8e8ed] border border-[#e5e5e7] rounded-full px-5 py-2.5 shadow-sm font-medium"
-          >
-            reset layout
-          </button>
-
-          {/* ── 1. Bunny stickynote ── */}
-          <div
-            style={wrapStyle("bunny", 2, isMobile ? 520 : 440, -5)}
-            onMouseDown={drag("bunny")}
-            {...hoverHandlers("bunny", -5)}
-          >
-            <Image
-              src="/bunny-stickynote.png"
-              alt="lydia designs with intention, curiosity, and passion"
-              width={5919}
-              height={5138}
-              style={{ width: "100%", height: "auto", pointerEvents: "none" }}
-              priority
-            />
-          </div>
-
-          {/* ── 2. Carrot stickynote ── */}
-          <div
-            style={wrapStyle("carrot", 1, isMobile ? 530 : 450, 7)}
-            onMouseDown={drag("carrot")}
-            {...hoverHandlers("carrot", 7)}
-          >
-            <Image
-              src="/carrotstickynote.png"
-              alt="studying bfa graphic design and hci at WashU"
-              width={7475}
-              height={8478}
-              style={{ width: "100%", height: "auto", pointerEvents: "none" }}
-              priority
-            />
-          </div>
-
-          {/* ── 3. Bunny logo (hover swaps image) ── */}
-          <div
-            className="group"
-            style={wrapStyle("logo", 4, 90)}
-            onMouseDown={drag("logo")}
-          >
-            <Image
-              src="/bunny-logo.png"
-              alt="bunny logo"
-              width={5234}
-              height={5240}
-              className="transition-opacity duration-200 group-hover:opacity-0"
-              style={{ width: "100%", height: "auto", pointerEvents: "none" }}
-            />
-            <Image
-              src="/bunny-logo-hover.png"
-              alt="bunny logo hover"
-              width={5234}
-              height={5240}
-              className="absolute inset-0 transition-opacity duration-200 opacity-0 group-hover:opacity-100"
-              style={{ width: "100%", height: "auto", pointerEvents: "none" }}
-            />
-          </div>
-
-          {/* ── 4. Walking bunny GIF ── */}
-          <div
-            style={wrapStyle("gif", 4, isMobile ? 80 : 58)}
-            onMouseDown={drag("gif")}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/bunnywalking.gif"
-              alt="walking bunny"
-              style={{ width: "100%", height: "auto", pointerEvents: "none" }}
-            />
-          </div>
-
-          {/* ── 5. "product designer" button ── */}
-          <div
-            style={wrapStyle("pdBtn", 5, isMobile ? 210 : 150, 5)}
-            onMouseDown={drag("pdBtn", () => {
-              setActiveTab("work");
-              scrollToTabs();
-            })}
-            {...hoverHandlers("pdBtn", 5, 1.06)}
-          >
-            <Image
-              src="/productdesignerbutton.png"
-              alt="product designer"
-              width={2562}
-              height={1046}
-              style={{ width: "100%", height: "auto", pointerEvents: "none" }}
-            />
-          </div>
-
-          {/* ── 6. "about me" button — click navigates to about tab ── */}
-          <div
-            style={wrapStyle("aboutBtn", 5, isMobile ? 205 : 145, -2)}
-            onMouseDown={drag("aboutBtn", () => {
-              setActiveTab("about");
-              scrollToTabs();
-            })}
-            {...hoverHandlers("aboutBtn", -2, 1.06)}
-          >
-            <Image
-              src="/aboutme-button.png"
-              alt="about me"
-              width={2553}
-              height={939}
-              style={{ width: "100%", height: "auto", pointerEvents: "none" }}
-            />
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── FILE TABS — slides up over sticky hero ── */}
-      <div id="tabs-section" className="px-3 sm:px-10 pb-16 -mt-16 sm:-mt-24 relative z-20" style={{ background: "linear-gradient(to bottom, transparent 0%, white 56px)" }}>
-
-        {/* Tab row */}
-        <div className="flex items-end gap-0 mt-20 sm:mt-0">
-          {(["work", "gallery", "about"] as const).map((tab, i) => (
+      {/* ══ FIXED PILL NAV — top-right, frosted, sticks on scroll, never overlaps the folder ══ */}
+      <div className="fixed top-4 sm:top-5 left-0 right-0 z-50 px-3 sm:px-8 pointer-events-none">
+        <div className="max-w-[1320px] mx-auto flex justify-end">
+        <nav ref={navRef} className="pointer-events-auto flex items-center gap-0.5 rounded-full p-1.5 border border-white/70 backdrop-blur-xl shadow-[0_14px_36px_-16px_rgba(30,64,175,0.42)]" style={{ background: "rgba(231,237,255,0.92)" }}>
+          {/* sliding active pill */}
+          <span
+            aria-hidden
+            className="absolute top-1.5 bottom-1.5 rounded-full shadow-[0_2px_8px_-2px_rgba(30,64,175,0.55)] transition-all duration-300 ease-out"
+            style={{ left: navInd.left, width: navInd.width, background: "#1e40af", opacity: navInd.ready ? 1 : 0 }}
+          />
+          {(["work", "gallery", "about"] as const).map((tab) => (
             <button
               key={tab}
+              data-tab={tab}
               onClick={() => setActiveTab(tab)}
-              className={[
-                "px-7 py-2 text-sm font-medium transition-all duration-200",
-                "rounded-t-2xl",
-                activeTab === tab
-                  ? "bg-[#f5f5f7] text-[#1D4ED8] border border-b-0 border-[#e5e5e7] relative z-10"
-                  : "bg-white text-[#8e8e93] border border-[#e5e5e7] border-b-0 hover:bg-[#f0f0f5] hover:text-[#6e6e73]",
-              ].join(" ")}
-              style={{ marginBottom: "-1px" }}
+              aria-current={activeTab === tab ? "page" : undefined}
+              className={`relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm sm:text-[15px] font-medium transition-colors duration-300 ${
+                activeTab === tab ? "text-white" : "text-[#1e40af] hover:text-[#1e40af]"
+              }`}
             >
               {tab}
             </button>
           ))}
+          <a
+            href="https://drive.google.com/file/d/1gS96a0bIVfhp9Ei2HXeb5uNuoHeEzZLq/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm sm:text-[15px] font-medium text-[#1e40af] hover:text-[#1e40af] transition-colors duration-200"
+          >
+            resume
+          </a>
+        </nav>
         </div>
+      </div>
 
-        {/* Tab panel */}
+      {/* ══ FOLDER ══ */}
+      <div id="tabs-section" className="px-3 sm:px-8 pt-20 sm:pt-24 pb-20">
+
+        {/* The big folder */}
         <div
-          className="rounded-b-3xl rounded-tr-3xl p-6 pb-10"
-          style={{ background: "#f5f5f7", border: "1px solid #e5e5e7" }}
+          className="relative max-w-[1320px] mx-auto rounded-tr-[2.5rem] rounded-b-[2.5rem] border border-[#c9d5f7] shadow-[0_40px_100px_-52px_rgba(29,78,216,0.22)] px-5 sm:px-14 pt-11 sm:pt-14 pb-16"
+          style={{ background: "#f4f7ff" }}
         >
 
-          {/* WORK */}
+          {/* Folder left tab */}
+          <div className="absolute -top-5 left-0 h-7 w-36 sm:w-56 rounded-tl-[1.5rem] rounded-tr-[2.5rem] border-t border-l border-[#c9d5f7]" style={{ background: "#f4f7ff" }} />
+
+          {/* HERO — work tab */}
           {activeTab === "work" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-10 pt-6 sm:pt-10 pb-10 sm:pb-16">
+              <div className="flex-1 min-w-0">
+                <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.02em] text-[#1D4ED8] mb-8">lydia park</h1>
+                <p className="text-[14px] sm:text-base text-[#6e6e73] leading-[1.9] max-w-xl">
+                  <span className="hl-hover">System-fluent<span className="hl-tip">tokens, patterns, scale</span></span> product designer bringing clarity to complex, ambiguous problem spaces through{" "}
+                  <span className="hl-hover">prototyping<span className="hl-tip">test before build</span></span>,{" "}
+                  <span className="hl-hover">interaction design<span className="hl-tip">states, flows, feedback</span></span>, and{" "}
+                  <span className="hl-hover">rapid iteration<span className="hl-tip">learn, refine, repeat</span></span>.
+                </p>
+              </div>
+              <div className="shrink-0 flex justify-center lg:justify-end lg:w-[420px]">
+                <HeadphoneBunny className="w-40 sm:w-52 lg:w-[280px] lg:mr-28" />
+              </div>
+            </div>
+          )}
 
-              <Link
-                href="/sparc"
-                onMouseMove={(e) => setCardCta({ text: "view case study!", x: e.clientX, y: e.clientY })}
-                onMouseLeave={() => setCardCta(null)}
-                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div className="w-full aspect-[4/3] relative overflow-hidden bg-[#0a2e1c]">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/sparc/cover-frame.png" alt="SPARC Sports" className="absolute inset-0 w-full h-full object-cover" style={{ transform: "scale(1.08) translateY(-2px)", transformOrigin: "center center" }} />
-                  {/* GIF on back iPhone screen */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/images/sparc/sparc-screen.gif" alt="" aria-hidden className="absolute" style={{ left: "calc(64% + 17px)", top: "calc(6% - 1px)", height: "80%", width: "auto", borderRadius: "22px" }} />
-                </div>
-                <div className="px-4 py-3">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">SPARC Sports</p>
-                    <span className="text-xs text-[#8e8e93] shrink-0">2026</span>
+          {/* WORK — folder-style project cards */}
+          {activeTab === "work" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-10 items-start">
+              {[
+                { href: "/sparc",         cover: "/images/sparc/cover-frame.png",             bg: "#0a2e1c",                                           title: "SPARC Sports",      label: "Product Design", tags: ["Shipped", "Systems"], desc: "Led brand and UI redesign for SPARC — boosting athlete engagement by 60%", cta: "view case study!", meta: [["Role", "Lead Product Designer"], ["Team", "2 Product Designers"], ["Timeframe", "Aug 2025 – Present"]] },
+                { href: "/copilot",       cover: "/images/copilot-hero.png",                  bg: "#d0e4ff",                                           title: "Microsoft Copilot", label: "AI Product", tags: ["Shipped", "AI"],      desc: "Redesigned Copilot interactions — enabling 10× faster AI access",          cta: "view case study!", meta: [["Role", "Product Designer"], ["Team", "2 Designers, 2 PMs"], ["Timeframe", "Aug 2025 – Jan 2026"]] },
+                { href: "/little-prince", cover: "/images/little-prince/lp-card-cover-v2.png", bg: "#1a1a2e",                                           title: "Le Petite Route",   label: "Mobile Concept", tags: ["Concept", "Mobile"],  desc: "Created a story-driven travel experience inspired by The Little Prince",    cta: "view the journey!", meta: [["Timeframe", "March 2025"], ["Duration", "5 Weeks"], ["Tools", "Figma, Photoshop, Procreate"]] },
+                { href: "/amc",           cover: "/images/amc/amc-card-cover.png",            bg: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)", title: "AMC Rebrand",       label: "Brand Identity", tags: ["Shipped", "Brand"],   desc: "Designed a new brand identity system for AMC",                             cta: "view rebrand!", meta: [["Role", "Brand Designer"], ["Client", "AMC @ WashU"], ["Timeframe", "August 2025"]] },
+              ].map((p, i) => (
+                <Link
+                  key={p.href}
+                  href={p.href}
+                  className="group relative block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform hover:-translate-y-1"
+                >
+                  {/* Folder tab — tucked behind the card at rest, rises up on hover */}
+                  <div className="pointer-events-none absolute left-7 -top-[26px] z-0 flex items-center gap-2 rounded-t-[0.85rem] border border-b-0 border-[#8ea6ef] bg-white px-4 pt-1.5 pb-3.5 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-[opacity,transform] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
+                    <span className="font-mono text-[11px] font-semibold tracking-widest text-[#1D4ED8]">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1d1d1f]">{p.label}</span>
                   </div>
-                  <p className="mt-1 text-sm text-[#6e6e73]">Led brand and UI redesign for SPARC — boosting athlete engagement by 60%</p>
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
-                    <div className="overflow-hidden">
-                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Role</span><span className="text-[#3a3a3c]">Lead Product Designer</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Team</span><span className="text-[#3a3a3c]">2 Product Designers</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">Aug 2025 – Present</span></div>
+
+                  {/* Card — clean bordered container at rest, blue folder on hover */}
+                  <div className="relative z-10 rounded-[1.6rem] border border-[#e5e7f1] bg-white p-3.5 transition-[border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_10px_30px_-24px_rgba(30,64,175,0.22)] group-hover:border-[#8ea6ef] group-hover:shadow-[0_22px_48px_-26px_rgba(30,64,175,0.32)]">
+                    {/* Cover — inset, rounded */}
+                    <div className="relative aspect-[16/10] rounded-[1.15rem] overflow-hidden" style={{ background: p.bg }}>
+                      <Image src={p.cover} alt={p.title} fill className="object-cover transition-transform duration-[650ms] ease-out group-hover:scale-[1.04]" />
+                    </div>
+                    {/* Text */}
+                    <div className="px-2 pt-4 pb-1.5">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <h3 className="text-[17px] font-semibold tracking-tight text-[#1d1d1f] group-hover:text-[#1D4ED8] transition-colors duration-300">{p.title}</h3>
+                        {p.tags.length > 0 && (
+                          <div className="flex flex-wrap justify-end gap-1.5 shrink-0 opacity-0 translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]">
+                            {p.tags.map((t) => (
+                              <span key={t} className="rounded-full border border-[#c3d0ff] px-2.5 py-[3px] text-[11px] font-medium text-[#1D4ED8] whitespace-nowrap">{t}</span>
+                            ))}
+                          </div>
+                        )}
                       </div>
+                      <p className="text-sm text-[#6e6e73] leading-relaxed">{p.desc}</p>
                     </div>
                   </div>
-                </div>
-              </Link>
-
-              <Link
-                href="/copilot"
-                onMouseMove={(e) => setCardCta({ text: "view case study!", x: e.clientX, y: e.clientY })}
-                onMouseLeave={() => setCardCta(null)}
-                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div className="w-full aspect-[4/3] relative overflow-hidden" style={{ background: "#d0e4ff" }}>
-                  <Image src="/images/copilot-hero.png" alt="Microsoft Copilot" fill className="object-cover" />
-                </div>
-                <div className="px-4 py-3">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">Microsoft Copilot</p>
-                    <span className="text-xs text-[#8e8e93] shrink-0">2025</span>
-                  </div>
-                  <p className="mt-1 text-sm text-[#6e6e73]">Redesigned Copilot interactions — enabling 10× faster AI access</p>
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
-                    <div className="overflow-hidden">
-                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Role</span><span className="text-[#3a3a3c]">Product Designer</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Team</span><span className="text-[#3a3a3c]">2 Designers, 2 PMs</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">Aug 2025 – Jan 2026</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link
-                href="/little-prince"
-                onMouseMove={(e) => setCardCta({ text: "view the journey!", x: e.clientX, y: e.clientY })}
-                onMouseLeave={() => setCardCta(null)}
-                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div className="w-full aspect-[4/3] relative overflow-hidden bg-[#1a1a2e]">
-                  <Image src="/images/little-prince/lp-card-cover-v2.png" alt="Le Petite Route" fill className="object-cover" />
-                </div>
-                <div className="px-4 py-3">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">Le Petite Route</p>
-                    <span className="text-xs text-[#8e8e93] shrink-0">2025</span>
-                  </div>
-                  <p className="mt-1 text-sm text-[#6e6e73]">Created a story-driven travel experience inspired by The Little Prince</p>
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
-                    <div className="overflow-hidden">
-                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">March 2025</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Duration</span><span className="text-[#3a3a3c]">5 Weeks</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Tools</span><span className="text-[#3a3a3c]">Figma, Photoshop, Procreate</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link
-                href="/amc"
-                onMouseMove={(e) => setCardCta({ text: "view rebrand!", x: e.clientX, y: e.clientY })}
-                onMouseLeave={() => setCardCta(null)}
-                className="group block rounded-2xl overflow-hidden bg-white ring-2 ring-transparent hover:ring-[#1D4ED8] transition-all duration-300 hover:scale-[1.02]"
-              >
-                <div className="w-full aspect-[4/3] relative overflow-hidden" style={{ background: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)" }}>
-                  <Image src="/images/amc/amc-card-cover.png" alt="AMC Rebrand" fill className="object-cover" />
-                </div>
-                <div className="px-4 py-3">
-                  <div className="flex items-baseline justify-between gap-2">
-                    <p className="text-lg font-semibold text-[#1d1d1f] transition-colors duration-200 group-hover:text-[#1D4ED8]">AMC Rebrand</p>
-                    <span className="text-xs text-[#8e8e93] shrink-0">2025</span>
-                  </div>
-                  <p className="mt-1 text-sm text-[#6e6e73]">Designed a new brand identity system for AMC</p>
-                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-in-out">
-                    <div className="overflow-hidden">
-                      <div className="mt-3 pt-3 border-t border-dashed border-[#d6d6da] space-y-1.5">
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Role</span><span className="text-[#3a3a3c]">Brand Designer</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Client</span><span className="text-[#3a3a3c]">AMC @ WashU</span></div>
-                        <div className="flex gap-3 text-xs"><span className="w-24 shrink-0 uppercase tracking-wide text-[#a1a1a6]">Timeframe</span><span className="text-[#3a3a3c]">August 2025</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
+                </Link>
+              ))}
             </div>
           )}
 
@@ -598,8 +279,8 @@ export default function Home() {
                               onClick={() => scrollTo(id)}
                               className="flex items-center gap-1.5 text-left w-full transition-all duration-200"
                             >
-                              <span className={`text-sm transition-colors duration-200 ${activeGallerySection === id ? "text-[#1D4ED8] font-semibold" : "text-gray-400 hover:text-[#4169e1]"}`}>{label}</span>
-                              <span className={`text-xs transition-colors duration-200 ${activeGallerySection === id ? "text-[#4169e1]" : "text-gray-300"}`}>({count})</span>
+                              <span className={`text-sm transition-colors duration-200 ${activeGallerySection === id ? "text-[#1D4ED8] font-semibold" : "text-gray-400 hover:text-[#1D4ED8]"}`}>{label}</span>
+                              <span className={`text-xs transition-colors duration-200 ${activeGallerySection === id ? "text-[#1D4ED8]" : "text-gray-300"}`}>({count})</span>
                             </button>
                           ))}
                         </div>
@@ -706,7 +387,7 @@ export default function Home() {
                       <button
                         key={id}
                         onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })}
-                        className={`block text-sm text-left transition-colors duration-200 ${activeAboutSection === id ? "text-[#1D4ED8] font-semibold" : "text-[#8e8e93] hover:text-[#4169e1]"}`}
+                        className={`block text-sm text-left transition-colors duration-200 ${activeAboutSection === id ? "text-[#1D4ED8] font-semibold" : "text-[#8e8e93] hover:text-[#1D4ED8]"}`}
                       >
                         {label}
                       </button>
@@ -768,7 +449,7 @@ export default function Home() {
                 <div id="about-experience" className="flex flex-col lg:flex-row gap-4 lg:gap-8 items-start mb-16">
                   <div className="lg:shrink-0 lg:w-64">
                     <h3 className="text-xl font-bold text-[#1d1d1f] mb-1">Experience</h3>
-                    <a href="/Lydia-Park-Resume-2026.pdf" download="Lydia-Park-Resume-2026.pdf"
+                    <a href="https://drive.google.com/file/d/1gS96a0bIVfhp9Ei2HXeb5uNuoHeEzZLq/view?usp=drive_link" target="_blank" rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 rounded-full bg-[#e8edff] text-[#1D4ED8] text-[11px] font-semibold hover:bg-[#d0daff] active:scale-95 transition-all duration-150">
                       Resume ↗
                     </a>
@@ -868,7 +549,7 @@ export default function Home() {
                       { title: "Learn from mistakes.", desc: "Every wrong turn is data. Iterate relentlessly and grow." },
                       { title: "Design with purpose.", desc: "Not decoration. Good design solves real problems for real people." },
                     ].map(({ title, desc }) => (
-                      <div key={title} className="border border-[#d0daff] rounded-2xl p-4 bg-[#e8edff] hover:bg-[#d8e4ff] transition-colors">
+                      <div key={title} className="border border-[#e6eaf6] rounded-2xl p-4 bg-white hover:bg-[#f6f8ff] transition-colors shadow-[0_10px_24px_-18px_rgba(45,97,253,0.25)]">
                         <p className="text-[#1D4ED8] text-sm mb-2">✦</p>
                         <p className="text-sm font-semibold text-[#1d1d1f] mb-1">{title}</p>
                         <p className="text-xs text-[#8e8e93] leading-relaxed">{desc}</p>
@@ -970,7 +651,7 @@ export default function Home() {
       )}
 
       {/* ── FOOTER ── */}
-      <footer className="relative z-30 border-t border-[#e5e5e7] bg-white px-16 py-10">
+      <footer className="relative z-30 bg-[#f4f7ff] px-8 sm:px-16 py-10 mt-6">
 
         {/* 3-column desktop, stacked mobile */}
         <div className="flex flex-col sm:grid sm:grid-cols-3 sm:items-start gap-8 mb-10">
@@ -978,6 +659,7 @@ export default function Home() {
           {/* Left: name */}
           <div>
             <p className="text-base font-bold text-[#1D4ED8]">lydia park</p>
+            <p className="text-xs text-[#8e8e93] mt-1.5">Thanks for dropping in, let&apos;s chat!</p>
           </div>
 
           {/* Center: nav */}
@@ -1013,8 +695,8 @@ export default function Home() {
 
         {/* Bottom */}
         <div className="border-t border-gray-100 pt-5 text-center">
-          <p className="text-[11px] text-gray-400">Built in Next.js &amp; with love</p>
-          <p className="text-[11px] text-gray-400">@Lydia Park 2026</p>
+          <p className="text-[11px] text-gray-400">Designed &amp; built with Next.js</p>
+          <p className="text-[11px] text-gray-400">© 2026 Lydia Park</p>
         </div>
 
       </footer>

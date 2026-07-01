@@ -45,8 +45,8 @@ export default function Footer() {
 
       {/* Bottom */}
       <div className="border-t border-gray-100 pt-5 text-center">
-        <p className="text-[11px] text-gray-400">Built in Next.js &amp; with love</p>
-        <p className="text-[11px] text-gray-400">@Lydia Park 2026</p>
+        <p className="text-[11px] text-gray-400">Designed &amp; built with Next.js</p>
+        <p className="text-[11px] text-gray-400">© 2026 Lydia Park</p>
       </div>
 
     </footer>

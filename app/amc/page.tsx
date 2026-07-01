@@ -4,29 +4,19 @@ import Footer from "../components/Footer";
 
 export default function AmcCaseStudy() {
   return (
-    <div className="min-h-screen bg-white font-[family-name:var(--font-clother)] pt-14">
-
-      <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0]">
-        <a href="/" className="inline-flex items-center gap-2 text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
-          <Image src="/nav-bunny-logo.png" alt="Lydia Park logo" width={24} height={24} priority className="w-6 h-6" />
-          lydia park
-        </a>
-      </nav>
+    <div className="min-h-screen bg-white font-[family-name:var(--font-clother)]">
 
       <main>
 
-        {/* ── BREADCRUMB ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-8">
-          <div className="flex items-end border-b border-[#e5e5e7]">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 bg-[#f5f5f7] hover:bg-[#e8e8ed] transition-colors border border-[#e5e5e7] border-b-0 rounded-t-lg px-4 py-1.5 text-xs text-[#6e6e73] mb-[-1px]"
-            >
-              <span className="text-[#1D4ED8] font-medium">(work)</span>
-              <span className="text-[#c0c0c0]">›</span>
-              <span>AMC Rebrand</span>
-            </Link>
-          </div>
+        {/* ── BACK ── */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-10">
+          <Link
+            href="/?tab=work"
+            className="group inline-flex items-center gap-2 rounded-full border border-[#c3d0ff] bg-[#eef2ff] hover:bg-[#e0e8ff] px-4 py-2 text-sm font-semibold text-[#1D4ED8] transition-colors"
+          >
+            <span className="text-base leading-none transition-transform duration-200 group-hover:-translate-x-0.5">←</span>
+            back
+          </Link>
         </div>
 
         {/* ── TITLE + METADATA ── */}
@@ -73,7 +63,7 @@ export default function AmcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Overview</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Overview</p>
               <h2 className="text-2xl font-semibold text-black leading-snug">What is AMC?</h2>
               <p className="text-xs text-gray-400 mt-2">August 2025</p>
             </div>
@@ -87,7 +77,7 @@ export default function AmcCaseStudy() {
 
         {/* ── OUTCOME / IMPACT ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Outcome</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Outcome</p>
           <h2 className="text-2xl font-semibold text-black mb-10">Business Impact as a Designer for AMC</h2>
 
           <div className="flex flex-col sm:flex-row items-start divide-y sm:divide-y-0 sm:divide-x divide-gray-200 mb-10">
@@ -97,7 +87,7 @@ export default function AmcCaseStudy() {
               { stat: "3",     label: "Logo variants delivered",        sub: "Primary, secondary, and emblem" },
             ].map((item) => (
               <div key={item.stat} className="flex-1 py-6 sm:py-0 sm:px-10 first:pt-0 sm:first:pt-0 first:pl-0 last:pb-0 sm:last:pb-0">
-                <p className="text-5xl font-bold text-[#4169e1] mb-3">{item.stat}</p>
+                <p className="text-5xl font-bold text-[#1D4ED8] mb-3">{item.stat}</p>
                 <p className="text-base font-semibold text-black mb-1">{item.label}</p>
                 <p className="text-sm text-gray-400">{item.sub}</p>
               </div>
@@ -105,7 +95,7 @@ export default function AmcCaseStudy() {
           </div>
 
           <div className="bg-[#f5f5f7] border border-[#e5e5e7] rounded-2xl p-8">
-            <p className="text-sm font-semibold text-[#4169e1] mb-4">Designer Impact</p>
+            <p className="text-sm font-semibold text-[#1D4ED8] mb-4">Designer Impact</p>
             <ul className="space-y-3">
               {[
                 "Delivered a full logo rebrand for AMC's name change — replacing the informal panel C motif with a bold, scalable modern mark",
@@ -113,8 +103,8 @@ export default function AmcCaseStudy() {
                 "Designed 3 logo variants (primary, secondary, emblem) giving AMC flexibility across digital, print, and merchandise formats",
                 "Strengthened AMC's identity alongside WashU's visual standards while preserving its distinct cultural energy",
               ].map((point, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm font-bold text-gray-600 leading-relaxed">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4169e1] shrink-0" />
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#1D4ED8] shrink-0" />
                   {point}
                 </li>
               ))}
@@ -126,7 +116,7 @@ export default function AmcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">So... the Rebrand!</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">So... the Rebrand!</p>
               <h2 className="text-2xl font-semibold text-black leading-snug">
                 Why a new logo?
               </h2>
@@ -149,7 +139,7 @@ export default function AmcCaseStudy() {
 
         {/* ── BEFORE / AFTER ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Re-Designed Logo</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Re-Designed Logo</p>
           <p className="text-sm text-gray-500 mb-10">Refreshing AMC for the 2025–26 college season.</p>
 
           <div className="grid grid-cols-2 gap-8">
@@ -182,7 +172,7 @@ export default function AmcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-16 items-center">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Sketches + Iterations</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Sketches + Iterations</p>
               <h2 className="text-2xl font-semibold text-black mb-6">The design process</h2>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Starting from circular form studies and letterform explorations, each iteration pushed toward a more confident, graphic mark that could live anywhere — digital, print, or merch.
@@ -204,7 +194,7 @@ export default function AmcCaseStudy() {
 
         {/* ── FINAL DESIGN / MOCKING ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Final Design / Mocking</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Final Design / Mocking</p>
           <p className="text-sm text-gray-600 leading-relaxed mb-10 max-w-xl">
             The final mark across its full range of applications — light, dark, and gradient — showing how the logo holds across every AMC touchpoint.
           </p>

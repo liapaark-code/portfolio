@@ -5,29 +5,19 @@ import ThemeCarousel from "./ThemeCarousel";
 
 export default function SparcCaseStudy() {
   return (
-    <div className="min-h-screen bg-white font-[family-name:var(--font-clother)] pt-14">
-
-      <nav className="fixed top-0 left-0 right-0 z-50 px-10 py-3 bg-white/80 backdrop-blur-md border-b border-[#f0f0f0]">
-        <a href="/" className="inline-flex items-center gap-2 text-base font-bold text-[#1D4ED8] tracking-wide hover:opacity-70 transition-opacity">
-          <Image src="/nav-bunny-logo.png" alt="Lydia Park logo" width={24} height={24} priority className="w-6 h-6" />
-          lydia park
-        </a>
-      </nav>
+    <div className="min-h-screen bg-white font-[family-name:var(--font-clother)]">
 
       <main>
 
-        {/* ── BREADCRUMB ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-8">
-          <div className="flex items-end border-b border-[#e5e5e7]">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 bg-[#f5f5f7] hover:bg-[#e8e8ed] transition-colors border border-[#e5e5e7] border-b-0 rounded-t-lg px-4 py-1.5 text-xs text-[#6e6e73] mb-[-1px]"
-            >
-              <span className="text-[#1D4ED8] font-medium">(work)</span>
-              <span className="text-[#c0c0c0]">›</span>
-              <span>SPARC</span>
-            </Link>
-          </div>
+        {/* ── BACK ── */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-10">
+          <Link
+            href="/?tab=work"
+            className="group inline-flex items-center gap-2 rounded-full border border-[#c3d0ff] bg-[#eef2ff] hover:bg-[#e0e8ff] px-4 py-2 text-sm font-semibold text-[#1D4ED8] transition-colors"
+          >
+            <span className="text-base leading-none transition-transform duration-200 group-hover:-translate-x-0.5">←</span>
+            back
+          </Link>
         </div>
 
         {/* ── TITLE + METADATA ── */}
@@ -74,7 +64,7 @@ export default function SparcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">The Mission</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">The Mission</p>
               <h2 className="text-2xl font-semibold text-black">SPARC Status Quo</h2>
             </div>
           </div>
@@ -91,7 +81,7 @@ export default function SparcCaseStudy() {
 
         {/* ── QUICK PREVIEW ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-          <span className="inline-block bg-[#e8edff] text-[#4169e1] text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
+          <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-xs font-semibold px-4 py-1.5 rounded-full mb-4">
             QUICK PREVIEW!
           </span>
           <div className="border border-gray-200 rounded-2xl overflow-hidden">
@@ -107,7 +97,7 @@ export default function SparcCaseStudy() {
 
         {/* ── OUTCOME / IMPACT ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Outcome</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Outcome</p>
           <h2 className="text-2xl font-semibold text-black mb-10">Business Impact as a Designer for SPARC</h2>
 
           <div className="flex flex-col sm:flex-row items-start divide-y sm:divide-y-0 sm:divide-x divide-gray-200 mb-10">
@@ -117,7 +107,7 @@ export default function SparcCaseStudy() {
               { stat: "+33%", label: "Increase in perceived product trust", sub: "Redesigned interface rated most credible among tested concepts" },
             ].map((item) => (
               <div key={item.stat} className="flex-1 py-6 sm:py-0 sm:px-10 first:pt-0 sm:first:pt-0 first:pl-0 last:pb-0 sm:last:pb-0">
-                <p className="text-5xl font-bold text-[#4169e1] mb-3">{item.stat}</p>
+                <p className="text-5xl font-bold text-[#1D4ED8] mb-3">{item.stat}</p>
                 <p className="text-base font-semibold text-black mb-1">{item.label}</p>
                 <p className="text-sm text-gray-400">{item.sub}</p>
               </div>
@@ -125,7 +115,7 @@ export default function SparcCaseStudy() {
           </div>
 
           <div className="rounded-2xl p-8" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-            <p className="text-sm font-semibold text-[#4169e1] mb-4">Designer Impact</p>
+            <p className="text-sm font-semibold text-[#1D4ED8] mb-4">Designer Impact</p>
             <ul className="space-y-3">
               {[
                 "Increased feature discoverability by introducing a structured visual hierarchy and color system, allowing athletes to navigate reflection tools more efficiently",
@@ -133,8 +123,8 @@ export default function SparcCaseStudy() {
                 "Designed a scalable design system including logo architecture, color tokens, and reusable UI components to support SPARC's future product expansion",
                 "Unified SPARC's visual identity across product UI, social media, pitch materials, and merchandise to strengthen brand recognition",
               ].map((point, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm font-bold text-gray-600 leading-relaxed">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#4169e1] shrink-0" />
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#1D4ED8] shrink-0" />
                   {point}
                 </li>
               ))}
@@ -146,7 +136,7 @@ export default function SparcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Its Challenges</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Its Challenges</p>
               <p className="text-base text-black leading-relaxed">
                 Limited guidance for how the brand should scale across new features and marketing touchpoints
               </p>
@@ -168,7 +158,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">The Problem &amp; Opportunity</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">The Problem &amp; Opportunity</p>
               <h2 className="text-2xl font-semibold text-black leading-snug">
                 How might we create a brand and product experience that athletes trust and enjoy using every day?
               </h2>
@@ -182,7 +172,7 @@ export default function SparcCaseStudy() {
 
           {/* Pain points */}
           <div className="mb-10">
-            <span className="inline-block bg-[#e8edff] text-[#4169e1] text-xs font-semibold px-3 py-1 rounded-full mb-5">
+            <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-xs font-semibold px-3 py-1 rounded-full mb-5">
               PAIN POINTS:
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -193,12 +183,12 @@ export default function SparcCaseStudy() {
               ].map((p) => (
                 <div key={p.n} className="rounded-2xl p-6" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="w-7 h-7 rounded-full bg-[#4169e1] text-white text-xs font-bold flex items-center justify-center shrink-0">
+                    <span className="w-7 h-7 rounded-full bg-[#1D4ED8] text-white text-xs font-bold flex items-center justify-center shrink-0">
                       {p.n}
                     </span>
-                    <p className="text-sm font-semibold text-[#4169e1]">{p.title}</p>
+                    <p className="text-sm font-semibold text-[#1D4ED8]">{p.title}</p>
                   </div>
-                  <p className="text-sm font-bold text-gray-500 leading-relaxed text-center">{p.desc}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed text-center">{p.desc}</p>
                 </div>
               ))}
             </div>
@@ -207,7 +197,7 @@ export default function SparcCaseStudy() {
           {/* So... The Opportunity */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
             <div>
-              <h3 className="text-xl font-semibold text-[#4169e1]">So... The Opportunity</h3>
+              <h3 className="text-xl font-semibold text-[#1D4ED8]">So... The Opportunity</h3>
             </div>
             <div>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -223,7 +213,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Intro to Part 1, 2, &amp; 3</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Intro to Part 1, 2, &amp; 3</p>
               <h2 className="text-2xl font-semibold text-black">A Focused and Iterative Visual Experience</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -252,21 +242,21 @@ export default function SparcCaseStudy() {
               {/* Staggered part bubbles */}
               <div className="space-y-5">
                 <div className="flex items-start gap-3">
-                  <span className="inline-block bg-[#e8edff] text-[#4169e1] text-xs font-semibold px-3 py-1 rounded-full shrink-0 mt-0.5">Part 1</span>
+                  <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-xs font-semibold px-3 py-1 rounded-full shrink-0 mt-0.5">Part 1</span>
                   <div className="rounded-xl px-4 py-3 flex-1" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-                    <p className="text-sm font-bold text-[#4169e1]">Testing color systems across real app screens</p>
+                    <p className="text-sm font-bold text-[#1D4ED8]">Testing color systems across real app screens</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 ml-8">
                   <div className="rounded-xl px-4 py-3 flex-1" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-                    <p className="text-sm font-bold text-[#4169e1]">Iterating on UI layouts to improve clarity and consistency</p>
+                    <p className="text-sm font-bold text-[#1D4ED8]">Iterating on UI layouts to improve clarity and consistency</p>
                   </div>
-                  <span className="inline-block bg-[#e8edff] text-[#4169e1] text-xs font-semibold px-3 py-1 rounded-full shrink-0 mt-0.5">Part 2</span>
+                  <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-xs font-semibold px-3 py-1 rounded-full shrink-0 mt-0.5">Part 2</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="inline-block bg-[#e8edff] text-[#4169e1] text-xs font-semibold px-3 py-1 rounded-full shrink-0 mt-0.5">Part 3</span>
+                  <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-xs font-semibold px-3 py-1 rounded-full shrink-0 mt-0.5">Part 3</span>
                   <div className="rounded-xl px-4 py-3 flex-1" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-                    <p className="text-sm font-bold text-[#4169e1]">New Brand Design for SPARC</p>
+                    <p className="text-sm font-bold text-[#1D4ED8]">New Brand Design for SPARC</p>
                   </div>
                 </div>
               </div>
@@ -277,7 +267,7 @@ export default function SparcCaseStudy() {
         {/* ── PART 1: COLOR SYSTEMS BANNER ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-6 border-t border-gray-100">
           <div className="bg-[#e8edff] rounded-full px-8 py-5 flex flex-wrap gap-2 items-center justify-between">
-            <p className="text-base font-bold text-[#4169e1] tracking-wide">PART 1: COLOR SYSTEMS</p>
+            <p className="text-base font-bold text-[#1D4ED8] tracking-wide">PART 1: COLOR SYSTEMS</p>
             <a href="#part2" className="bg-white border border-gray-200 rounded-full px-5 py-2 text-sm font-medium text-black hover:bg-gray-50 transition-colors">
               SKIP TO PART 2
             </a>
@@ -289,7 +279,7 @@ export default function SparcCaseStudy() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
             {/* Left: heading + color system image */}
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Generative Research</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Generative Research</p>
               <h2 className="text-2xl font-semibold text-black mb-6">Color System Exploration</h2>
               <Image
                 src="/images/sparc/brand-2.png"
@@ -358,7 +348,7 @@ export default function SparcCaseStudy() {
 
               {/* Color Decision Reasonings */}
               <div className="relative mb-4">
-                <span className="inline-block bg-[#e8edff] text-[#4169e1] text-xs font-medium px-4 py-1.5 rounded-full mb-4 -rotate-2">
+                <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-xs font-medium px-4 py-1.5 rounded-full mb-4 -rotate-2">
                   Color Decision Reasonings
                 </span>
               </div>
@@ -394,7 +384,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Success Metrics</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Success Metrics</p>
               <h2 className="text-2xl font-semibold text-black">Surveying the Audience: The Athletes!</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -413,7 +403,7 @@ export default function SparcCaseStudy() {
               { stat: "33.3%", label: "Usability",            desc: "Found Dark Green easiest to navigate during quick check-ins, supporting athlete workflows that require speed and clarity under pressure." },
             ].map((m) => (
               <div key={m.label} className="border border-gray-200 rounded-2xl p-8">
-                <p className="text-5xl font-bold text-[#4169e1] mb-2">{m.stat}</p>
+                <p className="text-5xl font-bold text-[#1D4ED8] mb-2">{m.stat}</p>
                 <p className="text-sm font-semibold text-black mb-3">{m.label}</p>
                 <p className="text-sm text-gray-500 leading-relaxed">{m.desc}</p>
               </div>
@@ -421,8 +411,8 @@ export default function SparcCaseStudy() {
           </div>
 
           {/* Bottom line */}
-          <div className="border border-[#4169e1] rounded-2xl p-6">
-            <p className="text-sm font-semibold text-[#4169e1] mb-2">Bottom Line</p>
+          <div className="border border-[#1D4ED8] rounded-2xl p-6">
+            <p className="text-sm font-semibold text-[#1D4ED8] mb-2">Bottom Line</p>
             <p className="text-sm text-gray-600 leading-relaxed">
               Dark Green is currently the leading visual direction, balancing excitement, trust, and usability for SPARC&apos;s athlete audience. Qualitative feedback further reinforced a preference for clean, slightly brighter interfaces that remain calm and professional.
             </p>
@@ -434,7 +424,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Analysis</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Analysis</p>
               <h2 className="text-2xl font-semibold text-black">Choosing the Right Color</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -490,7 +480,7 @@ export default function SparcCaseStudy() {
         {/* ── TL;DR FINALIZED DESIGN COLORWAY ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="border border-gray-200 rounded-2xl p-8 shadow-sm">
-            <h2 className="text-xl font-semibold text-[#4169e1] mb-4">TL;DR Finalized Design Colorway</h2>
+            <h2 className="text-xl font-semibold text-[#1D4ED8] mb-4">TL;DR Finalized Design Colorway</h2>
             <p className="text-sm text-gray-600 leading-relaxed mb-6">
               <strong className="text-black">The dark green system is psychologically better suited for SPARC&apos;s mental training platform.</strong>{" "}
               While red excels at commanding attention and signaling urgency, it contradicts the foundational goal of mental performance training: cultivating a calm, controlled, and reflective state. Green&apos;s associations with balance, stability, and grounded focus create an environment where athletes can regulate emotions, build confidence, and prepare mentally without the added pressure that red inherently communicates.
@@ -506,7 +496,7 @@ export default function SparcCaseStudy() {
         {/* ── PART 2 BANNER ── */}
         <section id="part2" className="max-w-5xl mx-auto px-4 sm:px-8 py-6 border-t border-gray-100">
           <div className="bg-[#e8edff] rounded-full px-8 py-5 flex flex-wrap gap-2 items-center justify-between">
-            <p className="text-base font-bold text-[#4169e1] tracking-wide">PART 2: UI DESIGN</p>
+            <p className="text-base font-bold text-[#1D4ED8] tracking-wide">PART 2: UI DESIGN</p>
             <a href="#part3" className="bg-white border border-gray-200 rounded-full px-5 py-2 text-sm font-medium text-black hover:bg-gray-50 transition-colors">
               SKIP TO PART 3
             </a>
@@ -517,7 +507,7 @@ export default function SparcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Overview</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Overview</p>
               <h2 className="text-2xl font-semibold text-black">The &ldquo;Why?&rdquo; in the Changes</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -541,11 +531,11 @@ export default function SparcCaseStudy() {
         {/* ── PART 2: PROBLEM REVIEW ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="mb-10">
-            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Problem Review:</p>
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Problem Review:</p>
             <h2 className="text-2xl font-semibold text-black">The Main Question in UI</h2>
           </div>
           <div className="border border-gray-200 rounded-2xl p-14 text-center">
-            <p className="text-lg text-[#4169e1] leading-relaxed font-medium max-w-2xl mx-auto">
+            <p className="text-lg text-[#1D4ED8] leading-relaxed font-medium max-w-2xl mx-auto">
               How might we visualize athlete progress so improvements feel clear, motivating,
               and instantly scannable during quick check-ins?
             </p>
@@ -556,7 +546,7 @@ export default function SparcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Timeline</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Timeline</p>
               <h2 className="text-2xl font-semibold text-black">Fast, Test, Refine</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -573,8 +563,8 @@ export default function SparcCaseStudy() {
             className="w-full h-auto"
           />
           <div className="mt-8 rounded-2xl p-6" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-            <p className="text-sm font-bold text-gray-600 leading-relaxed">
-              <strong className="text-[#4169e1]">OUTCOME:</strong>{" "}
+            <p className="text-sm text-gray-600 leading-relaxed">
+              <strong className="text-[#1D4ED8]">OUTCOME:</strong>{" "}
               Improved scan speed and clarity, helping athletes quickly identify priorities and take action.
             </p>
           </div>
@@ -584,7 +574,7 @@ export default function SparcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">User Needs &amp; Design Implications</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">User Needs &amp; Design Implications</p>
               <h2 className="text-2xl font-semibold text-black">Design for Momentum</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -609,13 +599,13 @@ export default function SparcCaseStudy() {
             {/* Arrow */}
             <div className="shrink-0">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <path d="M6 16h20M20 10l6 6-6 6" stroke="#4169e1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 16h20M20 10l6 6-6 6" stroke="#1D4ED8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             {/* Right: final training modules GIF */}
             <div className="flex-[2] relative flex justify-center">
               <div className="relative">
-                <div className="absolute -top-4 right-0 bg-[#e8edff] text-[#4169e1] text-xs font-medium px-4 py-1.5 rounded-full -rotate-6 shadow-sm z-10 whitespace-nowrap">
+                <div className="absolute -top-4 right-0 bg-[#e8edff] text-[#1D4ED8] text-xs font-medium px-4 py-1.5 rounded-full -rotate-6 shadow-sm z-10 whitespace-nowrap">
                   Final Iteration!
                 </div>
                 <img
@@ -627,8 +617,8 @@ export default function SparcCaseStudy() {
             </div>
           </div>
           <div className="mt-8 rounded-2xl p-6" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-            <p className="text-sm font-bold text-gray-600 leading-relaxed">
-              <strong className="text-[#4169e1]">OUTCOME:</strong>{" "}
+            <p className="text-sm text-gray-600 leading-relaxed">
+              <strong className="text-[#1D4ED8]">OUTCOME:</strong>{" "}
               Increased content discoverability and scan speed, helping athletes quickly find and start the right training module.
             </p>
           </div>
@@ -636,9 +626,9 @@ export default function SparcCaseStudy() {
 
         {/* ── PART 2: FINAL SOLUTION ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
-          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-8">Final Solution</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-8">Final Solution</p>
           <div className="border border-gray-200 rounded-2xl p-10">
-            <h2 className="text-xl font-semibold text-[#4169e1] mb-5">TL;DR Clarity Drives Confidence</h2>
+            <h2 className="text-xl font-semibold text-[#1D4ED8] mb-5">TL;DR Clarity Drives Confidence</h2>
             <p className="text-sm text-gray-600 leading-relaxed">
               <strong className="text-black">The refined UI system is better suited for SPARC&apos;s mental training experience because it prioritizes clarity and cognitive ease.</strong>{" "}
               While earlier layouts successfully surfaced data, they introduced unnecessary visual friction that slowed athlete understanding during quick check-ins. By strengthening hierarchy, simplifying progress signals, and reducing cognitive load, the final design creates an environment where athletes can quickly interpret their performance, build confidence in their progress, and move into training with focus rather than hesitation.
@@ -649,7 +639,7 @@ export default function SparcCaseStudy() {
         {/* ── PART 3 BANNER ── */}
         <section id="part3" className="max-w-5xl mx-auto px-4 sm:px-8 py-6 border-t border-gray-100">
           <div className="bg-[#e8edff] rounded-full px-8 py-5 flex flex-wrap gap-2 items-center justify-between">
-            <p className="text-base font-bold text-[#4169e1] tracking-wide">PART 3: LOGO REBRAND DESIGN</p>
+            <p className="text-base font-bold text-[#1D4ED8] tracking-wide">PART 3: LOGO REBRAND DESIGN</p>
             <a href="#reflection" className="bg-white border border-gray-200 rounded-full px-5 py-2 text-sm font-medium text-black hover:bg-gray-50 transition-colors">
               SKIP TO REFLECTION
             </a>
@@ -662,7 +652,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Brand Foundation</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Brand Foundation</p>
               <h2 className="text-2xl font-semibold text-black leading-snug">
                 &ldquo;Mental strength isn&apos;t a mindset. It&apos;s a system.&rdquo;
               </h2>
@@ -698,14 +688,14 @@ export default function SparcCaseStudy() {
           {/* THE SOLUTION — card left, new logo right */}
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <div className="flex-1 rounded-2xl p-10 text-right relative" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-              <span className="absolute -top-3.5 right-6 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide whitespace-nowrap text-white" style={{ background: "#4169e1" }}>
+              <span className="absolute -top-3.5 right-6 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide whitespace-nowrap text-white" style={{ background: "#1D4ED8" }}>
                 THE SOLUTION
               </span>
-              <p className="text-base text-[#4169e1] leading-relaxed">
+              <p className="text-base text-[#1D4ED8] leading-relaxed">
                 I developed a grounded, green-led brand foundation that{" "}
-                <strong className="text-[#4169e1]">visually reinforces stability and controlled readiness.</strong>{" "}
+                <strong className="text-[#1D4ED8]">visually reinforces stability and controlled readiness.</strong>{" "}
                 By shifting the identity toward calm authority and structured focus, the{" "}
-                <strong className="text-[#4169e1]">SPARC system better supports athletes in regulating emotions, building confidence, and preparing mentally under pressure.</strong>
+                <strong className="text-[#1D4ED8]">SPARC system better supports athletes in regulating emotions, building confidence, and preparing mentally under pressure.</strong>
               </p>
             </div>
             <div className="shrink-0">
@@ -725,7 +715,7 @@ export default function SparcCaseStudy() {
         <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Logo Symbol Breakdown</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Logo Symbol Breakdown</p>
               <h2 className="text-2xl font-semibold text-black leading-snug">
                 Every Element Has a Purpose
               </h2>
@@ -751,7 +741,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">02 - Color System</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">02 - Color System</p>
               <h2 className="text-2xl font-semibold text-black">Calm Under Pressure</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -774,7 +764,7 @@ export default function SparcCaseStudy() {
               />
             </div>
             <div className="pt-20">
-              <span className="inline-block bg-[#e8edff] text-[#4169e1] text-xs font-medium px-4 py-1.5 rounded-full mb-4">
+              <span className="inline-block bg-[#e8edff] text-[#1D4ED8] text-xs font-medium px-4 py-1.5 rounded-full mb-4">
                 Color Rationale
               </span>
               <p className="text-sm text-gray-600 leading-relaxed mb-4">
@@ -800,7 +790,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">03 - Typography</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">03 - Typography</p>
               <h2 className="text-2xl font-semibold text-black">Strength Meets Clarity</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -827,7 +817,7 @@ export default function SparcCaseStudy() {
           {/* 2-col header */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">04 - Logo Design Process</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">04 - Logo Design Process</p>
               <h2 className="text-2xl font-semibold text-black">From Sketch to Symbol</h2>
             </div>
             <div className="flex items-start pt-8">
@@ -853,7 +843,7 @@ export default function SparcCaseStudy() {
 
           {/* FINAL LOGO full-width banner */}
           <div className="w-full bg-[#e8edff] rounded-2xl py-5 flex items-center justify-center mb-10">
-            <p className="text-base font-bold text-[#4169e1] tracking-widest">FINAL LOGO</p>
+            <p className="text-base font-bold text-[#1D4ED8] tracking-widest">FINAL LOGO</p>
           </div>
 
           {/* Logo specs — Primary, Secondary, Emblem */}
@@ -883,7 +873,7 @@ export default function SparcCaseStudy() {
 
           {/* Banner */}
           <div className="bg-[#e8edff] rounded-2xl px-8 py-6 flex flex-wrap gap-2 items-center justify-between mb-12">
-            <p className="text-base font-bold text-[#4169e1] tracking-wide">KEY TAKEAWAYS/REFLECTION</p>
+            <p className="text-base font-bold text-[#1D4ED8] tracking-wide">KEY TAKEAWAYS/REFLECTION</p>
             <a href="#" className="bg-white border border-gray-200 rounded-full px-5 py-2 text-sm font-medium text-black hover:bg-gray-50 transition-colors">
               BACK TO THE TOP
             </a>
@@ -891,7 +881,7 @@ export default function SparcCaseStudy() {
 
           {/* Success Metrics */}
           <div className="mb-12">
-            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Success Metrics</p>
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Success Metrics</p>
             <h2 className="text-2xl font-semibold text-black mb-8">Athlete Engagement &amp; Design Impact</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {[
@@ -900,8 +890,8 @@ export default function SparcCaseStudy() {
                 { stat: "+33%", label: "Increase in perceived product trust", desc: "Redesigned interface rated most credible among tested concepts by athletes." },
               ].map((m) => (
                 <div key={m.stat} className="bg-[#e8edff] rounded-2xl p-8 text-center" style={{ border: "1px solid #d0daff" }}>
-                  <p className="text-5xl font-bold text-[#4169e1] mb-2">{m.stat}</p>
-                  <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-3">{m.label}</p>
+                  <p className="text-5xl font-bold text-[#1D4ED8] mb-2">{m.stat}</p>
+                  <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-3">{m.label}</p>
                   <p className="text-sm text-gray-600 leading-relaxed">{m.desc}</p>
                 </div>
               ))}
@@ -910,12 +900,12 @@ export default function SparcCaseStudy() {
 
           {/* Section header */}
           <div className="mb-10">
-            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4169e1] mb-4">Takeaways &amp; Reflection</p>
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Takeaways &amp; Reflection</p>
             <h2 className="text-2xl font-semibold text-black">What working on SPARC taught me about designing across systems</h2>
           </div>
 
           {/* Reflection card */}
-          <div className="rounded-2xl border border-[#4169e1]">
+          <div className="rounded-2xl border border-[#1D4ED8]">
             <div className="rounded-2xl px-10 py-10 space-y-8">
               {[
                 {
