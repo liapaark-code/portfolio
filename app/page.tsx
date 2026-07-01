@@ -414,8 +414,7 @@ export default function Home() {
                     <p className="text-xs text-[#8e8e93] mt-2 text-center leading-relaxed">At a hanok village in Korea ☁️</p>
                   </div>
                   <div className="flex-1 min-w-0 lg:pt-1 flex flex-col">
-                    <h2 className="flex flex-col items-start gap-2 text-[26px] font-bold text-[#1d1d1f] mb-3">
-                      <Image src="/nav-bunny-logo.png" alt="" width={56} height={56} className="w-14 h-14 bunny-bob" />
+                    <h2 className="text-[26px] font-bold text-[#1d1d1f] mb-3">
                       Hi, I&apos;m Lydia!
                     </h2>
                     <div className="flex items-center gap-1.5 text-[13px] text-[#8e8e93] mb-5 flex-wrap">

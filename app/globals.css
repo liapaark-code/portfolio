@@ -140,6 +140,29 @@ html {
   transform: translateX(-50%) translateY(0);
 }
 
+/* "click me!" hint — speech bubble by the bunny's right ear */
+.click-hint {
+  position: absolute;
+  right: 8%;
+  top: -9%;
+  background: #1e40af;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 11px;
+  border-radius: 14px;
+  border-bottom-right-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 8px 18px -8px rgba(30, 64, 175, 0.55);
+  transform-origin: bottom right;
+  animation: hintFloat 2s ease-in-out infinite;
+}
+@keyframes hintFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

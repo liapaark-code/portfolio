@@ -13,6 +13,7 @@ export default function HeadphoneBunny({ className = "" }: { className?: string 
   const eyeR = useRef<HTMLSpanElement>(null);
   const [greet, setGreet] = useState<string | null>(null);
   const [bubbleKey, setBubbleKey] = useState(0);
+  const [hint, setHint] = useState(true);
   const msgIndex = useRef(0);
   const hideTimer = useRef<number | undefined>(undefined);
 
@@ -94,6 +95,7 @@ export default function HeadphoneBunny({ className = "" }: { className?: string 
         { duration: 560, easing: "cubic-bezier(.34,1.56,.64,1)" }
       );
     }
+    setHint(false);
     setGreet(MESSAGES[msgIndex.current % MESSAGES.length]);
     setBubbleKey((k) => k + 1);
     msgIndex.current += 1;
@@ -135,6 +137,7 @@ export default function HeadphoneBunny({ className = "" }: { className?: string 
         <img src="/keychain/bunny-headphones-noeyes.png" alt="lydia park bunny" className="w-full h-auto" draggable={false} />
         <span ref={eyeL} style={{ ...eyeStyle, left: "53.5%", top: "79%" }} />
         <span ref={eyeR} style={{ ...eyeStyle, left: "68.2%", top: "79.2%" }} />
+        {hint && <span className="click-hint">click me!</span>}
       </div>
     </div>
   );
