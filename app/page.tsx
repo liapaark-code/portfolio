@@ -137,10 +137,11 @@ export default function Home() {
               <div className="flex-1 min-w-0">
                 <h1 className="text-4xl sm:text-6xl font-bold tracking-[-0.02em] text-[#1D4ED8] mb-8">lydia park</h1>
                 <p className="text-[14px] sm:text-base text-[#6e6e73] leading-[1.9] max-w-xl">
-                  <span className="hl-hover">System-fluent<span className="hl-tip">tokens, patterns, scale</span></span> product designer bringing clarity to complex, ambiguous problem spaces through{" "}
-                  <span className="hl-hover">prototyping<span className="hl-tip">test before build</span></span>,{" "}
-                  <span className="hl-hover">interaction design<span className="hl-tip">states, flows, feedback</span></span>, and{" "}
-                  <span className="hl-hover">rapid iteration<span className="hl-tip">learn, refine, repeat</span></span>.
+                  A product designer who bridges{" "}
+                  <span className="hl-hover">systems thinking<span className="hl-tip">structure, patterns, scale</span></span> and{" "}
+                  <span className="hl-hover">visual craft<span className="hl-tip">type, color, motion</span></span>, grounding interface decisions in{" "}
+                  <span className="hl-hover">how real people think and feel<span className="hl-tip">research + psychology</span></span>, to make complex products{" "}
+                  <span className="hl-hover">clear and human<span className="hl-tip">simple, honest, usable</span></span>.
                 </p>
               </div>
               <div className="shrink-0 flex justify-center lg:justify-end lg:w-[420px]">

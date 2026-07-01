@@ -116,6 +116,8 @@ html {
   border-radius: 6px;
   padding: 1px 6px;
   cursor: default;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 .hl-tip {
   position: absolute;
