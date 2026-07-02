@@ -7,9 +7,7 @@ import HeadphoneBunny from "./components/HeadphoneBunny";
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"work" | "gallery" | "about">("work");
   const [lightbox, setLightbox] = useState<{ images: { src: string; title: string }[]; index: number; category: string } | null>(null);
-  const [activeGallerySection, setActiveGallerySection] = useState("gallery-clay");
   const [galleryFilter, setGalleryFilter] = useState("all");
-  const [activeAboutSection, setActiveAboutSection] = useState("about-bio");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const [navInd, setNavInd] = useState({ left: 0, width: 0, ready: false });
@@ -84,38 +82,6 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKey);
   }, [lightbox]);
 
-  // Track active gallery section via IntersectionObserver
-  useEffect(() => {
-    if (activeTab !== "gallery") return;
-    setActiveGallerySection("gallery-painting");
-    const ids = ["gallery-painting", "gallery-clay", "gallery-gestural", "gallery-collage", "gallery-type", "gallery-digital-art"];
-    const observers = ids.map(id => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) setActiveGallerySection(id);
-      }, { threshold: 0.2 });
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach(obs => obs?.disconnect());
-  }, [activeTab]);
-
-  // Track active about section via IntersectionObserver
-  useEffect(() => {
-    if (activeTab !== "about") return;
-    const ids = ["about-bio", "about-experience", "about-leadership", "about-values", "about-photos"];
-    const observers = ids.map(id => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) setActiveAboutSection(id);
-      }, { threshold: 0.2 });
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach(obs => obs?.disconnect());
-  }, [activeTab]);
 
   // Honor /?tab=work|gallery|about (e.g. nav links from sub-pages)
   useEffect(() => {
@@ -445,19 +411,18 @@ export default function Home() {
                 {/* Community */}
                 <div className="mb-12">
                   <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-[#8b8fe8] mb-4">Community</p>
-                  <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {[
-                      { name: "Asian Multicultural Council", role: "Public Relations Chair", desc: "Organizing cultural events and building community across WashU's diverse student population with 30+ events annually.", img: "/images/about/amc.webp", alt: "AMC group photo", href: "https://www.instagram.com/wustlamc/" },
-                      { name: "Skandalaris Design Agency", role: "Agency Web Designer", desc: "Designing web experiences for student entrepreneurs at WashU's interdisciplinary innovation center.", img: "/images/about/skandalaris.webp", alt: "Skandalaris Center", href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/" },
-                      { name: "Product Space", role: "Product Design Fellow", desc: "Selected as a fellow to develop product design skills through mentorship, workshops, and real-world projects.", img: "/images/about/product-space.webp", alt: "Product Space fellows", href: "https://www.washuproduct.com/" },
-                    ].map(({ name, role, desc, img, alt, href }) => (
+                      { name: "Asian Multicultural Council", role: "Public Relations Chair", img: "/images/about/amc.webp", alt: "AMC group photo", href: "https://www.instagram.com/wustlamc/" },
+                      { name: "Skandalaris Design Agency", role: "Agency Web Designer", img: "/images/about/skandalaris.webp", alt: "Skandalaris Center", href: "https://skandalaris.wustl.edu/resource/skandalaris-design-agency/" },
+                      { name: "Product Space", role: "Product Design Fellow · VP of Design", img: "/images/about/product-space.webp", alt: "Product Space fellows", href: "https://www.washuproduct.com/" },
+                    ].map(({ name, role, img, alt, href }) => (
                       <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block border border-[#e5e7f1] rounded-2xl overflow-hidden bg-white hover:bg-[#f6f8ff] hover:border-[#c9d5f7] transition-colors">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt={alt} loading="lazy" className="w-full h-64 object-cover" />
                         <div className="p-4">
-                          <p className="text-[15px] font-semibold text-[#1d1d1f] mb-1">{name}</p>
-                          <p className="text-[13px] text-[#8e8e93] mb-2">{role}</p>
-                          <p className="text-[13px] text-[#6e6e73] leading-relaxed">{desc}</p>
+                          <p className="text-[15px] font-semibold text-[#1d1d1f]">{name}</p>
+                          <p className="text-[13px] text-[#8e8e93] mt-0.5">{role}</p>
                         </div>
                       </a>
                     ))}
