@@ -1,0 +1,208 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "good-times",
+      "fontSize": "48px",
+      "fontWeight": "700",
+      "lineHeight": "62.4px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Build Mentally Stronger Teams"
+    },
+    {
+      "role": "heading",
+      "fontFamily": "nimbus-sans",
+      "fontSize": "44px",
+      "fontWeight": "700",
+      "lineHeight": "57.2px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Turn Athlete Data Into Coaching Insights"
+    },
+    {
+      "role": "heading-2",
+      "fontFamily": "nimbus-sans",
+      "fontSize": "36px",
+      "fontWeight": "700",
+      "lineHeight": "46.8px",
+      "letterSpacing": "normal",
+      "color": "#B5F542",
+      "sampleText": "78%"
+    },
+    {
+      "role": "body",
+      "fontFamily": "nimbus-sans",
+      "fontSize": "20px",
+      "fontWeight": "700",
+      "lineHeight": "26px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "SPARC gives coaches real-time insight into athlete mindset —"
+    },
+    {
+      "role": "label",
+      "fontFamily": "nimbus-sans",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Expert Validation"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      6,
+      8,
+      10,
+      12,
+      13,
+      14,
+      16,
+      20,
+      24,
+      28,
+      36,
+      40,
+      48,
+      56,
+      64
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "8px",
+    "12px",
+    "1920px"
+  ],
+  "shadows": [],
+  "buttons": [
+    {
+      "label": "Client LoginRequest a Demo",
+      "background": "transparent",
+      "color": "#FFFFFF",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "46px"
+    },
+    {
+      "label": "Client Login",
+      "background": "transparent",
+      "color": "#C3F763",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgba(195, 247, 99, 0.58)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "24px"
+    },
+    {
+      "label": "Request a Demo",
+      "background": "#B5F542",
+      "color": "#0C0C0C",
+      "padding": "16px 24px 14px",
+      "borderRadius": "8px",
+      "border": "0px none rgb(12, 12, 12)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "46px"
+    },
+    {
+      "label": "See What Coaches Get",
+      "background": "transparent",
+      "color": "#8A8A8A",
+      "padding": "10px 12.8px",
+      "borderRadius": "8px",
+      "border": "1px solid rgb(138, 138, 138)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "48px"
+    }
+  ],
+  "cards": [
+    {
+      "label": "card",
+      "background": "#141414",
+      "color": "#FFFFFF",
+      "padding": "24px",
+      "borderRadius": "12px",
+      "border": "1px solid rgb(37, 37, 37)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "199.391px"
+    },
+    {
+      "label": "card",
+      "background": "transparent",
+      "color": "#FFFFFF",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "97px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "#0C0C0C",
+    "color": "#FFFFFF",
+    "padding": "0px 96px",
+    "borderRadius": "0px",
+    "border": "",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "80px"
+  },
+  "chips": [
+    {
+      "label": "Expert Validation",
+      "background": "#0D1A0E",
+      "color": "#B5F542",
+      "padding": "8px 24px",
+      "borderRadius": "1920px",
+      "border": "1px solid rgba(195, 247, 99, 0.58)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "36px"
+    },
+    {
+      "label": "Mental performance infra",
+      "background": "transparent",
+      "color": "#FFFFFF",
+      "padding": "0px",
+      "borderRadius": "0px",
+      "border": "0px none rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "36px"
+    },
+    {
+      "label": "College programs",
+      "background": "#B5F542",
+      "color": "#B5F542",
+      "padding": "3.2px 16px",
+      "borderRadius": "1920px",
+      "border": "1px solid rgba(181, 245, 66, 0.4)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "300",
+      "height": "32.375px"
+    }
+  ],
+  "statCells": [],
+  "tabs": []
+}

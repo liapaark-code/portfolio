@@ -2,6 +2,7 @@ import Image from "next/image";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import ThemeCarousel from "./ThemeCarousel";
+import CoverVideo from "../components/CoverVideo";
 
 export default function SparcCaseStudy() {
   return (
@@ -46,16 +47,14 @@ export default function SparcCaseStudy() {
           </div>
         </section>
 
-        {/* ── HERO BANNER ── */}
+        {/* ── HERO — looping cover animation ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 pb-0 border-t border-gray-200 pt-8">
-          <div className="w-full rounded-2xl overflow-hidden">
-            <Image
-              src="/images/sparc/hero-banner.png"
-              alt="SPARC — Reset your expectations"
-              width={1200}
-              height={520}
-              className="w-full h-auto"
-              priority
+          <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#0C0C0C]">
+            <CoverVideo
+              src="/videos/sparc-cover.mp4"
+              poster="/images/sparc/cover-poster.webp"
+              label="SPARC — Build mentally stronger teams"
+              className="w-full h-full object-cover"
             />
           </div>
         </section>

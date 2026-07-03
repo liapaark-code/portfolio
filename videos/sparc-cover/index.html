@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1200" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      /* ============================================================
+         SPARC cover — 7s poster-in-motion, native-DOM redesign
+         UI recreated from assets/capture/extracted/tokens.json:
+           --bg        #0C0C0C  (--neutrals--black)
+           --surface   #141414  (--neutrals--100-base)
+           --surface-2 #252525  (--neutrals--80)
+           --lime      #B5F542  (--primary-green--green-10)
+           --lime-35   #B5F54226 (green-35 chip/glow alpha)
+           --deep      #0D1A0E  (green-50, deep green)
+           --muted     #8A8A8A  (--neutrals--50)
+           radii 8 / 12 / 16 / 20
+         Only bitmap: hero-2.png (SPARC lockup). Everything else DOM/SVG.
+         Display font: Michroma (local @font-face, single weight 400);
+         body: Helvetica/Arial stack (site nimbus-sans fallback).
+         ============================================================ */
+      @font-face {
+        font-family: "Michroma";
+        font-style: normal;
+        font-weight: 400;
+        src: url("assets/fonts/michroma-latin.woff2") format("woff2");
+      }
+
+      :root {
+        --bg: #0c0c0c;
+        --surface: #141414;
+        --surface-2: #252525;
+        --lime: #b5f542;
+        --lime-35: #b5f54226;
+        --deep: #0d1a0e;
+        --muted: #8a8a8a;
+        --white: #ffffff;
+        --card-border: 1px solid rgba(255, 255, 255, 0.07);
+        --card-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+        --display: "Michroma", sans-serif;
+        --body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1200px; /* 16:10 — native fill for the portfolio card cover */
+        overflow: hidden;
+        background: var(--bg);
+      }
+      body {
+        font-family: var(--body);
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1200px;
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      /* ================= z0 · blurred green gradient stage =================
+         Oversized radial-gradient divs + filter: blur() (NO backdrop-filter).
+         .blob-drift carries the sine drift (x/y), .blob carries bloom
+         (opacity/scale) — no property conflicts. */
+      #bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .blob-drift {
+        position: absolute;
+      }
+      .blob {
+        border-radius: 50%;
+      }
+      /* deep green behind the dashboard cluster, center ~(1350, 620) */
+      #blob-1-drift {
+        left: 650px;
+        top: -80px;
+      }
+      #blob-1 {
+        width: 1400px;
+        height: 1400px;
+        background: radial-gradient(circle, rgba(26, 84, 46, 0.95) 0%, rgba(20, 66, 38, 0.75) 30%, rgba(13, 26, 14, 0) 68%);
+        filter: blur(140px);
+      }
+      /* lime glow behind lockup/headline, center ~(380, 320) */
+      #blob-2-drift {
+        left: -70px;
+        top: -130px;
+      }
+      #blob-2 {
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(circle, rgba(181, 245, 66, 0.24) 0%, rgba(181, 245, 66, 0.12) 38%, rgba(181, 245, 66, 0) 68%);
+        filter: blur(160px);
+      }
+      /* deep green lower-left, center ~(300, 1050) — reaches the 1200 bottom */
+      #blob-3-drift {
+        left: -250px;
+        top: 500px;
+      }
+      #blob-3 {
+        width: 1100px;
+        height: 1100px;
+        background: radial-gradient(circle, rgba(22, 74, 42, 0.85) 0%, rgba(17, 56, 32, 0.6) 32%, rgba(13, 26, 14, 0) 68%);
+        filter: blur(140px);
+      }
+
+      /* ====== z0.5 · vignette (registry component, ~0.2, above blobs,
+         below UI) ====== */
+      #hf-vignette {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.2) 120%);
+      }
+
+      /* ================= dashboard cluster (native DOM cards) ============= */
+      .card {
+        position: absolute;
+        background: var(--surface);
+        border: var(--card-border);
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        font-family: var(--body);
+      }
+
+      /* z1 · Weekly AI Insights — 380x180, center (1170, 270), settles 0.88 */
+      #card-insights {
+        left: 980px; /* 1170 - 190 */
+        top: 180px; /* 270 - 90  */
+        width: 380px;
+        height: 180px;
+        z-index: 3;
+        padding: 26px 28px;
+      }
+      #card-insights .tag {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--lime);
+        background: var(--lime-35);
+        border-radius: 8px;
+        padding: 5px 12px;
+      }
+      #card-insights h3 {
+        margin-top: 12px;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--white);
+        letter-spacing: 0.01em;
+      }
+      #card-insights .skeleton {
+        margin-top: 14px;
+        height: 12px;
+        border-radius: 8px;
+        background: var(--surface-2);
+      }
+      #card-insights .skeleton.short {
+        width: 62%;
+      }
+
+      /* z1.5 · Team Assessment Trends — 520x360, center (1580, 745), 0.92
+         (nudged down-right from the plan's (1560,700) so its title clears
+         the MPI card's bottom edge — corners still overlap for depth) */
+      #card-trends {
+        left: 1320px; /* 1580 - 260 */
+        top: 625px; /* 805 - 180 */
+        width: 520px;
+        height: 360px;
+        z-index: 4;
+        padding: 30px 32px;
+      }
+      #card-trends h3 {
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--white);
+        letter-spacing: 0.01em;
+      }
+      .trend-row {
+        margin-top: 18px;
+      }
+      .trend-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .trend-label {
+        font-size: 20px;
+        color: var(--white);
+      }
+      .trend-value {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .delta-chip {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--lime);
+        background: var(--lime-35);
+        border-radius: 8px;
+        padding: 2px 9px;
+      }
+      .spark {
+        display: block;
+        margin-top: 6px;
+        width: 456px;
+        height: 30px;
+      }
+      .spark path {
+        fill: none;
+        stroke: var(--lime);
+        stroke-width: 3;
+        stroke-linecap: round;
+        /* pathLength="1" on each path → draw-on is a 1 → 0 dashoffset tween */
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+      }
+
+      /* z2 · Mental Performance Index — 460x340, center (1290, 490) */
+      #card-mpi {
+        left: 1060px; /* 1290 - 230 */
+        top: 320px; /* 490 - 170 */
+        width: 460px;
+        height: 340px;
+        z-index: 5;
+        padding: 30px 32px;
+        overflow: hidden; /* clips the shimmer sheen to the card */
+      }
+      #card-mpi .label {
+        font-size: 20px;
+        color: var(--muted);
+        max-width: 260px;
+        line-height: 1.35;
+      }
+      #mpi-ring {
+        position: absolute;
+        top: 28px;
+        right: 28px;
+        width: 120px;
+        height: 120px;
+      }
+      #card-mpi .number-row {
+        position: absolute;
+        left: 32px;
+        bottom: 34px;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+      #mpi-num {
+        font-family: var(--display);
+        font-size: 130px;
+        line-height: 1;
+        color: var(--white);
+      }
+      #card-mpi .denom {
+        font-size: 28px;
+        color: var(--muted);
+      }
+
+      /* ============ z3 · left column: lockup + headline + CTA ============ */
+      #left-col {
+        position: absolute;
+        left: 120px;
+        top: 0;
+        width: 1180px;
+        height: 1200px;
+        z-index: 6;
+        transform-origin: left center; /* hold_breath inhale */
+        pointer-events: none;
+      }
+      #brand-logo {
+        position: absolute;
+        left: 0;
+        top: 152px;
+        display: block;
+        width: 340px; /* hero-2.png 1080x361 -> h ~114px */
+        height: auto;
+      }
+      #headline {
+        position: absolute;
+        left: 0;
+        top: 440px;
+        font-family: var(--display);
+        font-weight: 400; /* Michroma ships a single weight */
+        font-size: 88px;
+        line-height: 1.16;
+        color: var(--white);
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      #headline .line {
+        display: block;
+      }
+      #headline .lime {
+        color: var(--lime); /* site --text-color--text-green pattern */
+      }
+      #cta {
+        position: absolute;
+        left: 0;
+        top: 884px; /* clears the 4-row headline block (ends ~848px) */
+        display: inline-flex;
+        align-items: center;
+        height: 64px;
+        padding: 0 42px;
+        border-radius: 999px;
+        background: var(--lime);
+        color: var(--bg);
+        font-family: var(--body);
+        font-size: 22px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      /* ---- shimmer-sweep (registry component, customized) ----
+         one restrained diagonal sheen across the MPI card, 5.4-6.1s.
+         Card surface is dark #141414, so the sheen uses plain low-alpha
+         white (~0.10) instead of the block's overlay blend. */
+      .shimmer-sweep-target {
+        position: absolute;
+        inset: 0;
+        display: block;
+        pointer-events: none;
+        --shimmer-pos: -30%;
+      }
+      .shimmer-sweep-target .shimmer-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: linear-gradient(
+          var(--shimmer-angle, 115deg),
+          transparent 0%,
+          transparent calc(var(--shimmer-pos, -30%) - var(--shimmer-width, 24%) / 2),
+          var(--shimmer-color, rgba(255, 255, 255, 0.1)) var(--shimmer-pos, -30%),
+          transparent calc(var(--shimmer-pos, -30%) + var(--shimmer-width, 24%) / 2),
+          transparent 100%
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="7"
+      data-fps="30"
+      data-width="1920"
+      data-height="1200"
+    >
+      <!-- z0 · blurred green gradient stage (blobs oversize the canvas) -->
+      <div id="bg" class="clip" data-start="0" data-duration="7" data-track-index="1" data-layout-allow-overflow="true">
+        <div id="blob-1-drift" class="blob-drift"><div id="blob-1" class="blob"></div></div>
+        <div id="blob-2-drift" class="blob-drift"><div id="blob-2" class="blob"></div></div>
+        <div id="blob-3-drift" class="blob-drift"><div id="blob-3" class="blob"></div></div>
+      </div>
+
+      <!-- z0.5 · vignette (registry component, ~0.2 strength, below UI) -->
+      <div id="hf-vignette" class="clip" data-start="0" data-duration="7" data-track-index="2"></div>
+
+      <!-- z1 · Weekly AI Insights (back layer, settles at scale 0.88) -->
+      <div id="card-insights" class="card clip" data-start="2.3" data-duration="4.7" data-track-index="3">
+        <span class="tag">AI-Powered Insights</span>
+        <h3>Weekly AI Insights</h3>
+        <div class="skeleton"></div>
+        <div class="skeleton short"></div>
+      </div>
+
+      <!-- z1.5 · Team Assessment Trends (settles at scale 0.92) -->
+      <div id="card-trends" class="card clip" data-start="2.1" data-duration="4.9" data-track-index="4">
+        <h3>Team Assessment Trends</h3>
+        <div class="trend-row">
+          <div class="trend-head">
+            <span class="trend-label">Managing Pressure</span>
+            <span class="trend-value">30</span>
+          </div>
+          <svg class="spark" viewBox="0 0 456 30" xmlns="http://www.w3.org/2000/svg">
+            <path id="spark-1" pathLength="1" d="M2,10 C40,6 70,20 110,16 C150,12 180,4 220,12 C260,20 300,26 340,22 C380,18 420,24 454,20" />
+          </svg>
+        </div>
+        <div class="trend-row">
+          <div class="trend-head">
+            <span class="trend-label">Focus &amp; Concentration</span>
+            <span class="trend-value"><span id="delta-chip" class="delta-chip">+4</span>36</span>
+          </div>
+          <svg class="spark" viewBox="0 0 456 30" xmlns="http://www.w3.org/2000/svg">
+            <path id="spark-2" pathLength="1" d="M2,24 C50,22 90,12 140,16 C190,20 230,24 280,16 C330,8 380,6 420,5 C435,4.5 448,4 454,4" />
+          </svg>
+        </div>
+        <div class="trend-row">
+          <div class="trend-head">
+            <span class="trend-label">Handling Frustration</span>
+            <span class="trend-value">42</span>
+          </div>
+          <svg class="spark" viewBox="0 0 456 30" xmlns="http://www.w3.org/2000/svg">
+            <path id="spark-3" pathLength="1" d="M2,26 C40,25 80,16 120,18 C160,20 200,10 240,12 C280,14 320,6 360,8 C400,10 430,4 454,5" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- z2 · Mental Performance Index (frontmost card) -->
+      <div id="card-mpi" class="card clip" data-start="1.9" data-duration="5.1" data-track-index="5">
+        <div class="label">Mental Performance Index</div>
+        <svg id="mpi-ring" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6" />
+          <!-- 2*PI*52 = 326.73; 84% -> dashoffset 52.28 -->
+          <circle
+            id="mpi-arc"
+            cx="60"
+            cy="60"
+            r="52"
+            fill="none"
+            stroke="#b5f542"
+            stroke-width="6"
+            stroke-linecap="round"
+            stroke-dasharray="326.73"
+            stroke-dashoffset="326.73"
+            transform="rotate(-90 60 60)"
+          />
+        </svg>
+        <div class="number-row">
+          <span id="mpi-num">0</span>
+          <span class="denom">/100</span>
+        </div>
+        <!-- one diagonal sheen across the MPI card, 5.4-6.1s -->
+        <div id="shimmer-target" class="shimmer-sweep-target"></div>
+      </div>
+
+      <!-- z3 · left column: lockup + headline + CTA (real site copy) -->
+      <div id="left-col" class="clip" data-start="0" data-duration="7" data-track-index="6">
+        <img src="assets/capture/assets/hero-2.png" alt="" id="brand-logo" width="340" height="114" />
+        <h1 id="headline">
+          <span class="line" id="hl-1">Build</span>
+          <span class="line" id="hl-2">Mentally</span>
+          <!-- 'STRONGER TEAMS' can't fit one line at the ≥84px legibility
+               floor in Michroma without hitting the MPI card, so it stacks
+               as two rows inside the third reveal unit -->
+          <span class="line" id="hl-3"><span class="lime">Stronger</span><br />Teams</span>
+        </h1>
+        <div id="cta">Request a Demo</div>
+      </div>
+    </div>
+
+    <!-- shimmer-sweep component: auto-inject .shimmer-mask into targets -->
+    <script>
+      (function () {
+        document.querySelectorAll(".shimmer-sweep-target").forEach((el) => {
+          if (!el.querySelector(".shimmer-mask")) {
+            const mask = document.createElement("div");
+            mask.className = "shimmer-mask";
+            el.appendChild(mask);
+          }
+        });
+      })();
+    </script>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      /* Seek-safe gating: delayed elements start hidden via set(autoAlpha:0),
+         revealed by fromTo(autoAlpha) at their entrance. */
+      gsap.set(
+        ["#blob-1", "#blob-2", "#blob-3", "#brand-logo", "#hl-1", "#hl-2", "#hl-3", "#cta",
+         "#card-mpi", "#card-trends", "#card-insights", "#delta-chip"],
+        { autoAlpha: 0 }
+      );
+
+      /* ===== Moment 1 · Brand + headline strike (hook) 0.00-1.60s ===== */
+      // 0.00-0.90 gradient blobs bloom (ambient-glow-bloom)
+      tl.fromTo(
+        ".blob",
+        { autoAlpha: 0, scale: 1.08 },
+        { autoAlpha: 1, scale: 1, duration: 0.9, ease: "sine.out" },
+        0
+      );
+      // perpetual sine drift on the blob wrappers — phase-offset, back to
+      // zero-crossing exactly at t=7 so the loop restart reads intentional
+      tl.to("#blob-1-drift", { x: 34, y: -22, duration: 3.6, ease: "sine.inOut" }, 0);
+      tl.to("#blob-1-drift", { x: 0, y: 0, duration: 3.39, ease: "sine.inOut" }, 3.61);
+      tl.to("#blob-2-drift", { x: -28, y: 26, duration: 3.9, ease: "sine.inOut" }, 0);
+      tl.to("#blob-2-drift", { x: 0, y: 0, duration: 3.09, ease: "sine.inOut" }, 3.91);
+      tl.to("#blob-3-drift", { x: 40, y: 18, duration: 3.2, ease: "sine.inOut" }, 0);
+      tl.to("#blob-3-drift", { x: 0, y: 0, duration: 3.79, ease: "sine.inOut" }, 3.21);
+
+      // 0.15-0.60 SPARC lockup resolves: fade_blur, no movement
+      tl.fromTo(
+        "#brand-logo",
+        { autoAlpha: 0, filter: "blur(12px)" },
+        { autoAlpha: 1, filter: "blur(0px)", duration: 0.45, ease: "power2.out" },
+        0.15
+      );
+      // 0.35-1.31 headline word_reveal by line: slide_bottom, 0.12s stagger
+      // ('STRONGER' lands already lime — line 1 + lime glow IS the <0.5s hook)
+      tl.fromTo("#hl-1", { y: 90, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.72, ease: "power4.out" }, 0.35);
+      tl.fromTo("#hl-2", { y: 90, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.72, ease: "power4.out" }, 0.47);
+      tl.fromTo("#hl-3", { y: 90, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.72, ease: "power4.out" }, 0.59);
+      // 1.15-1.55 CTA pill scale_grow
+      tl.fromTo(
+        "#cta",
+        { scale: 0.9, autoAlpha: 0 },
+        { scale: 1, autoAlpha: 1, duration: 0.4, ease: "power3.out" },
+        1.15
+      );
+
+      /* ===== Moment 2 · Dashboard glide-in + MPI count-up 1.90-3.60s ===== */
+      // 1.90-3.00 card_MPI from the right (settles just after beat 2.0)
+      tl.fromTo(
+        "#card-mpi",
+        { x: 140, y: 30, autoAlpha: 0, filter: "blur(8px)" },
+        { x: 0, y: 0, autoAlpha: 1, filter: "blur(0px)", duration: 1.1, ease: "power4.out" },
+        1.9
+      );
+      // 2.10-3.20 card_trends depth-scatter from lower-right, settles at 0.92
+      tl.fromTo(
+        "#card-trends",
+        { x: 100, y: 60, scale: 0.86, autoAlpha: 0, filter: "blur(8px)" },
+        { x: 0, y: 0, scale: 0.92, autoAlpha: 1, filter: "blur(0px)", duration: 1.1, ease: "power4.out" },
+        2.1
+      );
+      // 2.30-3.40 card_insights from upper-left of the cluster, settles at 0.88
+      tl.fromTo(
+        "#card-insights",
+        { x: -70, y: -40, scale: 0.82, autoAlpha: 0, filter: "blur(8px)" },
+        { x: 0, y: 0, scale: 0.88, autoAlpha: 1, filter: "blur(0px)", duration: 1.1, ease: "power4.out" },
+        2.3
+      );
+      // 2.20-3.50 MPI counts 0 -> 84 (timeline-driven proxy, seek-safe) while
+      // the lime arc sweeps 0 -> 84% (svg-path-draw), ending together
+      const mpi = { v: 0 };
+      const mpiNum = document.getElementById("mpi-num");
+      tl.to(
+        mpi,
+        {
+          v: 84,
+          duration: 1.3,
+          ease: "power2.out",
+          onUpdate: () => (mpiNum.textContent = String(Math.round(mpi.v))),
+        },
+        2.2
+      );
+      tl.fromTo(
+        "#mpi-arc",
+        { strokeDashoffset: 326.73 },
+        { strokeDashoffset: 52.28, duration: 1.3, ease: "power2.out" },
+        2.2
+      );
+
+      /* ===== Moment 3 · Sparklines draw on 4.00-5.40s ===== */
+      // svg-path-draw via pathLength=1 dashoffset, 0.45s each, 0.15s stagger
+      tl.fromTo("#spark-1", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.inOut" }, 4.0);
+      tl.fromTo("#spark-2", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.inOut" }, 4.15);
+      tl.fromTo("#spark-3", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.inOut" }, 4.3);
+      // 4.20 (beat) CTA scale_pulse — the single accent hit
+      tl.to("#cta", { scale: 1.05, duration: 0.175, ease: "sine.inOut", yoyo: true, repeat: 1 }, 4.2);
+      // 5.00-5.35 '+4' delta chip scale_grow — the last new element
+      tl.fromTo(
+        "#delta-chip",
+        { scale: 0.8, autoAlpha: 0 },
+        { scale: 1, autoAlpha: 1, duration: 0.35, ease: "power3.out" },
+        5.0
+      );
+
+      /* ===== Settle · Poster hold (loop-friendly) 5.40-7.00s =====
+         Cards hand off to phase-offset ambient float (±5px y max, amplitude
+         eased in from 0); every offset back at zero-crossing by t=7. */
+      tl.to("#card-mpi", { y: -5, duration: 0.69, ease: "sine.inOut" }, 5.4);
+      tl.to("#card-mpi", { y: 3, duration: 0.59, ease: "sine.inOut" }, 6.1);
+      tl.to("#card-mpi", { y: 0, duration: 0.3, ease: "sine.inOut" }, 6.7);
+      tl.to("#card-trends", { y: -4, duration: 0.79, ease: "sine.inOut" }, 5.5);
+      tl.to("#card-trends", { y: 2, duration: 0.45, ease: "sine.inOut" }, 6.3);
+      tl.to("#card-trends", { y: 0, duration: 0.24, ease: "sine.inOut" }, 6.76);
+      tl.to("#card-insights", { y: 4, duration: 0.64, ease: "sine.inOut" }, 5.45);
+      tl.to("#card-insights", { y: -2, duration: 0.55, ease: "sine.inOut" }, 6.1);
+      tl.to("#card-insights", { y: 0, duration: 0.3, ease: "sine.inOut" }, 6.66);
+      // left column hold_breath: one slow inhale into the final frame
+      tl.to("#left-col", { scale: 1.01, duration: 1.6, ease: "sine.inOut" }, 5.4);
+      // 5.40-6.10 shimmer-sweep across the MPI card — the last event; the
+      // frame is otherwise still by 6.1s
+      tl.fromTo(
+        "#shimmer-target",
+        { "--shimmer-pos": "-30%" },
+        { "--shimmer-pos": "130%", duration: 0.7, ease: "power2.inOut" },
+        5.4
+      );
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

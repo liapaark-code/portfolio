@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "webAnimations": 2,
+    "cssDeclarations": 59,
+    "scrollTargets": 21,
+    "cdpAnimations": 117,
+    "canvases": 0
+  },
+  "namedAnimations": [
+    "ticker",
+    "ticker-reverse"
+  ],
+  "scrollTriggeredElements": 21,
+  "representativeAnimations": [
+    {
+      "type": "CSSAnimation",
+      "playState": "running",
+      "animationName": "ticker",
+      "targetSelector": "div.hero_logo-track",
+      "targetRect": {
+        "x": -847.595458984375,
+        "y": 1026.03125,
+        "width": 2400,
+        "height": 72,
+        "top": 1026.03125,
+        "right": 1552.404541015625,
+        "bottom": 1098.03125,
+        "left": -847.595458984375
+      },
+      "keyframes": [
+        {
+          "offset": 0,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "translateX(0%)",
+          "computedOffset": 0
+        },
+        {
+          "offset": 1,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "translateX(-50%)",
+          "computedOffset": 1
+        }
+      ],
+      "timing": {
+        "duration": 50000,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear",
+        "direction": "normal"
+      }
+    },
+    {
+      "type": "CSSAnimation",
+      "playState": "running",
+      "animationName": "ticker-reverse",
+      "targetSelector": "div.hero_logo-track",
+      "targetRect": {
+        "x": -473.92364501953125,
+        "y": 1440.421875,
+        "width": 1920,
+        "height": 72,
+        "top": 1440.421875,
+        "right": 1446.0763549804688,
+        "bottom": 1512.421875,
+        "left": -473.92364501953125
+      },
+      "keyframes": [
+        {
+          "offset": 0,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "translateX(-50%)",
+          "computedOffset": 0
+        },
+        {
+          "offset": 1,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "translateX(0%)",
+          "computedOffset": 1
+        }
+      ],
+      "timing": {
+        "duration": 50000,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear",
+        "direction": "normal"
+      }
+    }
+  ]
+}

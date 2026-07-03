@@ -375,7 +375,7 @@ export default function CopilotCaseStudy() {
             view previous work
           </a>
           <a
-            href="/little-prince"
+            href="/blumiin"
             className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"
           >
             view next work

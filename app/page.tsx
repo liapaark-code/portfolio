@@ -3,11 +3,13 @@ import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import HeadphoneBunny from "./components/HeadphoneBunny";
+import CoverVideo from "./components/CoverVideo";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"work" | "gallery" | "about">("work");
   const [lightbox, setLightbox] = useState<{ images: { src: string; title: string }[]; index: number; category: string } | null>(null);
   const [galleryFilter, setGalleryFilter] = useState("all");
+  const [galleryMode, setGalleryMode] = useState<"ux" | "art">("art");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const [navInd, setNavInd] = useState({ left: 0, width: 0, ready: false });
@@ -16,6 +18,28 @@ export default function Home() {
   const [fdim, setFdim] = useState({ w: 0, h: 0, tabw: 0 });
   const asideRef = useRef<HTMLElement>(null);
   const [asideTop, setAsideTop] = useState(24);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  // Respect prefers-reduced-motion: swap autoplaying video covers for their poster frame
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // Some browsers pause looping covers in background tabs without resuming — re-kick on return
+  useEffect(() => {
+    const resume = () => {
+      if (document.hidden) return;
+      document.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach((v) => {
+        if (v.paused && !v.ended) v.play().catch(() => {});
+      });
+    };
+    document.addEventListener("visibilitychange", resume);
+    return () => document.removeEventListener("visibilitychange", resume);
+  }, []);
 
   // Measure the folder + its tab so we can draw one continuous outline stroke
   useLayoutEffect(() => {
@@ -183,10 +207,11 @@ export default function Home() {
           {activeTab === "work" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-10 items-start">
               {[
-                { href: "/sparc",         cover: "/images/sparc/cover-frame.png",             bg: "#0a2e1c",                                           title: "SPARC Sports",      label: "Product Design", tags: ["Shipped", "Systems"], desc: "Led brand and UI redesign for SPARC — boosting athlete engagement by 60%", cta: "view case study!", meta: [["Role", "Lead Product Designer"], ["Team", "2 Product Designers"], ["Timeframe", "Aug 2025 – Present"]] },
-                { href: "/copilot",       cover: "/images/copilot-hero.png",                  bg: "#d0e4ff",                                           title: "Microsoft Copilot", label: "AI Product", tags: ["Shipped", "AI"],      desc: "Redesigned Copilot interactions — enabling 10× faster AI access",          cta: "view case study!", meta: [["Role", "Product Designer"], ["Team", "2 Designers, 2 PMs"], ["Timeframe", "Aug 2025 – Jan 2026"]] },
-                { href: "/little-prince", cover: "/images/little-prince/lp-card-cover-v2.png", bg: "#1a1a2e",                                           title: "Le Petite Route",   label: "Mobile Concept", tags: ["Concept", "Mobile"],  desc: "Created a story-driven travel experience inspired by The Little Prince",    cta: "view the journey!", meta: [["Timeframe", "March 2025"], ["Duration", "5 Weeks"], ["Tools", "Figma, Photoshop, Procreate"]] },
-                { href: "/amc",           cover: "/images/amc/amc-card-cover.png",            bg: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)", title: "AMC Rebrand",       label: "Brand Identity", tags: ["Shipped", "Brand"],   desc: "Designed a new brand identity system for AMC",                             cta: "view rebrand!", meta: [["Role", "Brand Designer"], ["Client", "AMC @ WashU"], ["Timeframe", "August 2025"]] },
+                { href: "/sparc",         cover: "/images/sparc/cover-poster.webp",           video: "/videos/sparc-cover.mp4", bg: "#0C0C0C",                          title: "SPARC Sports",      label: "Product Design", tags: ["Shipped", "Systems", "Website"], desc: "Led brand and UI redesign for SPARC — boosting athlete engagement by 60%", cta: "view case study!", meta: [["Role", "Lead Product Designer"], ["Team", "2 Product Designers"], ["Timeframe", "Aug 2025 – Present"]] },
+                { href: "/copilot",       cover: "/images/copilot-hero.png",                  video: null,                      bg: "#d0e4ff",                          title: "Microsoft Copilot", label: "AI Product", tags: ["Shipped", "AI"],      desc: "Redesigned Copilot interactions — enabling 10× faster AI access",          cta: "view case study!", meta: [["Role", "Product Designer"], ["Team", "2 Designers, 2 PMs"], ["Timeframe", "Aug 2025 – Jan 2026"]] },
+                { href: "/blumiin",       cover: "/images/blumiin/cover-poster.png",          video: "/videos/blumiin-cover.mp4", bg: "#365a3d",                        title: "Blumiin",           label: "Product Concept", tags: ["Hackathon Winner", "Concept"],  desc: "Designed an honest herbal-remedy app — winner of the Skandalaris intern pitch", cta: "view case study!", meta: [["Role", "Designer — team of 5"], ["Context", "Skandalaris Hackathon"], ["Timeframe", "June 2026"]] },
+                { href: "/little-prince", cover: "/images/little-prince/lp-card-cover-v2.png", video: null,                     bg: "#1a1a2e",                          title: "Le Petite Route",   label: "Mobile Concept", tags: ["Concept", "Mobile"],  desc: "Created a story-driven travel experience inspired by The Little Prince",    cta: "view the journey!", meta: [["Timeframe", "March 2025"], ["Duration", "5 Weeks"], ["Tools", "Figma, Photoshop, Procreate"]] },
+                { href: "/amc",           cover: "/images/amc/amc-card-cover.png",            video: null,                      bg: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)", title: "AMC Rebrand", label: "Brand Identity", tags: ["Shipped", "Brand"],   desc: "Designed a new brand identity system for AMC",                             cta: "view rebrand!", meta: [["Role", "Brand Designer"], ["Client", "AMC @ WashU"], ["Timeframe", "August 2025"]] },
               ].map((p, i) => (
                 <Link
                   key={p.href}
@@ -201,9 +226,25 @@ export default function Home() {
 
                   {/* Card — clean bordered container at rest, blue folder on hover */}
                   <div className="relative z-10 rounded-[1.6rem] border border-[#e5e7f1] bg-white p-3.5 transition-[border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_10px_30px_-24px_rgba(30,64,175,0.22)] group-hover:border-[#8ea6ef] group-hover:shadow-[0_22px_48px_-26px_rgba(30,64,175,0.32)]">
-                    {/* Cover — inset, rounded */}
+                    {/* Cover — inset, rounded; video covers loop muted, fall back to the poster for reduced motion */}
                     <div className="relative aspect-[16/10] rounded-[1.15rem] overflow-hidden" style={{ background: p.bg }}>
-                      <Image src={p.cover} alt={p.title} fill className="object-cover transition-transform duration-[650ms] ease-out group-hover:scale-[1.04]" />
+                      {p.video && !reducedMotion ? (
+                        <video
+                          src={p.video}
+                          poster={p.cover}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          // React doesn't serialize `muted` into SSR HTML, so Chrome blocks the
+                          // pre-hydration autoplay attempt — re-kick playback on mount
+                          ref={(el) => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
+                          aria-label={p.title}
+                          className="absolute inset-0 h-full w-full object-contain transition-transform duration-[650ms] ease-out group-hover:scale-[1.04]"
+                        />
+                      ) : (
+                        <Image src={p.cover} alt={p.title} fill className={`${p.video ? "object-contain" : "object-cover"} transition-transform duration-[650ms] ease-out group-hover:scale-[1.04]`} />
+                      )}
                     </div>
                     {/* Text */}
                     <div className="px-2 pt-4 pb-1.5">
@@ -272,44 +313,133 @@ export default function Home() {
 
             const shown = galleryFilter === "all" ? pieces : pieces.filter((p) => p.cat === galleryFilter);
 
+            // UX design extras — add projects here. Example:
+            // { src: "/images/gallery/ux/project-cover.png", title: "Project Name", desc: "One-line description", href: "/project-page" }
+            type UxProject = { src: string; title: string; desc: string; href?: string; video?: string; tags?: string[]; hoverSrc?: string };
+            const uxProjects: UxProject[] = [
+              { src: "/images/gallery/ux/focusghost-cover.png", video: "/videos/focusghost-cover.mp4", title: "FocusGhost — DevFest '26 Hackathon Project", desc: "Focus-tracking desktop app that visualizes when work becomes ghosted", href: "https://devpost.com/software/focusghost", tags: ["Hackathon", "Desktop"] },
+              { src: "/images/gallery/ux/referencepoint-cover.png", video: "/videos/referencepoint-branding.mp4", title: "ReferencePoint Branding", desc: "Brand identity and spring-physics logo reveal for ReferencePoint", tags: ["Branding", "Motion"] },
+              { src: "/images/gallery/ux/atmosense-cover.jpg", title: "Atmosense — Figbuild '26 Hackathon Project", desc: "Sensory-aware navigation app that maps the city by comfort level", href: "https://sensory-compass.vercel.app/", tags: ["Hackathon", "Mobile"] },
+              { src: "/images/gallery/ux/robbie-meadow-poster.png", video: "/videos/robbie-meadow.mp4", title: "WashUX Club Website Game", desc: "Playable meadow for Robbie, the WashUX mascot — built for the club site", href: "https://washuxclub.com/", tags: ["WashUX", "Interactive"] },
+              { src: "/images/gallery/ux/amass-logo-skeleton.png", hoverSrc: "/images/gallery/ux/amass-logo-hover.png", title: "AMASS Logo Branding", desc: "Logo construction — the AMASS mark built on a geometric grid system", tags: ["Branding", "Logo"] },
+            ];
+
             return (
               <div className="pt-2 pb-16">
+                {/* Mode toggle: UX Extras ↔ Art */}
+                <div className="flex justify-end mb-6">
+                <div className="inline-flex items-center gap-0.5 rounded-full bg-[#eef2ff] p-1">
+                  {([["ux", "UX Extras"], ["art", "Art"]] as const).map(([id, label]) => (
+                    <button
+                      key={id}
+                      onClick={() => setGalleryMode(id)}
+                      aria-pressed={galleryMode === id}
+                      className={`rounded-full px-4 py-1.5 text-[13px] font-medium transition-all duration-200 ${galleryMode === id ? "bg-white text-[#1D4ED8] shadow-[0_2px_8px_rgba(29,78,216,0.14)]" : "text-[#6e6e73] hover:text-[#1D4ED8]"}`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                </div>
+
                 {/* Header + filter chips */}
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
                   <div>
                     <h2 className="text-[26px] font-bold tracking-[-0.02em] text-[#1d1d1f]">Gallery</h2>
-                    <p className="text-sm text-[#8e8e93] mt-1">Paintings, ceramics, type, and everything in between.</p>
+                    <p className="text-sm text-[#8e8e93] mt-1">
+                      {galleryMode === "art" ? "Paintings, ceramics, type, and everything in between." : "UX design extras and side explorations."}
+                    </p>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {filters.map((f) => (
-                      <button
-                        key={f.id}
-                        onClick={() => setGalleryFilter(f.id)}
-                        className={`rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors duration-200 ${galleryFilter === f.id ? "bg-[#1D4ED8] text-white" : "bg-[#eef2ff] text-[#1D4ED8] hover:bg-[#e0e8ff]"}`}
-                      >
-                        {f.label}
-                      </button>
-                    ))}
-                  </div>
+                  {galleryMode === "art" && (
+                    <div className="flex flex-wrap gap-2">
+                      {filters.map((f) => (
+                        <button
+                          key={f.id}
+                          onClick={() => setGalleryFilter(f.id)}
+                          className={`rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors duration-200 ${galleryFilter === f.id ? "bg-[#1D4ED8] text-white" : "bg-[#eef2ff] text-[#1D4ED8] hover:bg-[#e0e8ff]"}`}
+                        >
+                          {f.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
-                {/* Staggered masonry */}
-                <div className="columns-2 md:columns-3 gap-5">
-                  {shown.map((p, i) => (
-                    <figure
-                      key={p.src}
-                      className="group break-inside-avoid mb-6 cursor-zoom-in"
-                      onClick={() => setLightbox({ images: shown, index: i, category: p.medium })}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={p.src} alt={p.title || p.medium} loading="lazy" className="w-full rounded-[10px] transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-90" />
-                      <figcaption className="mt-2 px-0.5">
-                        <p className="text-[13px] text-[#1d1d1f] leading-tight">{p.title || "Untitled"}</p>
-                        <p className="text-[11px] uppercase tracking-[0.1em] text-[#8b8fe8] mt-0.5">{p.medium}</p>
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
+                {galleryMode === "art" ? (
+                  /* Staggered masonry */
+                  <div className="columns-2 md:columns-3 gap-5">
+                    {shown.map((p, i) => (
+                      <figure
+                        key={p.src}
+                        className="group break-inside-avoid mb-6 cursor-zoom-in"
+                        onClick={() => setLightbox({ images: shown, index: i, category: p.medium })}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={p.src} alt={p.title || p.medium} loading="lazy" className="w-full rounded-[10px] transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-90" />
+                        <figcaption className="mt-2 px-0.5">
+                          <p className="text-[13px] text-[#1d1d1f] leading-tight">{p.title || "Untitled"}</p>
+                          <p className="text-[11px] uppercase tracking-[0.1em] text-[#8b8fe8] mt-0.5">{p.medium}</p>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                ) : uxProjects.length > 0 ? (
+                  /* UX extras — masonry columns so rows don't force-match heights */
+                  <div className="columns-1 sm:columns-2 gap-6">
+                    {uxProjects.map((p) => {
+                      const card = (
+                        <>
+                          <div className="relative rounded-[10px] overflow-hidden border border-[#e5e7f1]">
+                            {p.video ? (
+                              <CoverVideo src={p.video} poster={p.src} label={p.title} className="w-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]" />
+                            ) : (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img src={p.src} alt={p.title} loading="lazy" className="w-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02]" />
+                            )}
+                            {p.hoverSrc && (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img src={p.hoverSrc} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100" />
+                            )}
+                          </div>
+                          <div className="mt-2.5 px-0.5 flex items-start justify-between gap-3">
+                            <div>
+                              <p className="text-[14px] font-medium text-[#1d1d1f] leading-tight">{p.title}</p>
+                              <p className="text-[13px] text-[#8e8e93] mt-0.5">{p.desc}</p>
+                            </div>
+                            <div className="flex items-center gap-1.5 shrink-0 pt-0.5 opacity-0 translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:translate-y-0">
+                              {(p.tags ?? []).map((t) => (
+                                <span key={t} className="rounded-full border border-[#c3d0ff] px-2.5 py-[3px] text-[11px] font-medium text-[#1D4ED8] whitespace-nowrap">{t}</span>
+                              ))}
+                              {p.href?.startsWith("http") && (
+                                <svg viewBox="0 0 14 14" width="14" height="14" fill="none" aria-hidden="true" className="ml-1 text-[#1D4ED8]">
+                                  <path d="M4 10L10 4M5 4h5v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      );
+                      const external = p.href?.startsWith("http");
+                      return p.href ? (
+                        <a key={p.title} href={p.href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} className="group block break-inside-avoid mb-6">{card}</a>
+                      ) : (
+                        <div key={p.title} className="group break-inside-avoid mb-6">{card}</div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  /* UX extras — empty state until projects are added */
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="aspect-square rounded-[10px] border border-dashed border-[#c9d5f7] bg-white/60 flex items-center justify-center text-[13px] text-[#8e8e93]"
+                      >
+                        coming soon ✦
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })()}

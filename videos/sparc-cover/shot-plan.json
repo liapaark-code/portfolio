@@ -1,0 +1,130 @@
+{
+  "status": "final",
+  "category": "webpage",
+  "duration_s": 7,
+  "fps": 30,
+  "canvas": { "w": 1920, "h": 1080, "aspect": "16:9" },
+  "style": "clean / minimal / premium product-design portfolio cover — SPARC's design system RECREATED natively in HTML/CSS (no screenshots, no mockup images). Crisp DOM dashboard cards, real site copy, real tokens, inline-SVG sparklines, over a slow-drifting blurred green gradient stage. Slow confident glides, power/sine easing only; zero gimmicks, zero narration. Reads as a poster at thumbnail size: big type, big number, high contrast.",
+  "palette": ["#0C0C0C", "#141414", "#252525", "#0D1A0E", "#B5F542", "#FFFFFF", "#8A8A8A"],
+  "font": "Michroma",
+  "font_note": "Site fonts are Adobe-licensed and NOT in the capture. Display 'good-times' (wide techy geometric) → fallback Michroma (Google; Orbitron acceptable alt). Body 'nimbus-sans' → 'Helvetica Neue', Helvetica, Arial, sans-serif. All recreated text must stay thumbnail-readable: headline lines ≥ ~84px, MPI number ≥ ~120px, card labels ≥ ~20px, nothing smaller than ~18px rendered.",
+  "beats": [0.5, 2.0, 4.2],
+  "export": "mp4",
+
+  "asset_needs": [],
+  "assets_resolved": {
+    "ledger": "assets/index.md",
+    "logo_lockup": "assets/capture/assets/hero-2.png (only bitmap in the piece — it's the logo, allowed)",
+    "ui_source_of_truth": [
+      "assets/capture/extracted/tokens.json — real CSS variables: --neutrals--black #0c0c0c, surfaces #141414/#252525, --primary-green--green-10 #b5f542, green-20 #c3f76394, green-30 #b5f54266, green-35 #b5f54226, green-50 #0d1a0e (deep green), neutrals-50 #8a8a8a, radii 8/12/16/20px, --text-color--text-green",
+      "assets/capture/extracted/design-styles.json — component styles",
+      "assets/capture/extracted/visible-text.txt — exact site copy"
+    ],
+    "unused_by_design": [
+      "laptop mockup webp / image-21.webp card crops — replaced by native DOM recreation per redesign direction",
+      "phone SPARC Insight card — cut to stay inside the 3-moment budget",
+      "phone carousel + scroll screenshots — out of scope for a poster loop"
+    ]
+  },
+
+  "content": {
+    "url": "https://sparc-sports.com/",
+    "capture": "resolved — UI is recreated natively from extracted tokens/copy; no page screenshots composited",
+
+    "block": "shimmer-sweep",
+    "customize": {
+      "shimmer-sweep": "single restrained diagonal sheen across the MPI card at 5.4–6.1s; low opacity (~0.10), white→transparent; once, never repeats",
+      "vignette": "polish block, very subtle (~0.2) — keeps corners reading dark at thumbnail size",
+      "note": "no catalog block covers a native-UI dashboard cover; choreography hand-authored per blueprints dataviz-countup + titlecard-reveal restraint, rules: counting-dynamic-scale (MPI count-up), svg-path-draw (sparkline draw-on), depth-scatter-assemble, depth-of-field-blur, ambient-glow-bloom, sine-wave-loop; motion-vocabulary primitives slide_bottom / word_reveal / fade_blur / scale_grow / scale_pulse / hold_breath"
+    },
+
+    "stage_background": {
+      "description": "Blurred green gradient stage — the green glow SPARC uses behind its hero, not a neon wash. Built from CSS gradient divs with filter: blur() (render-safe; NO backdrop-filter).",
+      "base": "#0c0c0c full-bleed",
+      "blobs": [
+        "blob-1 (deep green): ~1400px radial div, #0d1a0e at ~85% → transparent, filter blur(140px), centered behind the dashboard cluster (≈ x 1350, y 560)",
+        "blob-2 (lime glow): ~900px radial div, #b5f542 at 10% opacity (≈ token green-35 #b5f54226) → transparent, blur(160px), upper-left behind lockup/headline (≈ x 380, y 260)",
+        "blob-3 (deep green): ~1100px radial div, #0d1a0e at ~70% → transparent, blur(140px), lower-left (≈ x 300, y 980)"
+      ],
+      "motion": "each blob drifts on sine-wave-loop the full 7s: ±30–45px x/y, periods 9–13s, phase-offset; opacity blooms 0→full during 0.0–0.9s (ambient-glow-bloom). Slow enough to read as living light, near zero-crossing at t=7 for the loop.",
+      "vignette": "subtle, on top of blobs, below UI"
+    },
+
+    "recreated_ui": {
+      "left_column (branding + hero copy)": {
+        "lockup": "hero-2.png, ~340px wide, top-left (x 120, y 92)",
+        "headline": "BUILD MENTALLY STRONGER TEAMS — Michroma 700, uppercase, 3 stacked lines ~92px, white; the word STRONGER in lime #b5f542 (site's --text-color--text-green pattern); left-aligned, starts ≈ y 380",
+        "cta": "lime pill (radius-full), #b5f542 bg, #0c0c0c text 'Request a Demo' in body stack ~22px/600, ~64px tall, below headline"
+      },
+      "dashboard_cluster (right, native DOM cards on #141414, radius 16px, 1px border rgba(255,255,255,.07), shadow 0 30px 80px rgba(0,0,0,.55), body font stack)": {
+        "card_MPI": "≈ 460×340 at (x 1290, y 430), frontmost. Label 'Mental Performance Index' ~20px #8a8a8a; hero number 84 ~130px white Michroma with '/100' ~28px #8a8a8a; thin lime progress ring or arc at 84%",
+        "card_trends": "≈ 520×360 at (x 1560, y 700), scale 0.92 (reads farther back). Title 'Team Assessment Trends' ~22px white. Three rows, each: label ~20px white + inline-SVG sparkline (lime stroke 3px, transparent fill) + value: 'Managing Pressure — 30', 'Focus & Concentration — 36' with a lime '+4' delta chip (green-35 bg, lime text), 'Handling Frustration — 42'. Sparkline path shapes echo the site's 30/36/42/38/28/28-style series",
+        "card_insights": "≈ 380×180 at (x 1170, y 210), scale 0.88, back layer. Pill tag 'AI-Powered Insights' (lime text on green-35 bg) + title 'Weekly AI Insights' ~24px white + two skeleton text bars (#252525, radius 8) — no tiny paragraph text"
+      },
+      "z_order": "blobs (z0) → vignette (z0.5) → card_insights (z1) → card_trends (z1.5) → card_MPI (z2) → left column lockup/headline/CTA (z3)"
+    },
+
+    "choreography": [
+      {
+        "moment": 1,
+        "name": "Brand + headline strike (hook)",
+        "time": "0.00–1.60s",
+        "layers": [
+          "0.00–0.90s — gradient blobs bloom: opacity 0→full, scale 1.08→1.0, sine.out (ambient-glow-bloom); their perpetual sine drift starts immediately.",
+          "0.15–0.60s — SPARC lockup resolves: fade_blur (opacity 0→1, blur 12px→0), no movement.",
+          "0.35–1.30s — headline word_reveal by line: each of the 3 lines slide_bottom (y +90→0, opacity 0→1, power4.out, 0.12s stagger); 'STRONGER' lands already lime — the sub-0.5s hook is line 1 + lime glow on black.",
+          "1.15–1.55s — CTA pill scale_grow (scale 0.9→1.0, opacity 0→1, power3.out)."
+        ]
+      },
+      {
+        "moment": 2,
+        "name": "Dashboard glide-in + MPI count-up",
+        "time": "1.90–3.60s",
+        "layers": [
+          "1.90–3.00s — card_MPI enters from right: x +140→0, y +30→0, blur 8px→0, opacity 0→1, power4.out (settles just after beat 2.0).",
+          "2.10–3.20s — card_trends depth-scatter-assemble from lower-right (x +100 y +60 → 0, settles at scale 0.92), 0.2s stagger.",
+          "2.30–3.40s — card_insights same recipe from upper-left of the cluster, settles at scale 0.88.",
+          "2.20–3.50s — MPI number counts 0→84 (counting-dynamic-scale; timeline-driven snap so it's seek-safe) while the lime ring arc sweeps 0→84% (svg-path-draw on the arc), both power2.out ending together."
+        ]
+      },
+      {
+        "moment": 3,
+        "name": "Sparklines draw on (pattern interrupt)",
+        "time": "4.00–5.40s",
+        "layers": [
+          "4.00–5.10s — the three trend sparklines draw on via stroke-dashoffset (svg-path-draw), 0.45s each, 0.15s stagger, power2.inOut — the piece's signature micro-moment.",
+          "4.20s (beat 4.2) — CTA pill scale_pulse: scale 1→1.05→1, 0.35s, sine.inOut — the single accent hit; nothing else reacts.",
+          "5.00–5.35s — '+4' delta chip on Focus & Concentration: scale_grow (0.8→1.0, opacity 0→1, power3.out) — the last new element."
+        ]
+      },
+      {
+        "moment": "settle",
+        "name": "Poster hold (loop-friendly)",
+        "time": "5.40–7.00s",
+        "layers": [
+          "5.40–7.00s — three cards hand off to sine-wave-loop ambient float: ±5px y, periods 5.5s/4.8s/6.2s, phase-offset, amplitude eased in from 0; blobs keep their slow drift.",
+          "5.40–7.00s — left column hold_breath: scale 1.000→1.010, sine.inOut, one slow inhale.",
+          "5.40–6.10s — shimmer-sweep: one diagonal sheen crosses card_MPI (~0.10 opacity). Frame is otherwise still by 6.1s.",
+          "7.00s — end frame = recreated_ui layout exactly: lockup + full headline + CTA left, three lit dashboard cards right, 84/100 and drawn sparklines resolved, green glow breathing. Ambient offsets near zero-crossing at t=7; final frame doubles as the card's poster."
+        ]
+      }
+    ],
+
+    "easing_language": "entrances power4.out / power3.out (long deceleration, premium weight); count-up and draws power2; accents sine.inOut; nothing bounces, no back/elastic; no cut faster than 0.35s",
+    "highlights": [
+      { "region": "hero headline 'BUILD MENTALLY STRONGER TEAMS' + Request a Demo CTA", "label": null },
+      { "region": "Mental Performance Index 84/100 card (count-up + ring)", "label": null },
+      { "region": "Team Assessment Trends sparklines (draw-on) + Weekly AI Insights card", "label": null }
+    ],
+    "builder_notes": [
+      "NO screenshots/mockup bitmaps for UI — every card, headline, pill, and sparkline is DOM/SVG built from tokens.json values (#0c0c0c / #141414 / #252525 / #b5f542 / #b5f54226 / #0d1a0e / #8a8a8a, radii 8/12/16/20). Only bitmap allowed: hero-2.png lockup.",
+      "Blurred stage = gradient divs with filter: blur() — do NOT use backdrop-filter (render-unsafe). Oversize blob divs beyond canvas edges to avoid blur edge clipping; mark the drifting blob wrapper data-layout-allow-overflow.",
+      "Count-up and sparkline/arc draws must be timeline-driven (GSAP snap on textContent / stroke-dashoffset tweens), fully seek-safe and deterministic — no rAF counters, no Math.random.",
+      "Load Michroma via local @font-face (freeze the woff2 into assets/) — no runtime Google Fonts fetch at render; body text uses the Helvetica/Arial system stack.",
+      "Text sizes: headline ~92px, MPI 130px, labels ≥20px — verify thumbnail legibility at 480px-wide preview.",
+      "Every timed element: class='clip' + data-start/data-duration/data-track-index; single paused timeline registered on window.__timelines; run npm run check before handoff."
+    ]
+  },
+
+  "shot_brief": "A 7s unnarrated 16:9 poster-in-motion, rebuilt natively: SPARC's UI recreated as crisp DOM over a slow-breathing blurred green gradient stage (deep green #0d1a0e + low-opacity lime blobs on #0c0c0c). Blobs bloom from black as the SPARC lockup resolves and the headline BUILD MENTALLY STRONGER TEAMS reveals line by line — STRONGER in lime — with a lime Request-a-Demo pill (hook <0.5s). Three real dashboard cards glide in from the right at parallax depths while the Mental Performance Index counts 0→84 and its lime ring sweeps. Then the signature micro-moment: three sparklines draw themselves across the Team Assessment Trends card and a lime +4 chip lands. Everything settles into phase-offset ambient float, one sheen crosses the MPI card, and the piece holds a composed, loop-safe poster frame. Dominant motion idea: living green light behind a calm, self-assembling dashboard — the site's design system doing the talking, in vector-crisp DOM."
+}

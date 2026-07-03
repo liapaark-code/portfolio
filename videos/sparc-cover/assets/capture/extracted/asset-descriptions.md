@@ -1,0 +1,98 @@
+# Asset Descriptions
+
+⚠️  GEMINI_API_KEY not set — descriptions below are catalog-derived (alt text, headings, section context, filename) instead of Vision-generated. To get richer Vision descriptions on the next capture, set GEMINI_API_KEY (or GOOGLE_API_KEY) and re-run.
+
+The `logo-<hash>.svg` filename prefix is a structural hint (DOM said this SVG was inside a `<header>`, home-link `<a>`, or had an aria-label matching the page brand). To pick the actual brand logo without Vision, open the `logo-*` candidates in a previewer or rasterize them with `sharp` before referencing — composing a fake logo ships off-brand in the final video.
+
+- 7aa9f273-f537-49b7-a957-164d213248bb.mov — [video] Turn Athlete Data Into Coaching Insights, ~1920×1080
+- 69cab65125ea7dacf0680c7c-psypact-20logo.webp — 95KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680c7c-psypact-2520log.webp — 39KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680c82-nflpa-20logo.webp — 16KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680c82-nflpa-2520logo-.webp — 11KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680ca5-jordan-20chiu.webp — 18KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680ccb-expert-25201-p-.webp — 16KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680ccc-expert-202.webp — 40KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680ccc-expert-25202-p-.webp — 18KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680ccd-mathis-20ross.webp — 12KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680ccf-harry-20thursfi.webp — 11KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cd1-noah-20williams.webp — 16KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cd8-herman-20hoey.webp — 10KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cd9-johny-20mathes.webp — 48KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cda-antonio-20muniz.webp — 54KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cda-antonio-2520mun.webp — 22KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cdb-sergio-20tenis.webp — 20KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cf3-laptop-20mockup.webp — 277KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- 69cab65125ea7dacf0680cf3-laptop-2520mock.webp — 12KB, "SPARC company logo in white on black background.", in: footer_component is-in-view, above fold
+- built-with-licensed-sport-psychologists.webp — 25KB, built with licensed sport psychologists
+- favicon.png — 1KB, favicon
+- footer-component-is-in-view.png — 12KB, footer component is in view
+- hero-10.webp — 83KB, hero 10
+- hero-11.webp — 110KB, hero 11
+- hero-12.webp — 154KB, hero 12
+- hero-13.webp — 195KB, hero 13
+- hero-2.png — 17KB, hero 2
+- hero-9.webp — 46KB, hero 9
+- hero-image-is-in-view.webp — 29KB, hero image is in view
+- hero-logo.png — 10KB, hero logo
+- how-tennis-players-use-sparc.webp — 110KB, how tennis players use sparc
+- image-17.webp — 28KB, image 17
+- image-18.webp — 44KB, image 18
+- image-19.webp — 74KB, image 19
+- image-20.webp — 99KB, image 20
+- image-21.webp — 141KB, image 21
+- image-25.png — 115KB, image 25
+- image-26.png — 252KB, image 26
+- image-27.png — 404KB, image 27
+- image-28.png — 727KB, image 28
+- image-31.webp — 38KB, image 31
+- image-45.webp — 61KB, image 45
+- image-46.webp — 13KB, image 46
+- image-47.webp — 22KB, image 47
+- image-48.webp — 31KB, image 48
+- image-51.webp — 17KB, image 51
+- image-54.webp — 34KB, image 54
+- image-55.webp — 82KB, image 55
+- image-56.png — 90KB, image 56
+- logo-18102af4.svg — 0KB, logo 18102af4
+- logo-36ee9f24.svg — 0KB, logo 36ee9f24
+- logo-c3654d68.svg — 0KB, logo c3654d68
+- og-image.png — 318KB, og image
+- section-experts.webp — 73KB, section experts
+- section-insights.webp — 13KB, section insights
+- section-testimonials.png — 3237KB, section testimonials
+- sparc-company-logo-in-white-on-black-bac.webp — 21KB, sparc company logo in white on black bac
+- svg-2bb1e0e5.svg — 15KB, svg 2bb1e0e5
+- svg-73d20bf1.svg — 1KB, svg 73d20bf1
+- svg-bfeba089.svg — 1KB, svg bfeba089
+- turn-athlete-data-into-coaching-insights.webp — 160KB, turn athlete data into coaching insights
+- what-coaches-athletes-are-saying.webp — 14KB, what coaches athletes are saying
+- svgs/logo-0f445451.svg — logo 0f445451
+- svgs/logo-1d4bde1e.svg — logo 1d4bde1e
+- svgs/logo-24142df3.svg — logo 24142df3
+- svgs/logo-7b00bd7a-2.svg — logo 7b00bd7a 2
+- svgs/logo-7b00bd7a.svg — logo 7b00bd7a
+- svgs/svg-0f445451.svg — svg 0f445451
+- svgs/svg-1d4bde1e-2.svg — svg 1d4bde1e 2
+- svgs/svg-1d4bde1e.svg — svg 1d4bde1e
+- svgs/svg-1e14dd86.svg — svg 1e14dd86
+- svgs/svg-329f5fab-2.svg — svg 329f5fab 2
+- svgs/svg-329f5fab.svg — svg 329f5fab
+- svgs/svg-361f5d5e.svg — svg 361f5d5e
+- svgs/svg-3d8cedcf.svg — svg 3d8cedcf
+- svgs/svg-40d9adf3-2.svg — svg 40d9adf3 2
+- svgs/svg-40d9adf3-3.svg — svg 40d9adf3 3
+- svgs/svg-40d9adf3.svg — svg 40d9adf3
+- svgs/svg-5a769110-2.svg — svg 5a769110 2
+- svgs/svg-5a769110-3.svg — svg 5a769110 3
+- svgs/svg-5a769110.svg — svg 5a769110
+- svgs/svg-9757b208.svg — svg 9757b208
+- svgs/svg-a7b0051d-2.svg — svg a7b0051d 2
+- svgs/svg-a7b0051d-3.svg — svg a7b0051d 3
+- svgs/svg-a7b0051d.svg — svg a7b0051d
+- svgs/svg-c8a173e4.svg — svg c8a173e4
+- svgs/svg-d2008325.svg — svg d2008325
+- svgs/svg-e2bc6655-2.svg — svg e2bc6655 2
+- svgs/svg-e2bc6655.svg — svg e2bc6655
+- svgs/svg-f20284ff-2.svg — svg f20284ff 2
+- svgs/svg-f20284ff-3.svg — svg f20284ff 3
+- svgs/svg-f20284ff.svg — svg f20284ff
