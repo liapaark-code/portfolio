@@ -9,7 +9,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"work" | "gallery" | "about">("work");
   const [lightbox, setLightbox] = useState<{ images: { src: string; title: string }[]; index: number; category: string } | null>(null);
   const [galleryFilter, setGalleryFilter] = useState("all");
-  const [galleryMode, setGalleryMode] = useState<"ux" | "art">("art");
+  const [galleryMode, setGalleryMode] = useState<"ux" | "art">("ux");
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const [navInd, setNavInd] = useState({ left: 0, width: 0, ready: false });
@@ -326,44 +326,43 @@ export default function Home() {
 
             return (
               <div className="pt-2 pb-16">
-                {/* Mode toggle: UX Extras ↔ Art */}
-                <div className="flex justify-end mb-6">
-                <div className="inline-flex items-center gap-0.5 rounded-full bg-[#eef2ff] p-1">
-                  {([["ux", "UX Extras"], ["art", "Art"]] as const).map(([id, label]) => (
-                    <button
-                      key={id}
-                      onClick={() => setGalleryMode(id)}
-                      aria-pressed={galleryMode === id}
-                      className={`rounded-full px-4 py-1.5 text-[13px] font-medium transition-all duration-200 ${galleryMode === id ? "bg-white text-[#1D4ED8] shadow-[0_2px_8px_rgba(29,78,216,0.14)]" : "text-[#6e6e73] hover:text-[#1D4ED8]"}`}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-                </div>
-
-                {/* Header + filter chips */}
-                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+                {/* Header row — title + description left, mode toggle right, top-aligned */}
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
                   <div>
                     <h2 className="text-[26px] font-bold tracking-[-0.02em] text-[#1d1d1f]">Gallery</h2>
                     <p className="text-sm text-[#8e8e93] mt-1">
                       {galleryMode === "art" ? "Paintings, ceramics, type, and everything in between." : "UX design extras and side explorations."}
                     </p>
                   </div>
-                  {galleryMode === "art" && (
-                    <div className="flex flex-wrap gap-2">
-                      {filters.map((f) => (
-                        <button
-                          key={f.id}
-                          onClick={() => setGalleryFilter(f.id)}
-                          className={`rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors duration-200 ${galleryFilter === f.id ? "bg-[#1D4ED8] text-white" : "bg-[#eef2ff] text-[#1D4ED8] hover:bg-[#e0e8ff]"}`}
-                        >
-                          {f.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                  {/* Mode toggle: UX Extras ↔ Art */}
+                  <div className="inline-flex items-center gap-0.5 rounded-full bg-[#eef2ff] p-1 shrink-0">
+                    {([["ux", "UX Extras"], ["art", "Art"]] as const).map(([id, label]) => (
+                      <button
+                        key={id}
+                        onClick={() => setGalleryMode(id)}
+                        aria-pressed={galleryMode === id}
+                        className={`rounded-full px-4 py-1.5 text-[13px] font-medium transition-all duration-200 ${galleryMode === id ? "bg-white text-[#1D4ED8] shadow-[0_2px_8px_rgba(29,78,216,0.14)]" : "text-[#6e6e73] hover:text-[#1D4ED8]"}`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Art filter chips — own row below the header */}
+                {galleryMode === "art" && (
+                  <div className="flex flex-wrap gap-2 mb-8 -mt-2">
+                    {filters.map((f) => (
+                      <button
+                        key={f.id}
+                        onClick={() => setGalleryFilter(f.id)}
+                        className={`rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors duration-200 ${galleryFilter === f.id ? "bg-[#1D4ED8] text-white" : "bg-[#eef2ff] text-[#1D4ED8] hover:bg-[#e0e8ff]"}`}
+                      >
+                        {f.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 {galleryMode === "art" ? (
                   /* Staggered masonry */
