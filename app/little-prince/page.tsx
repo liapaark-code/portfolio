@@ -3,6 +3,38 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import ProgressRail, { type RailSection } from "../components/ProgressRail";
+
+const RAIL: RailSection[] = [
+  {
+    id: "overview",
+    label: "The brief",
+    subs: [
+      { id: "impact", label: "Impact" },
+      { id: "goals", label: "Design objectives" },
+    ],
+  },
+  {
+    id: "sketches",
+    label: "Building the flow",
+    subs: [
+      { id: "wireframes", label: "Digital wireframes" },
+      { id: "testing", label: "User testing" },
+    ],
+  },
+  { id: "identity", label: "Visual identity" },
+  {
+    id: "final",
+    label: "Final screens",
+    subs: [
+      { id: "lp-loading", label: "Loading screen" },
+      { id: "lp-home", label: "Home screen" },
+      { id: "lp-planets", label: "Planet selection" },
+      { id: "lp-guide", label: "Village guide" },
+    ],
+  },
+  { id: "takeaways", label: "Takeaways" },
+];
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 // Label:   text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8]
@@ -13,7 +45,8 @@ import Footer from "../components/Footer";
 // Accent:  #1D4ED8
 // ─────────────────────────────────────────────────────────────────────────────
 
-function Section({ label, heading, children, fullWidth = false }: {
+function Section({ id, label, heading, children, fullWidth = false }: {
+  id?: string;
   label: string;
   heading?: string;
   children: React.ReactNode;
@@ -21,7 +54,7 @@ function Section({ label, heading, children, fullWidth = false }: {
 }) {
   if (fullWidth) {
     return (
-      <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+      <section id={id} className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
         <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
         {heading && <h2 className="text-2xl font-semibold text-black mb-10">{heading}</h2>}
         {children}
@@ -30,7 +63,7 @@ function Section({ label, heading, children, fullWidth = false }: {
   }
   if (heading) {
     return (
-      <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+      <section id={id} className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
           <div>
             <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
@@ -44,7 +77,7 @@ function Section({ label, heading, children, fullWidth = false }: {
     );
   }
   return (
-    <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+    <section id={id} className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
       <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
       {children}
     </section>
@@ -79,6 +112,7 @@ export default function LittlePrinceCaseStudy() {
     <div className="min-h-screen bg-white font-[family-name:var(--font-clother)]">
 
       <main>
+        <ProgressRail sections={RAIL} />
 
         {/* ── BACK ── */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-10">
@@ -133,7 +167,7 @@ export default function LittlePrinceCaseStudy() {
         </section>
 
         {/* ── OVERVIEW ── */}
-        <Section label="Overview">
+        <Section id="overview" label="Overview">
           <div className="bg-[#f0f4ff] border border-[#d0daff] rounded-2xl p-8">
             <p className="text-base text-black leading-relaxed">
               Le Petite Route (The Little Journey) is a storytelling app that guides visitors through seven themed spots in Gamcheon Culture Village, each inspired by one of the planets from The Little Prince.
@@ -142,7 +176,7 @@ export default function LittlePrinceCaseStudy() {
         </Section>
 
         {/* ── OUTCOME / IMPACT ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="impact" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Outcome</p>
           <h2 className="text-2xl font-semibold text-black mb-10">Impact as a Designer for Le Petite Route</h2>
 
@@ -179,7 +213,7 @@ export default function LittlePrinceCaseStudy() {
         </section>
 
         {/* ── THE GOALS ── */}
-        <Section label="The Goals" heading="Design Objectives" fullWidth>
+        <Section id="goals" label="The Goals" heading="Design Objectives" fullWidth>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { tag: "Interactive",  title: "Mobile Guide",       desc: "A mobile guide connecting village history, culture, and The Little Prince." },
@@ -196,7 +230,7 @@ export default function LittlePrinceCaseStudy() {
         </Section>
 
         {/* ── DESIGN DEVELOPMENT ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="sketches" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Design Development</p>
@@ -223,7 +257,7 @@ export default function LittlePrinceCaseStudy() {
         </section>
 
         {/* ── ITERATIONS ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="wireframes" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Iterations</p>
@@ -248,7 +282,7 @@ export default function LittlePrinceCaseStudy() {
         </section>
 
         {/* ── USER TESTING ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="testing" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
 
           {/* Header */}
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">User Testing</p>
@@ -345,7 +379,7 @@ export default function LittlePrinceCaseStudy() {
         </section>
 
         {/* ── DESIGNING WITH CHARACTER ── */}
-        <Section label="Designing with Character" heading="Brand &amp; Visual Identity" fullWidth>
+        <Section id="identity" label="Designing with Character" heading="Brand &amp; Visual Identity" fullWidth>
           <p className="text-sm text-gray-600 leading-relaxed mb-8">
             The visual identity was developed through hand-drawn sketches and digital iterations, exploring how the iconic Little Prince crown character could anchor the brand.
           </p>
@@ -384,7 +418,7 @@ export default function LittlePrinceCaseStudy() {
         </Section>
 
         {/* ── FINAL DESIGNS ── */}
-        <Section label="Final Designs" heading="Final Screens" fullWidth>
+        <Section id="final" label="Final Designs" heading="Final Screens" fullWidth>
           <div className="flex flex-col gap-6">
 
             {/* Hero mockup image */}
@@ -402,24 +436,28 @@ export default function LittlePrinceCaseStudy() {
             {/* ── Alternating gif + description rows ── */}
             {[
               {
-                src:     "/images/little-prince/app-loadingscreen.mp4",
+                id:      "lp-loading",
+                src:     "/images/little-prince/app-loadingscreen-cropped.mp4",
                 label:   "Loading Screen",
                 desc:    "The app opens with a splash animation introducing Le Petite Route — setting the storybook tone before the journey begins.",
                 align:   "left",
               },
               {
-                src:     "/images/little-prince/app-homescreen.mp4",
+                id:      "lp-home",
+                src:     "/images/little-prince/app-homescreen-cropped.mp4",
                 label:   "Home Screen",
                 desc:    "Users land on a welcome screen that orients them to Gamcheon Village and lets them choose between a guided story path or free exploration.",
                 align:   "right",
               },
               {
+                id:      "lp-planets",
                 src:     "/images/little-prince/recording-1.mp4",
                 label:   "Planet Selection",
                 desc:    "The seven planets from The Little Prince are each mapped to a real village location. Users select a planet to begin its story chapter.",
                 align:   "left",
               },
               {
+                id:      "lp-guide",
                 src:     "/images/little-prince/recording-2.mp4",
                 label:   "Village Guide",
                 desc:    "Each location unlocks a narrative, photo spots, and achievement badges — blending literature, art, and real-world exploration.",
@@ -428,8 +466,9 @@ export default function LittlePrinceCaseStudy() {
             ].map((v, i) => (
               <div
                 key={v.src}
+                id={v.id}
                 ref={(el) => { rowRefs.current[i] = el; }}
-                className={`flex flex-col gap-6 sm:items-center sm:gap-10 ${v.align === "right" ? "sm:flex-row-reverse" : "sm:flex-row"}`}
+                className={`flex flex-col gap-6 sm:items-center sm:gap-10 scroll-mt-24 ${v.align === "right" ? "sm:flex-row-reverse" : "sm:flex-row"}`}
               >
                 {/* Video */}
                 <div
@@ -459,7 +498,7 @@ export default function LittlePrinceCaseStudy() {
         </Section>
 
         {/* ── TAKEAWAYS ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="takeaways" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Takeaways</p>
           <h2 className="text-2xl font-semibold text-black mb-10">
             What this project taught me about design and storytelling

@@ -2,6 +2,38 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import CoverVideo from "../components/CoverVideo";
+import ProgressRail, { type RailSection } from "../components/ProgressRail";
+
+const RAIL: RailSection[] = [
+  {
+    id: "overview",
+    label: "Overview",
+    subs: [
+      { id: "outcome", label: "Outcome" },
+      { id: "solution", label: "The solution" },
+    ],
+  },
+  {
+    id: "features",
+    label: "Features",
+    subs: [
+      { id: "f-search", label: "Symptom search" },
+      { id: "f-evidence", label: "Evidence first" },
+      { id: "f-community", label: "Community status" },
+      { id: "f-allergies", label: "Allergy excludes" },
+    ],
+  },
+  {
+    id: "decisions",
+    label: "Design decisions",
+    subs: [
+      { id: "d-clinical", label: "Killing clinical" },
+      { id: "d-qa", label: "Deleting Q&A" },
+    ],
+  },
+  { id: "pitch", label: "The pitch" },
+  { id: "reflection", label: "Reflection" },
+];
 
 /** Brand-blue keyword highlight — used sparingly for the words that carry the product. */
 function Hl({ children }: { children: React.ReactNode }) {
@@ -13,6 +45,7 @@ export default function BlumiinCaseStudy() {
     <div className="min-h-screen bg-white font-[family-name:var(--font-clother)]">
 
       <main>
+        <ProgressRail sections={RAIL} />
 
         {/* ── BACK ── */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-10">
@@ -64,7 +97,7 @@ export default function BlumiinCaseStudy() {
         </section>
 
         {/* ── THE QUESTION ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6">
+        <section id="overview" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">The Question</p>
@@ -101,7 +134,7 @@ export default function BlumiinCaseStudy() {
         </section>
 
         {/* ── OUTCOME ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="outcome" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Outcome</p>
           <h2 className="text-2xl font-semibold text-black mb-10">A two-hour pitch that won the room</h2>
 
@@ -138,7 +171,7 @@ export default function BlumiinCaseStudy() {
         </section>
 
         {/* ── THE SOLUTION ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="solution" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">The Solution</p>
@@ -161,7 +194,7 @@ export default function BlumiinCaseStudy() {
         </section>
 
         {/* ── FEATURES ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="features" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Features</p>
           <h2 className="text-2xl font-semibold text-black mb-4">Trust you can see at a glance</h2>
           <p className="text-sm text-gray-600 leading-relaxed max-w-xl mb-14">
@@ -169,7 +202,7 @@ export default function BlumiinCaseStudy() {
           </p>
 
           {/* Row 1 — text left, media right */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20">
+          <div id="f-search" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
               <h3 className="text-xl font-semibold text-black mb-4">Search by symptom, not by species</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -187,7 +220,7 @@ export default function BlumiinCaseStudy() {
           </div>
 
           {/* Row 2 — media left, text right */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20">
+          <div id="f-evidence" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div className="flex justify-center order-2 sm:order-1">
               <div className="rounded-[1.6rem] bg-[#0e1a14] p-[14px] max-w-[300px] w-full">
                 <div className="rounded-[1.1rem] overflow-hidden">
@@ -205,7 +238,7 @@ export default function BlumiinCaseStudy() {
           </div>
 
           {/* Row 3 — text left, media right */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20">
+          <div id="f-community" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
               <h3 className="text-xl font-semibold text-black mb-4">Community remedies earn their status</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -226,7 +259,7 @@ export default function BlumiinCaseStudy() {
           </div>
 
           {/* Row 4 — media left, text right */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center">
+          <div id="f-allergies" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center scroll-mt-24">
             <div className="flex justify-center order-2 sm:order-1">
               <div className="rounded-[1.6rem] overflow-hidden max-w-[300px]">
                 <CoverVideo
@@ -248,12 +281,12 @@ export default function BlumiinCaseStudy() {
         </section>
 
         {/* ── DESIGN DECISIONS ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="decisions" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Design Decisions</p>
           <h2 className="text-2xl font-semibold text-black mb-14">Two calls I&rsquo;d defend in any review</h2>
 
           {/* Decision 1 — text left, swatches right */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20">
+          <div id="d-clinical" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
               <h3 className="text-xl font-semibold text-black mb-4">Killing the clinical direction</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -283,7 +316,7 @@ export default function BlumiinCaseStudy() {
           </div>
 
           {/* Decision 2 — text left, outcome right */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center">
+          <div id="d-qa" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center scroll-mt-24">
             <div>
               <h3 className="text-xl font-semibold text-black mb-4">Deleting a working Q&amp;A tab</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -301,7 +334,7 @@ export default function BlumiinCaseStudy() {
         </section>
 
         {/* ── THE PITCH ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="pitch" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">The Pitch</p>
@@ -331,7 +364,7 @@ export default function BlumiinCaseStudy() {
         </section>
 
         {/* ── REFLECTION ── */}
-        <section id="reflection" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="reflection" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Reflection</p>
           <h2 className="text-2xl font-semibold text-black mb-10">What Blumiin taught me about designing for trust</h2>
 

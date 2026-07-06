@@ -322,6 +322,7 @@ export default function Home() {
               { src: "/images/gallery/ux/atmosense-cover.jpg", title: "Atmosense — Figbuild '26 Hackathon Project", desc: "Sensory-aware navigation app that maps the city by comfort level", href: "https://sensory-compass.vercel.app/", tags: ["Hackathon", "Mobile"] },
               { src: "/images/gallery/ux/robbie-meadow-poster.png", video: "/videos/robbie-meadow.mp4", title: "WashUX Club Website Game", desc: "Playable meadow for Robbie, the WashUX mascot — built for the club site", href: "https://washuxclub.com/", tags: ["WashUX", "Interactive"] },
               { src: "/images/gallery/ux/amass-logo-skeleton.png", hoverSrc: "/images/gallery/ux/amass-logo-hover.png", title: "AMASS Logo Branding", desc: "Logo construction — the AMASS mark built on a geometric grid system", tags: ["Branding", "Logo"] },
+              { src: "/images/gallery/ux/touchdesigner-hike-process-poster.jpg", video: "/videos/touchdesigner-hike-process.mp4", title: "Touch Designer Hike Video — Process", desc: "Behind the scenes — the node network driving the hike visuals", tags: ["TouchDesigner", "Process"] },
             ];
 
             return (
@@ -466,7 +467,7 @@ export default function Home() {
                   <a href="https://www.linkedin.com/in/lydia-paark" target="_blank" rel="noopener noreferrer" className="rounded-full px-4 py-2 text-[13px] font-medium border border-[#c9d5f7] bg-white text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white transition-colors">LinkedIn</a>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  {["UX / Product", "AI Experiences", "Design Systems", "Brand", "Illustration", "Prototyping"].map((sk) => (
+                  {["UX / Product", "AI Experiences", "Design Systems", "Brand", "Motion Design", "Illustration", "Prototyping", "Creative Coding"].map((sk) => (
                     <span key={sk} className="bg-[#eef2ff] text-[#1D4ED8] rounded-full px-3 py-1.5 text-xs font-medium">{sk}</span>
                   ))}
                 </div>

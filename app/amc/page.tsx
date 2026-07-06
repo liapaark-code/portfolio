@@ -1,12 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import ProgressRail, { type RailSection } from "../components/ProgressRail";
+
+const RAIL: RailSection[] = [
+  { id: "overview", label: "Overview" },
+  { id: "outcome", label: "Outcome" },
+  {
+    id: "rebrand",
+    label: "The rebrand",
+    subs: [
+      { id: "before-after", label: "Before → after" },
+      { id: "sketches", label: "Sketches" },
+      { id: "final-designs", label: "Final designs" },
+    ],
+  },
+  { id: "response", label: "How it landed" },
+];
 
 export default function AmcCaseStudy() {
   return (
     <div className="min-h-screen bg-white font-[family-name:var(--font-clother)]">
 
       <main>
+        <ProgressRail sections={RAIL} />
 
         {/* ── BACK ── */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-10">
@@ -60,7 +77,7 @@ export default function AmcCaseStudy() {
         </section>
 
         {/* ── OVERVIEW ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6">
+        <section id="overview" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Overview</p>
@@ -76,7 +93,7 @@ export default function AmcCaseStudy() {
         </section>
 
         {/* ── OUTCOME / IMPACT ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="outcome" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Outcome</p>
           <h2 className="text-2xl font-semibold text-black mb-10">Business Impact as a Designer for AMC</h2>
 
@@ -113,7 +130,7 @@ export default function AmcCaseStudy() {
         </section>
 
         {/* ── THE REBRAND ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="rebrand" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">So... the Rebrand!</p>
@@ -138,7 +155,7 @@ export default function AmcCaseStudy() {
         </section>
 
         {/* ── BEFORE / AFTER ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="before-after" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Re-Designed Logo</p>
           <p className="text-sm text-gray-500 mb-10">Refreshing AMC for the 2025–26 college season.</p>
 
@@ -169,7 +186,7 @@ export default function AmcCaseStudy() {
         </section>
 
         {/* ── SKETCHES + ITERATIONS ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="sketches" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_2fr] gap-16 items-center">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Sketches + Iterations</p>
@@ -193,7 +210,7 @@ export default function AmcCaseStudy() {
         </section>
 
         {/* ── FINAL DESIGN / MOCKING ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="final-designs" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Final Design / Mocking</p>
           <p className="text-sm text-gray-600 leading-relaxed mb-10 max-w-xl">
             The final mark across its full range of applications — light, dark, and gradient — showing how the logo holds across every AMC touchpoint.
@@ -239,7 +256,7 @@ export default function AmcCaseStudy() {
         </section>
 
         {/* ── FINAL RESPONSE ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="response" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-8">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#c0392b] mb-4">Final Response</p>

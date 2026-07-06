@@ -1,6 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
+import ProgressRail, { type RailSection } from "../components/ProgressRail";
+
+const RAIL: RailSection[] = [
+  { id: "outcome", label: "Outcome" },
+  { id: "overview", label: "Overview" },
+  {
+    id: "research",
+    label: "Research",
+    subs: [
+      { id: "research-invisible", label: "Why it's invisible" },
+      { id: "research-opportunity", label: "The opportunity" },
+      { id: "research-voices", label: "User voices" },
+    ],
+  },
+  {
+    id: "design",
+    label: "Design",
+    subs: [
+      { id: "design-foundation", label: "AI foundation" },
+      { id: "design-flows", label: "Final flows" },
+    ],
+  },
+  {
+    id: "results",
+    label: "Results",
+    subs: [
+      { id: "results-metrics", label: "Success metrics" },
+      { id: "results-risks", label: "Risks" },
+    ],
+  },
+  { id: "takeaways", label: "Takeaways" },
+];
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 // Label:   text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8]
@@ -12,7 +44,8 @@ import Footer from "../components/Footer";
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Reusable section wrapper
-function Section({ label, heading, children, fullWidth = false }: {
+function Section({ id, label, heading, children, fullWidth = false }: {
+  id?: string;
   label: string;
   heading?: string;
   children: React.ReactNode;
@@ -20,7 +53,7 @@ function Section({ label, heading, children, fullWidth = false }: {
 }) {
   if (fullWidth) {
     return (
-      <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+      <section id={id} className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
         <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
         {heading && <h2 className="text-2xl font-semibold text-black mb-10">{heading}</h2>}
         {children}
@@ -30,7 +63,7 @@ function Section({ label, heading, children, fullWidth = false }: {
   if (heading) {
     // SPARC-style: label + heading LEFT col, children RIGHT col
     return (
-      <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+      <section id={id} className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
           <div>
             <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
@@ -45,7 +78,7 @@ function Section({ label, heading, children, fullWidth = false }: {
   }
   // No heading: label on top, children below full-width
   return (
-    <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+    <section id={id} className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
       <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">{label}</p>
       {children}
     </section>
@@ -57,6 +90,7 @@ export default function CopilotCaseStudy() {
     <div className="min-h-screen bg-white font-[family-name:var(--font-clother)]">
 
       <main>
+        <ProgressRail sections={RAIL} />
 
         {/* ── BACK ── */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8 pt-10">
@@ -122,7 +156,7 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── OUTCOME / IMPACT ── */}
-        <Section label="Outcome" fullWidth>
+        <Section id="outcome" label="Outcome" fullWidth>
           <h2 className="text-2xl font-semibold text-black mb-10">Business Impact as a Designer for Copilot</h2>
 
           <div className="flex flex-col sm:flex-row items-start divide-y sm:divide-y-0 sm:divide-x divide-gray-200 mb-10">
@@ -158,7 +192,7 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── HUMAN-CENTERED AI INTEGRATION ── */}
-        <Section label="Human-Centered AI Integration" heading="Overview" fullWidth>
+        <Section id="overview" label="Human-Centered AI Integration" heading="Overview" fullWidth>
           <p className="text-sm text-gray-600 leading-relaxed mb-8">
             We set out to understand how real users experience Copilot in their day-to-day Microsoft workflows — identifying friction points and designing toward an AI that feels like a natural extension of the tools they already use.
           </p>
@@ -168,8 +202,8 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── WHY COPILOT SEEMS INVISIBLE ── */}
-        <Section label="Continuous Assessment" heading="Why Copilot Seems Invisible" fullWidth>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Section id="research" label="Continuous Assessment" heading="Why Copilot Seems Invisible" fullWidth>
+          <div id="research-invisible" className="grid grid-cols-1 sm:grid-cols-3 gap-4 scroll-mt-24">
             {[
               { tag: "Knowledge",  title: "Information Overwhelm", desc: "Users are flooded with suggestions they didn't ask for, making Copilot feel noisy rather than helpful." },
               { tag: "Workflow",   title: "Workflow Disruption",   desc: "Copilot interrupts existing task flows instead of integrating into them, pulling users out of context." },
@@ -185,7 +219,7 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── THE OPPORTUNITY ── */}
-        <Section label="The Opportunity">
+        <Section id="research-opportunity" label="The Opportunity">
           <div className="border-l-4 border-[#1D4ED8] pl-6 mb-8">
             <p className="text-xl font-medium text-black leading-snug">
               How might Copilot integrate directly into users&apos; own workflows while preserving and addressing pain points?
@@ -204,7 +238,7 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── USER QUOTES ── */}
-        <Section label="Generative Research" heading="Understanding AI in Everyday Workflows" fullWidth>
+        <Section id="research-voices" label="Generative Research" heading="Understanding AI in Everyday Workflows" fullWidth>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
             {[
               "I forget Copilot exists.",
@@ -235,9 +269,9 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── SCALABLE AI FOUNDATION ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="design" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           {/* Two-col header */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
+          <div id="design-foundation" className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10 scroll-mt-24">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Product Decisions</p>
               <h2 className="text-2xl font-semibold text-black">Designing a Scalable AI Foundation</h2>
@@ -269,7 +303,7 @@ export default function CopilotCaseStudy() {
         </section>
 
         {/* ── INLINE FINAL DESIGNS ── */}
-        <Section label="Design Explorations" heading="Inline Final Designs: Flow 1–4" fullWidth>
+        <Section id="design-flows" label="Design Explorations" heading="Inline Final Designs: Flow 1–4" fullWidth>
           <div className="flex flex-col gap-6">
             {[
               { src: "/images/copilot-flow1.mp4", feature: "Feature: Built-in Scheduling",  label: "Flow 1 — Schedule Meeting",   desc: "Copilot detects scheduling intent inline and surfaces available times directly in the compose window — no context switch required.",   outcome: "Reduced scheduling friction by surfacing meeting times inline, cutting the steps needed to book from 5+ actions to a single tap." },
@@ -295,8 +329,8 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── SUCCESS METRICS ── */}
-        <Section label="Success Metrics" heading="Copilot Actions Triggered per Session" fullWidth>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <Section id="results" label="Success Metrics" heading="Copilot Actions Triggered per Session" fullWidth>
+          <div id="results-metrics" className="grid grid-cols-1 sm:grid-cols-3 gap-5 scroll-mt-24">
             {[
               { stat: "+30%", label: "Increase in Copilot usage",  desc: "More users actively triggered Copilot features when embedded inline versus surfaced in a side panel." },
               { stat: "10x",  label: "Faster AI access",           desc: "Users reached Copilot in fewer steps with the redesigned inline entry points." },
@@ -312,7 +346,7 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── RISKS & MITIGATIONS ── */}
-        <Section label="Risks and Mitigations" heading="Planning for What Could Go Wrong" fullWidth>
+        <Section id="results-risks" label="Risks and Mitigations" heading="Planning for What Could Go Wrong" fullWidth>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { type: "Risk",       title: "Over-reliance on AI",    desc: "Users may defer critical thinking to Copilot, reducing engagement and skill development over time." },
@@ -330,7 +364,7 @@ export default function CopilotCaseStudy() {
         </Section>
 
         {/* ── TAKEAWAYS & NEXT STEPS ── */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100">
+        <section id="takeaways" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Takeaways &amp; Next Steps</p>
 
           <h2 className="text-2xl font-semibold text-black mb-10">
