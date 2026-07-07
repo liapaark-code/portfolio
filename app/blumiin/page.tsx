@@ -7,7 +7,7 @@ import ProgressRail, { type RailSection } from "../components/ProgressRail";
 const RAIL: RailSection[] = [
   {
     id: "overview",
-    label: "Overview",
+    label: "The Brief",
     subs: [
       { id: "outcome", label: "Outcome" },
       { id: "solution", label: "The solution" },
@@ -27,7 +27,7 @@ const RAIL: RailSection[] = [
     id: "decisions",
     label: "Design decisions",
     subs: [
-      { id: "d-clinical", label: "Killing clinical" },
+      { id: "d-clinical", label: "Direction, fast" },
       { id: "d-qa", label: "Deleting Q&A" },
     ],
   },
@@ -61,7 +61,7 @@ export default function BlumiinCaseStudy() {
         {/* ── TITLE + METADATA ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 pt-20 sm:pt-28 pb-8">
           <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight text-black leading-tight mb-4">
-            Blumiin — Herbal Remedies, Told Honestly
+            Blumiin: Herbal Remedies, Told Honestly
           </h1>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-8">
             <div>
@@ -75,7 +75,7 @@ export default function BlumiinCaseStudy() {
             </div>
             <div>
               <p className="text-xs text-gray-400 mb-1">Role</p>
-              <p className="text-sm text-black">Designer — team of 5</p>
+              <p className="text-sm text-black">Designer, team of 5</p>
             </div>
             <div>
               <p className="text-xs text-gray-400 mb-1">Tools</p>
@@ -90,45 +90,27 @@ export default function BlumiinCaseStudy() {
             <CoverVideo
               src="/videos/blumiin-cover.mp4"
               poster="/images/blumiin/cover-poster.png"
-              label="Blumiin — feature tour: symptom chips, evidence meters, expert input, and allergy excludes"
+              label="Blumiin feature tour: symptom chips, evidence meters, expert input, and allergy excludes"
               className="w-full h-full object-cover"
             />
           </div>
         </section>
 
-        {/* ── THE QUESTION ── */}
+        {/* ── THE BRIEF: the hackathon prompt, first thing the reader sees ── */}
         <section id="overview" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6 scroll-mt-24">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 mb-10">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">The Question</p>
-              <h2 className="text-2xl font-semibold text-black leading-snug">
-                How are we supposed to know what actually works?
-              </h2>
-            </div>
-            <div className="flex items-start pt-8">
-              <div className="text-sm text-gray-600 leading-relaxed space-y-4">
-                <p>
-                  Herbal advice is either <Hl>wellness hype</Hl> or <Hl>dense research</Hl> — neither gives a straight
-                  answer.
-                </p>
-                <p>
-                  Only <Hl>15% strongly trust pharma</Hl>. <Hl>84% don&rsquo;t believe herbal medicine is regulated</Hl>.
-                  Millions self-experiment with no honest guide.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">How people describe herbal medicine</p>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {["Ineffective", "Expensive", "Myth", "Complicated", "Unknown", "Unregulated", "Dangerous", "Scarce"].map((w) => (
-              <span key={w} className="rounded-full border border-gray-300 px-4 py-1.5 text-sm text-gray-500">{w}</span>
-            ))}
-          </div>
-          <div className="rounded-2xl p-6" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              <strong className="text-[#1D4ED8]">THE OPPORTUNITY:</strong>{" "}
-              nobody owns <strong className="text-black">honest</strong> in this space.
+          <div className="rounded-[2rem] px-8 py-12 sm:px-14 sm:py-14 text-center" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-5">The Brief</p>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-black leading-snug [text-wrap:balance]">
+              Make Blumiin <span className="text-[#1D4ED8]">the trusted home for herbal discovery</span>: a product
+              people{" "}
+              <span className="hl-hover">try<span className="hl-tip">symptom-first search</span></span>,{" "}
+              <span className="hl-hover">return to<span className="hl-tip">the My Herbs loop</span></span>, and{" "}
+              <span className="hl-hover">prefer<span className="hl-tip">verified community</span></span> over Reddit,
+              TikTok, and&nbsp;AI&nbsp;advice.
+            </h2>
+            <p className="text-sm text-gray-600 leading-relaxed mt-6">
+              The hackathon prompt, given to every team. Our answer:{" "}
+              <strong className="text-black">honesty is the gap no one else fills</strong>, so we made it the product.
             </p>
           </div>
         </section>
@@ -136,11 +118,16 @@ export default function BlumiinCaseStudy() {
         {/* ── OUTCOME ── */}
         <section id="outcome" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Outcome</p>
-          <h2 className="text-2xl font-semibold text-black mb-10">A two-hour pitch that won the room</h2>
+          <h2 className="text-2xl font-semibold text-black mb-4">A two-hour pitch that won the room</h2>
+          <p className="text-sm text-gray-600 leading-relaxed max-w-xl mb-10">
+            The brief asked for <Hl>lightweight wireframes</Hl>. I brought a{" "}
+            <strong className="text-black">working, branded app</strong>. The trust system wasn&rsquo;t described, it
+            was demoed.
+          </p>
 
-          <div className="flex flex-col sm:flex-row items-start divide-y sm:divide-y-0 sm:divide-x divide-gray-200 mb-10">
+          <div className="flex flex-col sm:flex-row items-start divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
             {[
-              { stat: "1st", label: "Skandalaris intern pitch", sub: "Team of 5 — I was the designer" },
+              { stat: "1st", label: "Skandalaris intern pitch", sub: "Team of 5, I was the designer" },
               { stat: "2 hrs", label: "From assets to winning pitch", sub: "Deck, live demo, go-to-market" },
               { stat: "84%", label: "Distrust herbal regulation", sub: "The research behind our claim" },
             ].map((item) => (
@@ -150,23 +137,6 @@ export default function BlumiinCaseStudy() {
                 <p className="text-sm text-gray-400">{item.sub}</p>
               </div>
             ))}
-          </div>
-
-          <div className="bg-[#f5f5f7] border border-[#e5e5e7] rounded-2xl p-8">
-            <p className="text-sm font-semibold text-[#1D4ED8] mb-4">Designer Impact</p>
-            <ul className="space-y-3">
-              {[
-                "Killed the clinical blue/teal direction — rebuilt as a warm forest system",
-                "Made honesty visual: evidence badges, sourced verdicts, dashed community cards",
-                "Deleted a working Q&A tab — a filter covered it with one fewer destination",
-                "Designed safety as behavior: allergies exclude, flags never green-light",
-              ].map((point, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#1D4ED8] shrink-0" />
-                  {point}
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
@@ -181,7 +151,7 @@ export default function BlumiinCaseStudy() {
             </div>
             <div className="flex flex-col items-start pt-8 gap-6">
               <p className="text-sm text-gray-600 leading-relaxed">
-                A <Hl>phone-first remedy guide</Hl> where every claim carries its receipts — what tradition says, what
+                A <Hl>phone-first remedy guide</Hl> where every claim carries its receipts: what tradition says, what
                 research found, what to watch out for.
               </p>
               <blockquote className="border-l-4 border-[#4d7a52] pl-4 bg-[#f0f7f1] rounded-r-xl py-3 pr-4">
@@ -195,15 +165,19 @@ export default function BlumiinCaseStudy() {
 
         {/* ── FEATURES ── */}
         <section id="features" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
-          <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Features</p>
-          <h2 className="text-2xl font-semibold text-black mb-4">Trust you can see at a glance</h2>
-          <p className="text-sm text-gray-600 leading-relaxed max-w-xl mb-14">
-            Four surfaces, one system: <Hl>evidence status is always visible</Hl>.
-          </p>
+          <div className="rounded-[2rem] px-8 py-12 sm:px-14 sm:py-14 text-center mb-14" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
+            <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-5">Features</p>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-black leading-snug [text-wrap:balance]">
+              Four surfaces, each answering one goal from the brief: <span className="hl-hover">try it</span>,{" "}
+              <span className="hl-hover">trust it</span>, <span className="hl-hover">prefer it</span>,{" "}
+              <span className="hl-hover">return&nbsp;to&nbsp;it</span>.
+            </h2>
+          </div>
 
           {/* Row 1 — text left, media right */}
           <div id="f-search" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4d7a52] mb-2">Goal · Try it</p>
               <h3 className="text-xl font-semibold text-black mb-4">Search by symptom, not by species</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 People think in problems, not Latin names. Home opens on a <Hl>symptom-first search</Hl> with{" "}
@@ -213,7 +187,7 @@ export default function BlumiinCaseStudy() {
             <div className="flex justify-center">
               <div className="rounded-[1.6rem] bg-[#0e1a14] p-[14px] max-w-[300px] w-full">
                 <div className="rounded-[1.1rem] overflow-hidden">
-                  <Image src="/images/blumiin/home-mobile.png" alt="Home — symptom-first search with personalized quick chips" width={390} height={844} className="w-full h-auto" />
+                  <Image src="/images/blumiin/home-mobile.png" alt="Home: symptom-first search with personalized quick chips" width={390} height={844} className="w-full h-auto" />
                 </div>
               </div>
             </div>
@@ -224,15 +198,16 @@ export default function BlumiinCaseStudy() {
             <div className="flex justify-center order-2 sm:order-1">
               <div className="rounded-[1.6rem] bg-[#0e1a14] p-[14px] max-w-[300px] w-full">
                 <div className="rounded-[1.1rem] overflow-hidden">
-                  <Image src="/images/blumiin/detail-mobile.png" alt="Remedy detail — evidence strength and safety meters above the fold" width={390} height={844} className="w-full h-auto" />
+                  <Image src="/images/blumiin/detail-mobile.png" alt="Remedy detail: evidence strength and safety meters above the fold" width={390} height={844} className="w-full h-auto" />
                 </div>
               </div>
             </div>
             <div className="order-1 sm:order-2">
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4d7a52] mb-2">Goal · Trust it</p>
               <h3 className="text-xl font-semibold text-black mb-4">Every remedy leads with its evidence</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                <Hl>Badge color = evidence strength</Hl>. Every detail page opens on two meters —{" "}
-                <Hl>evidence and safety</Hl> — before a single benefit.
+                <Hl>Badge color = evidence strength</Hl>. Every detail page opens on two meters,{" "}
+                <Hl>evidence and safety</Hl>, before a single benefit.
               </p>
             </div>
           </div>
@@ -240,10 +215,11 @@ export default function BlumiinCaseStudy() {
           {/* Row 3 — text left, media right */}
           <div id="f-community" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4d7a52] mb-2">Goal · Prefer it</p>
               <h3 className="text-xl font-semibold text-black mb-4">Community remedies earn their status</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                User posts render as <Hl>dashed cards</Hl> — never confusable with rated content.{" "}
-                <Hl>Expert backing or 25 saves</Hl> graduates a remedy to Explore.
+                Reddit&rsquo;s energy, minus the guesswork: posts render as <Hl>dashed cards</Hl>, never confusable
+                with rated content, and <Hl>expert backing or 25 saves</Hl> graduates a remedy to Explore.
               </p>
             </div>
             <div className="flex justify-center">
@@ -251,7 +227,7 @@ export default function BlumiinCaseStudy() {
                 <CoverVideo
                   src="/videos/blumiin-community.mp4"
                   poster="/images/blumiin/community-loop-poster.png"
-                  label="Screen recording — browsing Community: rooms, the expert-input filter, sharing a remedy"
+                  label="Screen recording: browsing Community, rooms, the expert-input filter, sharing a remedy"
                   className="w-full h-auto"
                 />
               </div>
@@ -265,16 +241,17 @@ export default function BlumiinCaseStudy() {
                 <CoverVideo
                   src="/videos/blumiin-profile.mp4"
                   poster="/images/blumiin/profile-loop-poster.png"
-                  label="Screen recording — Profile: allergies as hard excludes, medications, the My Herbs log"
+                  label="Screen recording: Profile, allergies as hard excludes, medications, the My Herbs log"
                   className="w-full h-auto"
                 />
               </div>
             </div>
             <div className="order-1 sm:order-2">
-              <h3 className="text-xl font-semibold text-black mb-4">Allergies don&rsquo;t warn — they exclude</h3>
+              <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4d7a52] mb-2">Goal · Return to it</p>
+              <h3 className="text-xl font-semibold text-black mb-4">Allergies don&rsquo;t warn, they exclude</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Flagged allergens <Hl>vanish from the app</Hl>. Medication flags <Hl>never green-light</Hl>. My Herbs
-                logs real use — the loop that brings people back.
+                logs real use, the loop that brings people back.
               </p>
             </div>
           </div>
@@ -288,9 +265,9 @@ export default function BlumiinCaseStudy() {
           {/* Decision 1 — text left, swatches right */}
           <div id="d-clinical" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
-              <h3 className="text-xl font-semibold text-black mb-4">Killing the clinical direction</h3>
+              <h3 className="text-xl font-semibold text-black mb-4">Finding the right direction fast</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Blue/teal read as pharma — the one authority this product can&rsquo;t claim. Rebuilt as a{" "}
+                Blue/teal read as pharma, the one authority this product can&rsquo;t claim. Rebuilt as a{" "}
                 <Hl>warm forest system</Hl> in one evening; the IA carried over untouched.
               </p>
             </div>
@@ -320,7 +297,7 @@ export default function BlumiinCaseStudy() {
             <div>
               <h3 className="text-xl font-semibold text-black mb-4">Deleting a working Q&amp;A tab</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Expert comments plus a <Hl>&ldquo;Has expert input&rdquo; filter</Hl> covered the whole use case — so
+                Expert comments plus a <Hl>&ldquo;Has expert input&rdquo; filter</Hl> covered the whole use case, so
                 the tab went. The recordings above still show the old five-tab nav, days before the cut.
               </p>
             </div>
@@ -345,7 +322,7 @@ export default function BlumiinCaseStudy() {
             <div className="flex items-start pt-8">
               <p className="text-sm text-gray-600 leading-relaxed">
                 Five of us, <Hl>two hours</Hl>: claim → research → live demo → close. The closer:{" "}
-                <Hl>free samples with honest labels</Hl> — benefits and cautions side by side, QR into Blumiin.
+                <Hl>free samples with honest labels</Hl>: benefits and cautions side by side, QR into Blumiin.
               </p>
             </div>
           </div>
@@ -373,15 +350,30 @@ export default function BlumiinCaseStudy() {
               {[
                 {
                   title: "Honesty is a design system, not a paragraph",
-                  body: "Badge colors, dashed borders, hard excludes — the interface makes it impossible to confuse proven with unproven. No disclaimer required.",
+                  body: (
+                    <>
+                      Badge colors, dashed borders, hard excludes: the interface makes it{" "}
+                      <Hl>impossible to confuse proven with unproven</Hl>. No disclaimer required.
+                    </>
+                  ),
                 },
                 {
                   title: "Deleting a feature is a design decision",
-                  body: "The Q&A tab worked, but it duplicated expert comments. Subtraction is a first-class move.",
+                  body: (
+                    <>
+                      The Q&amp;A tab worked, but it duplicated expert comments.{" "}
+                      <Hl>Subtraction is a first-class move</Hl>.
+                    </>
+                  ),
                 },
                 {
                   title: "A pitch is a design artifact too",
-                  body: "Lead with the claim, let evidence carry the weight, end with something tangible — the honest-label sample did more than any feature list.",
+                  body: (
+                    <>
+                      Lead with the claim, let evidence carry the weight, <Hl>end with something tangible</Hl>. The
+                      honest-label sample did more than any feature list.
+                    </>
+                  ),
                 },
               ].map((item, i) => (
                 <div key={i} className="flex gap-6">
@@ -398,8 +390,8 @@ export default function BlumiinCaseStudy() {
           <div className="rounded-2xl p-8 border-2 border-[#4d7a52]/30 bg-white">
             <p className="text-sm font-semibold text-[#4d7a52] mb-3">What I&rsquo;d do differently</p>
             <p className="text-sm text-gray-600 leading-relaxed">
-              The win validated the pitch, not the trust system. The badge colors and the 25-save threshold were never
-              user-tested — honest about what&rsquo;s proven, honest about what isn&rsquo;t.
+              The win validated <Hl>the pitch, not the trust system</Hl>. The badge colors and the 25-save threshold
+              were <Hl>never user-tested</Hl>. Honest about what&rsquo;s proven, honest about what isn&rsquo;t.
             </p>
           </div>
         </section>

@@ -467,7 +467,7 @@ export default function Home() {
                   <a href="https://www.linkedin.com/in/lydia-paark" target="_blank" rel="noopener noreferrer" className="rounded-full px-4 py-2 text-[13px] font-medium border border-[#c9d5f7] bg-white text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white transition-colors">LinkedIn</a>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  {["UX / Product", "AI Experiences", "Design Systems", "Brand", "Motion Design", "Illustration", "Prototyping", "Creative Coding"].map((sk) => (
+                  {["UX / Product", "AI Experiences", "Design Systems", "Brand", "Illustration", "Prototyping", "Creative Coding"].map((sk) => (
                     <span key={sk} className="bg-[#eef2ff] text-[#1D4ED8] rounded-full px-3 py-1.5 text-xs font-medium">{sk}</span>
                   ))}
                 </div>
