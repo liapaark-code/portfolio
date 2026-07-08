@@ -323,6 +323,7 @@ export default function Home() {
               { src: "/images/gallery/ux/robbie-meadow-poster.png", video: "/videos/robbie-meadow.mp4", title: "WashUX Club Website Game", desc: "Playable meadow for Robbie, the WashUX mascot — built for the club site", href: "https://washuxclub.com/", tags: ["WashUX", "Interactive"] },
               { src: "/images/gallery/ux/amass-logo-skeleton.png", hoverSrc: "/images/gallery/ux/amass-logo-hover.png", title: "AMASS Logo Branding", desc: "Logo construction — the AMASS mark built on a geometric grid system", tags: ["Branding", "Logo"] },
               { src: "/images/gallery/ux/touchdesigner-hike-process-poster.jpg", video: "/videos/touchdesigner-hike-process.mp4", title: "Touch Designer Hike Video — Process", desc: "Behind the scenes — the node network driving the hike visuals", tags: ["TouchDesigner", "Process"] },
+              { src: "/images/gallery/ux/logofolio-poster.png", video: "/videos/logofolio.mp4", title: "Logofolio", desc: "Twelve marks drop, tumble, and lock into a glass grid: an animated logo folio", tags: ["Logos", "Motion"] },
             ];
 
             return (
