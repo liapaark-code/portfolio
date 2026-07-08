@@ -315,15 +315,15 @@ export default function Home() {
 
             // UX design extras — add projects here. Example:
             // { src: "/images/gallery/ux/project-cover.png", title: "Project Name", desc: "One-line description", href: "/project-page" }
-            type UxProject = { src: string; title: string; desc: string; href?: string; video?: string; tags?: string[]; hoverSrc?: string };
+            type UxProject = { src: string; title: string; desc: string; href?: string; video?: string; tags?: string[]; hoverSrc?: string; breakBefore?: boolean };
             const uxProjects: UxProject[] = [
               { src: "/images/gallery/ux/focusghost-cover.png", video: "/videos/focusghost-cover.mp4", title: "FocusGhost — DevFest '26 Hackathon Project", desc: "Focus-tracking desktop app that visualizes when work becomes ghosted", href: "https://devpost.com/software/focusghost", tags: ["Hackathon", "Desktop"] },
               { src: "/images/gallery/ux/referencepoint-cover.png", video: "/videos/referencepoint-branding.mp4", title: "ReferencePoint Branding", desc: "Brand identity and spring-physics logo reveal for ReferencePoint", tags: ["Branding", "Motion"] },
               { src: "/images/gallery/ux/atmosense-cover.jpg", title: "Atmosense — Figbuild '26 Hackathon Project", desc: "Sensory-aware navigation app that maps the city by comfort level", href: "https://sensory-compass.vercel.app/", tags: ["Hackathon", "Mobile"] },
               { src: "/images/gallery/ux/robbie-meadow-poster.png", video: "/videos/robbie-meadow.mp4", title: "WashUX Club Website Game", desc: "Playable meadow for Robbie, the WashUX mascot — built for the club site", href: "https://washuxclub.com/", tags: ["WashUX", "Interactive"] },
+              { src: "/images/gallery/ux/logofolio-poster.png", video: "/videos/logofolio.mp4", title: "Logofolio", desc: "Twelve marks drop, tumble, and lock into a glass grid: an animated logo folio", tags: ["Logos", "Motion"], breakBefore: true },
               { src: "/images/gallery/ux/amass-logo-skeleton.png", hoverSrc: "/images/gallery/ux/amass-logo-hover.png", title: "AMASS Logo Branding", desc: "Logo construction — the AMASS mark built on a geometric grid system", tags: ["Branding", "Logo"] },
               { src: "/images/gallery/ux/touchdesigner-hike-process-poster.jpg", video: "/videos/touchdesigner-hike-process.mp4", title: "Touch Designer Hike Video — Process", desc: "Behind the scenes — the node network driving the hike visuals", tags: ["TouchDesigner", "Process"] },
-              { src: "/images/gallery/ux/logofolio-poster.png", video: "/videos/logofolio.mp4", title: "Logofolio", desc: "Twelve marks drop, tumble, and lock into a glass grid: an animated logo folio", tags: ["Logos", "Motion"] },
             ];
 
             return (
@@ -421,10 +421,11 @@ export default function Home() {
                         </>
                       );
                       const external = p.href?.startsWith("http");
+                      const wrapCls = `group break-inside-avoid mb-6${p.breakBefore ? " sm:[break-before:column]" : ""}`;
                       return p.href ? (
-                        <a key={p.title} href={p.href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} className="group block break-inside-avoid mb-6">{card}</a>
+                        <a key={p.title} href={p.href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} className={`${wrapCls} block`}>{card}</a>
                       ) : (
-                        <div key={p.title} className="group break-inside-avoid mb-6">{card}</div>
+                        <div key={p.title} className={wrapCls}>{card}</div>
                       );
                     })}
                   </div>
