@@ -146,7 +146,7 @@ export default function Home() {
             </button>
           ))}
           <a
-            href="https://drive.google.com/file/d/1gS96a0bIVfhp9Ei2HXeb5uNuoHeEzZLq/view?usp=drive_link"
+            href="https://drive.google.com/file/d/1jwPjB_1K1uUPAzZvG07NmMOscvQHCwWI/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm sm:text-[15px] font-medium text-[#1e40af] hover:text-[#1e40af] transition-colors duration-200"
@@ -464,7 +464,7 @@ export default function Home() {
                   WashU ’28
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <a href="https://drive.google.com/file/d/1gS96a0bIVfhp9Ei2HXeb5uNuoHeEzZLq/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="rounded-full px-4 py-2 text-[13px] font-medium bg-[#1D4ED8] text-white hover:bg-[#1740b8] transition-colors">Resume</a>
+                  <a href="https://drive.google.com/file/d/1jwPjB_1K1uUPAzZvG07NmMOscvQHCwWI/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="rounded-full px-4 py-2 text-[13px] font-medium bg-[#1D4ED8] text-white hover:bg-[#1740b8] transition-colors">Resume</a>
                   <a href="mailto:liapaark@gmail.com" className="rounded-full px-4 py-2 text-[13px] font-medium border border-[#c9d5f7] bg-white text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white transition-colors">Email</a>
                   <a href="https://www.linkedin.com/in/lydia-paark" target="_blank" rel="noopener noreferrer" className="rounded-full px-4 py-2 text-[13px] font-medium border border-[#c9d5f7] bg-white text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white transition-colors">LinkedIn</a>
                 </div>
@@ -494,7 +494,7 @@ export default function Home() {
                 <div className="mb-12">
                   <div className="flex items-center justify-between mb-4">
                     <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-[#8b8fe8]">Experience</p>
-                    <a href="https://drive.google.com/file/d/1gS96a0bIVfhp9Ei2HXeb5uNuoHeEzZLq/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#e8edff] text-[#1D4ED8] text-[11px] font-semibold hover:bg-[#d0daff] active:scale-95 transition-all duration-150">Resume ↗</a>
+                    <a href="https://drive.google.com/file/d/1jwPjB_1K1uUPAzZvG07NmMOscvQHCwWI/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#e8edff] text-[#1D4ED8] text-[11px] font-semibold hover:bg-[#d0daff] active:scale-95 transition-all duration-150">Resume ↗</a>
                   </div>
                   <div className="space-y-2.5">
                     {[
