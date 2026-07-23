@@ -16,6 +16,22 @@
   --muted: #6e6e73;
   --faint: #8e8e93;
   --line: #e5e5e7;
+
+  --nav-bg: rgba(231, 237, 255, 0.92);
+  --panel-bg: #f4f7ff;
+  --panel-stroke: #c9d5f7;
+  --surface-2: #f5f5f7;
+  --bunny-eye: #15171e;
+
+  /* case-study accent cards (inline-styled) */
+  --card-green: #f0faf4;
+  --card-green-2: #eaf2ec;
+  --card-green-grad: linear-gradient(120deg, #eaf2ec 0%, #f0faf4 100%);
+  --card-green-border: #b8d9be;
+  --card-blue: #e8edff;
+  --card-blue-border: #d0daff;
+  --card-red: #fdf0ee;
+  --row-active: #f0f4ff;
 }
 
 @theme inline {
@@ -23,6 +39,135 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-clother);
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Dark mode ──
+   Theme is a `.dark` class on <html>, toggled by the footer BunnyToggle and
+   persisted in localStorage. Pages use hardcoded light-palette utilities, so
+   dark mode remaps that (consistent) palette here in one place instead of
+   editing every class in six pages. */
+.dark {
+  --background: #0f1014;
+  --foreground: #ededf0;
+
+  --accent: #93aeff;
+  --accent-hover: #a8bcff;
+  --accent-soft: #202844;
+  --accent-softer: #1a2033;
+  --accent-border: #2f3a63;
+
+  --ink: #eaeaee;
+  --muted: #9a9aa3;
+  --faint: #94949d;
+  --line: #26272e;
+
+  --nav-bg: rgba(24, 30, 48, 0.92);
+  --panel-bg: #13161f;
+  --panel-stroke: #33406c;
+  --surface-2: #1b1c23;
+  --bunny-eye: #e8e8ee;
+
+  --card-green: #142019;
+  --card-green-2: #17251c;
+  --card-green-grad: linear-gradient(120deg, #17251c 0%, #142019 100%);
+  --card-green-border: #2b4936;
+  --card-blue: #202844;
+  --card-blue-border: #2f3a63;
+  --card-red: #241517;
+  --row-active: #1a2033;
+  color-scheme: dark;
+}
+
+/* Hero bunny PNG is dark ink on transparent - flip it light in dark mode
+   while keeping the headphones blue */
+.dark .bunny-ink { filter: invert(1) hue-rotate(180deg); }
+
+.dark ::selection { background-color: #2b3a66; color: #b9c8ff; }
+
+.dark .hl,
+.dark .hl-tag,
+.dark .hl-hover { background: #263155; color: #9db4ff; }
+
+/* - Surfaces - */
+.dark .bg-white { background-color: #17181f; }
+.dark .bg-white\/80 { background-color: rgba(23, 24, 31, 0.8); }
+.dark .bg-white\/70 { background-color: rgba(23, 24, 31, 0.7); }
+.dark .bg-white\/60 { background-color: rgba(23, 24, 31, 0.6); }
+.dark .hover\:bg-white:hover { background-color: #21222b; }
+.dark .bg-gray-50,
+.dark .bg-\[\#fafafa\],
+.dark .bg-\[\#f5f5f7\] { background-color: #1b1c23; }
+.dark .hover\:bg-gray-50:hover { background-color: #21222b; }
+.dark .bg-gray-300 { background-color: #3a3b45; }
+.dark .bg-\[\#f4f7ff\] { background-color: #13161f; }
+.dark .bg-\[\#f6f8ff\],
+.dark .hover\:bg-\[\#f6f8ff\]:hover { background-color: #191d2b; }
+.dark .bg-\[\#f0f4ff\],
+.dark .hover\:bg-\[\#f0f4ff\]:hover,
+.dark .bg-\[\#eef2ff\] { background-color: #1a2033; }
+.dark .bg-\[\#e8edff\] { background-color: #202844; }
+.dark .bg-\[\#e0e8ff\],
+.dark .hover\:bg-\[\#e0e8ff\]:hover { background-color: #232c4d; }
+.dark .bg-\[\#dbe4ff\] { background-color: #263155; }
+.dark .hover\:bg-\[\#d0daff\]:hover { background-color: #2c3a66; }
+.dark .bg-\[\#f0faf4\],
+.dark .hover\:bg-\[\#f0faf4\]:hover,
+.dark .bg-\[\#f0f7f1\] { background-color: #142019; }
+.dark .bg-\[\#fff5f5\] { background-color: #241517; }
+
+/* - Text - */
+.dark .text-black { color: #f0f0f3; }
+.dark .text-\[\#1d1d1f\] { color: #eaeaee; }
+.dark .text-\[\#3a3a3c\],
+.dark .text-gray-800 { color: #d9d9df; }
+.dark .text-gray-700 { color: #c4c4cc; }
+.dark .text-gray-600 { color: #a8a8b2; }
+.dark .text-gray-500,
+.dark .text-\[\#6e6e73\] { color: #9a9aa3; }
+.dark .text-gray-400,
+.dark .text-\[\#8e8e93\] { color: #85858f; }
+.dark .text-gray-300 { color: #55555e; }
+.dark .text-\[\#c0c0c8\],
+.dark .text-\[\#c0c0c0\] { color: #5e5e68; }
+.dark .text-\[\#1D4ED8\],
+.dark .hover\:text-\[\#1D4ED8\]:hover,
+.dark .group:hover .group-hover\:text-\[\#1D4ED8\] { color: #93aeff; }
+.dark .text-\[\#1e40af\],
+.dark .hover\:text-\[\#1e40af\]:hover { color: #a8bcff; }
+.dark .text-\[\#8b8fe8\] { color: #a6aaf2; }
+.dark .text-\[\#126b40\] { color: #63c08d; }
+.dark .text-\[\#4d7a52\] { color: #8dbb95; }
+.dark .text-\[\#3d6142\] { color: #9cc4a3; }
+.dark .text-\[\#1a4a2a\] { color: #79b490; }
+.dark .text-red-500 { color: #f28b7d; }
+.dark .text-red-400 { color: #f0a196; }
+.dark .text-\[\#c0392b\] { color: #e58274; }
+
+/* - Borders - */
+.dark .border-gray-100,
+.dark .border-\[\#f0f0f0\] { border-color: #24252c; }
+.dark .border-\[\#e5e5e7\],
+.dark .border-\[\#e8e8ed\] { border-color: #26272e; }
+.dark .border-\[\#e5e7f1\],
+.dark .border-\[\#e6eaf6\] { border-color: #272a38; }
+.dark .border-gray-200 { border-color: #2b2c34; }
+.dark .border-gray-300 { border-color: #3a3b45; }
+.dark .border-\[\#d0daff\] { border-color: #2f3a63; }
+.dark .border-\[\#c9d5f7\],
+.dark .hover\:border-\[\#c9d5f7\]:hover,
+.dark .border-\[\#c3d0ff\] { border-color: #33406c; }
+.dark .border-\[\#8ea6ef\],
+.dark .group:hover .group-hover\:border-\[\#8ea6ef\] { border-color: #4a5c9e; }
+.dark .border-\[\#1D4ED8\],
+.dark .hover\:border-\[\#1D4ED8\]:hover { border-color: #5679ff; }
+.dark .border-\[\#b8d9be\] { border-color: #2b4936; }
+.dark .border-\[\#4d7a52\],
+.dark .hover\:border-\[\#126b40\]:hover { border-color: #3f6a4a; }
+.dark .border-red-300 { border-color: #6e3a34; }
+.dark .border-red-100 { border-color: #402224; }
+.dark .border-\[\#c0392b\] { border-color: #8a4237; }
+.dark .border-white\/70 { border-color: rgba(84, 96, 140, 0.5); }
 
 html, body {
   scroll-behavior: smooth;
@@ -53,7 +198,7 @@ html {
   }
 }
 
-/* ── Motion — gentle, kept subtle for a professional feel ── */
+/* ── Motion - gentle, kept subtle for a professional feel ── */
 @keyframes bunny-walk {
   from { transform: translateX(-80px); }
   to   { transform: translateX(100vw); }
@@ -142,7 +287,7 @@ html {
   transform: translateX(-50%) translateY(0);
 }
 
-/* "click me!" hint — speech bubble by the bunny's right ear */
+/* "click me!" hint - speech bubble by the bunny's right ear */
 .click-hint {
   position: absolute;
   right: 8%;

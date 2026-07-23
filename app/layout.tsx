@@ -37,8 +37,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${clother.variable} antialiased`}>
+        {/* Apply the stored theme before first paint so dark mode doesn't flash light */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.theme==="dark")document.documentElement.classList.add("dark")}catch(e){}`,
+          }}
+        />
         <CustomCursor />
         <SmoothScroll />
         <ScrollReveal />

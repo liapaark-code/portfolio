@@ -194,7 +194,7 @@ export default function CopilotCaseStudy() {
         {/* ── HUMAN-CENTERED AI INTEGRATION ── */}
         <Section id="overview" label="Human-Centered AI Integration" heading="Overview" fullWidth>
           <p className="text-sm text-gray-600 leading-relaxed mb-8">
-            We set out to understand how real users experience Copilot in their day-to-day Microsoft workflows — identifying friction points and designing toward an AI that feels like a natural extension of the tools they already use.
+            We set out to understand how real users experience Copilot in their day-to-day Microsoft workflows, identifying friction points and designing toward an AI that feels like a natural extension of the tools they already use.
           </p>
           <div className="w-full rounded-2xl overflow-hidden border border-gray-100">
             <video src="/images/copilot-ui-overview.mp4" autoPlay loop muted playsInline className="w-full h-auto" />
@@ -306,10 +306,10 @@ export default function CopilotCaseStudy() {
         <Section id="design-flows" label="Design Explorations" heading="Inline Final Designs: Flow 1–4" fullWidth>
           <div className="flex flex-col gap-6">
             {[
-              { src: "/images/copilot-flow1.mp4", feature: "Feature: Built-in Scheduling",  label: "Flow 1 — Schedule Meeting",   desc: "Copilot detects scheduling intent inline and surfaces available times directly in the compose window — no context switch required.",   outcome: "Reduced scheduling friction by surfacing meeting times inline, cutting the steps needed to book from 5+ actions to a single tap." },
-              { src: "/images/copilot-flow2.mp4", feature: "Feature: Improve Writing",       label: "Flow 2 — Draft Email",         desc: "AI drafts a full email from a short prompt, keeping the user anchored in the compose flow while maintaining full editorial control.",    outcome: "Improved draft speed and writing confidence by generating complete emails inline — keeping users in the compose window from start to send." },
-              { src: "/images/copilot-flow3.mp4", feature: "Feature: Improve Writing",       label: "Flow 3 — Smart Reply",         desc: "Copilot reads the incoming message and generates contextually appropriate reply options that match the user's tone and intent.",          outcome: "Increased reply relevance by grounding Copilot responses to the active thread, reducing back-and-forth and cutting response time." },
-              { src: "/images/copilot-flow4.mp4", feature: "Feature: Response Templates",   label: "Flow 4 — Response Templates",  desc: "Frequently used reply patterns surface as one-tap templates, reducing repetitive writing and speeding up high-volume workflows.",       outcome: "Reduced repetitive writing effort for high-volume users by surfacing reusable reply patterns directly in the compose experience." },
+              { src: "/images/copilot-flow1.mp4", feature: "Feature: Built-in Scheduling",  label: "Flow 1: Schedule Meeting",   desc: "Copilot detects scheduling intent inline and surfaces available times directly in the compose window, with no context switch required.",   outcome: "Reduced scheduling friction by surfacing meeting times inline, cutting the steps needed to book from 5+ actions to a single tap." },
+              { src: "/images/copilot-flow2.mp4", feature: "Feature: Improve Writing",       label: "Flow 2: Draft Email",         desc: "AI drafts a full email from a short prompt, keeping the user anchored in the compose flow while maintaining full editorial control.",    outcome: "Improved draft speed and writing confidence by generating complete emails inline, keeping users in the compose window from start to send." },
+              { src: "/images/copilot-flow3.mp4", feature: "Feature: Improve Writing",       label: "Flow 3: Smart Reply",         desc: "Copilot reads the incoming message and generates contextually appropriate reply options that match the user's tone and intent.",          outcome: "Increased reply relevance by grounding Copilot responses to the active thread, reducing back-and-forth and cutting response time." },
+              { src: "/images/copilot-flow4.mp4", feature: "Feature: Response Templates",   label: "Flow 4: Response Templates",  desc: "Frequently used reply patterns surface as one-tap templates, reducing repetitive writing and speeding up high-volume workflows.",       outcome: "Reduced repetitive writing effort for high-volume users by surfacing reusable reply patterns directly in the compose experience." },
             ].map((f) => (
               <div key={f.src} className="border border-gray-200 rounded-2xl overflow-hidden transition-colors duration-200 hover:border-[#1D4ED8] hover:bg-[#f0f4ff]/40">
                 <div className="px-6 pt-5 pb-3">
@@ -402,7 +402,7 @@ export default function CopilotCaseStudy() {
         {/* ── NEXT WORK ── */}
         <div className="max-w-5xl mx-auto px-4 sm:px-8 py-16 flex justify-between">
           <a
-            href="/sparc"
+            href="/kaynolabs"
             className="group flex items-center gap-3 text-sm font-medium text-[#1D4ED8] hover:opacity-70 transition-opacity"
           >
             <span className="text-lg transition-transform duration-300 group-hover:-translate-x-1">←</span>

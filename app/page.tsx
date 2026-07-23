@@ -1,9 +1,10 @@
 "use client";
-import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import HeadphoneBunny from "./components/HeadphoneBunny";
 import CoverVideo from "./components/CoverVideo";
+import ThemeToggle from "./components/ThemeToggle";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"work" | "gallery" | "about">("work");
@@ -29,7 +30,7 @@ export default function Home() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Some browsers pause looping covers in background tabs without resuming — re-kick on return
+  // Some browsers pause looping covers in background tabs without resuming - re-kick on return
   useEffect(() => {
     const resume = () => {
       if (document.hidden) return;
@@ -122,10 +123,10 @@ export default function Home() {
   return (
     <div className="min-h-screen font-[family-name:var(--font-clother)] bg-white">
 
-      {/* ══ FIXED PILL NAV — top-right, frosted, sticks on scroll, never overlaps the folder ══ */}
+      {/* ══ FIXED PILL NAV - top-right, frosted, sticks on scroll, never overlaps the folder ══ */}
       <div className="fixed top-4 sm:top-5 left-0 right-0 z-50 px-3 sm:px-8 pointer-events-none">
         <div className="max-w-[1320px] mx-auto flex justify-end">
-        <nav ref={navRef} className="pointer-events-auto flex items-center gap-0.5 rounded-full p-1.5 border border-white/70 backdrop-blur-xl shadow-[0_14px_36px_-16px_rgba(30,64,175,0.42)]" style={{ background: "rgba(231,237,255,0.92)" }}>
+        <nav ref={navRef} className="pointer-events-auto flex items-center gap-0.5 rounded-full p-1.5 border border-white/70 backdrop-blur-xl shadow-[0_14px_36px_-16px_rgba(30,64,175,0.42)]" style={{ background: "var(--nav-bg)" }}>
           {/* sliding active pill */}
           <span
             aria-hidden
@@ -136,7 +137,7 @@ export default function Home() {
             <button
               key={tab}
               data-tab={tab}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => { setActiveTab(tab); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               aria-current={activeTab === tab ? "page" : undefined}
               className={`relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm sm:text-[15px] font-medium transition-colors duration-300 ${
                 activeTab === tab ? "text-white" : "text-[#1e40af] hover:text-[#1e40af]"
@@ -153,6 +154,9 @@ export default function Home() {
           >
             resume
           </a>
+          <span className="relative z-10 pl-1.5 pr-1.5 flex items-center">
+            <ThemeToggle scale={0.44} />
+          </span>
         </nav>
         </div>
       </div>
@@ -164,11 +168,11 @@ export default function Home() {
         <div
           ref={folderRef}
           className="relative max-w-[1320px] mx-auto rounded-tr-[2.5rem] rounded-b-[2.5rem] shadow-[0_40px_100px_-52px_rgba(29,78,216,0.22)] px-5 sm:px-14 pt-11 sm:pt-14 pb-16"
-          style={{ background: "#f4f7ff" }}
+          style={{ background: "var(--panel-bg)" }}
         >
 
           {/* Folder left tab (background fill only; outline drawn by the SVG below) */}
-          <div ref={tabRef} className="absolute -top-5 left-0 h-7 w-36 sm:w-56 rounded-t-[20px]" style={{ background: "#f4f7ff" }} />
+          <div ref={tabRef} className="absolute -top-5 left-0 h-7 w-36 sm:w-56 rounded-t-[20px]" style={{ background: "var(--panel-bg)" }} />
 
           {/* One continuous outline stroke for the tab + folder, perfectly aligned */}
           {fdim.w > 0 && (
@@ -180,11 +184,11 @@ export default function Home() {
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden
             >
-              <path d={folderOutline(fdim.w, fdim.h, fdim.tabw)} stroke="#c9d5f7" strokeWidth={1} />
+              <path d={folderOutline(fdim.w, fdim.h, fdim.tabw)} stroke="var(--panel-stroke)" strokeWidth={1} />
             </svg>
           )}
 
-          {/* HERO — work tab */}
+          {/* HERO - work tab */}
           {activeTab === "work" && (
             <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-10 pt-6 sm:pt-10 pb-10 sm:pb-16">
               <div className="flex-1 min-w-0">
@@ -203,30 +207,40 @@ export default function Home() {
             </div>
           )}
 
-          {/* WORK — folder-style project cards */}
+          {/* WORK - folder-style project cards */}
           {activeTab === "work" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-10 items-start">
               {[
-                { href: "/sparc",         cover: "/images/sparc/cover-poster.webp",           video: "/videos/sparc-cover.mp4", bg: "#0C0C0C",                          title: "SPARC Sports",      label: "Product Design", tags: ["Shipped", "Systems", "Website"], desc: "Led brand and UI redesign for SPARC — boosting athlete engagement by 60%", cta: "view case study!", meta: [["Role", "Lead Product Designer"], ["Team", "2 Product Designers"], ["Timeframe", "Aug 2025 – Present"]] },
-                { href: "/copilot",       cover: "/images/copilot-hero.png",                  video: null,                      bg: "#d0e4ff",                          title: "Microsoft Copilot", label: "AI Product", tags: ["Shipped", "AI"],      desc: "Redesigned Copilot interactions — enabling 10× faster AI access",          cta: "view case study!", meta: [["Role", "Product Designer"], ["Team", "2 Designers, 2 PMs"], ["Timeframe", "Aug 2025 – Jan 2026"]] },
-                { href: "/blumiin",       cover: "/images/blumiin/cover-poster.png",          video: "/videos/blumiin-cover.mp4", bg: "#365a3d",                        title: "Blumiin",           label: "Product Concept", tags: ["Hackathon Winner", "Concept"],  desc: "Designed an honest herbal-remedy app — winner of the Skandalaris intern pitch", cta: "view case study!", meta: [["Role", "Designer — team of 5"], ["Context", "Skandalaris Hackathon"], ["Timeframe", "June 2026"]] },
-                { href: "/little-prince", cover: "/images/little-prince/lp-card-cover-v2.png", video: null,                     bg: "#1a1a2e",                          title: "Le Petite Route",   label: "Mobile Concept", tags: ["Concept", "Mobile"],  desc: "Created a story-driven travel experience inspired by The Little Prince",    cta: "view the journey!", meta: [["Timeframe", "March 2025"], ["Duration", "5 Weeks"], ["Tools", "Figma, Photoshop, Procreate"]] },
-                { href: "/amc",           cover: "/images/amc/amc-card-cover.png",            video: null,                      bg: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)", title: "AMC Rebrand", label: "Brand Identity", tags: ["Shipped", "Brand"],   desc: "Designed a new brand identity system for AMC",                             cta: "view rebrand!", meta: [["Role", "Brand Designer"], ["Client", "AMC @ WashU"], ["Timeframe", "August 2025"]] },
-              ].map((p, i) => (
+                { href: "/sparc",         cover: "/images/sparc/cover-poster.webp",           video: "/videos/sparc-cover.mp4", bg: "#0C0C0C",                          title: "SPARC Sports",      label: "Product Design", tags: ["Shipped", "Systems", "Website"], desc: "Rebuilt SPARC's color system, dashboard UI, and brand identity, tested with athletes to lift engagement 60%", cta: "view case study!", meta: [["Role", "Lead Product Designer"], ["Team", "2 Product Designers"], ["Timeframe", "Aug 2025 – Present"]] },
+                { href: "/kaynolabs",     cover: "/images/kaynolabs/cover-poster.webp",       video: "/videos/kaynolabs-cover.mp4", bg: "#07080c",                      title: "Kayno Labs · Douglass AI", label: "Product Design", tags: ["Fast Shipped", "Client", "AI"], desc: "Audited and redesigned Douglass's homepage and Intelligence surface: 56% less copy, sourced answers above the fold", cta: "view case study!", meta: [["Role", "Product Designer"], ["Client", "Kayno Labs · Skandalaris"], ["Timeframe", "June – July 2026"]] },
+                { href: "/copilot",       cover: "/images/copilot-hero.png",                  video: null,                      bg: "#d0e4ff",                          title: "Microsoft Copilot", label: "AI Product", tags: ["Concept", "AI", "Website"],      desc: "Designed 4 in-flow Copilot features for Outlook, cutting a 5-step scheduling task to a single tap",          cta: "view case study!", meta: [["Role", "Product Designer"], ["Team", "2 Designers, 2 PMs"], ["Timeframe", "Aug 2025 – Jan 2026"]] },
+                { href: "/blumiin",       cover: "/images/blumiin/cover-poster.png",          video: "/videos/blumiin-cover.mp4", bg: "#365a3d",                        title: "Blumiin",           label: "Product Concept", tags: ["Hackathon Winner", "Concept", "Mobile", "ClaudeCode"],  desc: "Designed an evidence-first herbal remedy app in a 2-hour sprint, winning the Skandalaris intern pitch", cta: "view case study!", meta: [["Role", "Designer, team of 5"], ["Context", "Skandalaris Hackathon"], ["Timeframe", "June 2026"]] },
+                { href: "/little-prince", cover: "/images/little-prince/lp-card-cover-v2.png", video: null,                     bg: "#1a1a2e",                          title: "Le Petite Route",   label: "Mobile Concept", tags: ["Concept", "Mobile"],  desc: "Mapped 7 real village sites to The Little Prince narrative in a location-based storytelling app",    cta: "view the journey!", meta: [["Timeframe", "March 2025"], ["Duration", "5 Weeks"], ["Tools", "Figma, Photoshop, Procreate"]] },
+                { href: "/amc",           cover: "/images/amc/amc-card-cover.png",            video: null,                      bg: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)", title: "Asian Multicultural Collective Club Rebrand", label: "Brand Identity", tags: ["Shipped", "Brand"],   desc: "Rebranded AMC from a hand-drawn mark to a scalable identity, now on social, events, and merch",                             cta: "view rebrand!", meta: [["Role", "Brand Designer"], ["Client", "AMC @ WashU"], ["Timeframe", "August 2025"]] },
+              ].map((p, i, arr) => {
+                const isArchived = p.href === "/little-prince" || p.href === "/amc";
+                const prevArchived = i > 0 && (arr[i - 1].href === "/little-prince" || arr[i - 1].href === "/amc");
+                return (
+                <Fragment key={p.href}>
+                  {isArchived && !prevArchived && (
+                    <div className="md:col-span-2 mt-8 sm:mt-10 mb-2 flex items-center gap-4">
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa0ad]">Archived</span>
+                      <span className="h-px flex-1 bg-[#e5e7f1]" />
+                    </div>
+                  )}
                 <Link
-                  key={p.href}
                   href={p.href}
                   className="group relative block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform hover:-translate-y-1"
                 >
-                  {/* Folder tab — tucked behind the card at rest, rises up on hover */}
+                  {/* Folder tab - tucked behind the card at rest, rises up on hover */}
                   <div className="pointer-events-none absolute left-7 -top-[26px] z-0 flex items-center gap-2 rounded-t-[0.85rem] border border-b-0 border-[#8ea6ef] bg-white px-4 pt-1.5 pb-3.5 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-[opacity,transform] duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]">
                     <span className="font-mono text-[11px] font-semibold tracking-widest text-[#1D4ED8]">{String(i + 1).padStart(2, "0")}</span>
                     <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1d1d1f]">{p.label}</span>
                   </div>
 
-                  {/* Card — clean bordered container at rest, blue folder on hover */}
+                  {/* Card - clean bordered container at rest, blue folder on hover */}
                   <div className="relative z-10 rounded-[1.6rem] border border-[#e5e7f1] bg-white p-3.5 transition-[border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-[0_10px_30px_-24px_rgba(30,64,175,0.22)] group-hover:border-[#8ea6ef] group-hover:shadow-[0_22px_48px_-26px_rgba(30,64,175,0.32)]">
-                    {/* Cover — inset, rounded; video covers loop muted, fall back to the poster for reduced motion */}
+                    {/* Cover - inset, rounded; video covers loop muted, fall back to the poster for reduced motion */}
                     <div className="relative aspect-[16/10] rounded-[1.15rem] overflow-hidden" style={{ background: p.bg }}>
                       {p.video && !reducedMotion ? (
                         <video
@@ -237,7 +251,7 @@ export default function Home() {
                           loop
                           playsInline
                           // React doesn't serialize `muted` into SSR HTML, so Chrome blocks the
-                          // pre-hydration autoplay attempt — re-kick playback on mount
+                          // pre-hydration autoplay attempt - re-kick playback on mount
                           ref={(el) => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
                           aria-label={p.title}
                           className="absolute inset-0 h-full w-full object-contain transition-transform duration-[650ms] ease-out group-hover:scale-[1.04]"
@@ -251,7 +265,7 @@ export default function Home() {
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <h3 className="text-[17px] font-semibold tracking-tight text-[#1d1d1f] group-hover:text-[#1D4ED8] transition-colors duration-300">{p.title}</h3>
                         {p.tags.length > 0 && (
-                          <div className="flex flex-wrap justify-end gap-1.5 shrink-0 opacity-0 translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]">
+                          <div className="flex flex-wrap justify-end gap-1.5 shrink-0">
                             {p.tags.map((t) => (
                               <span key={t} className="rounded-full border border-[#c3d0ff] px-2.5 py-[3px] text-[11px] font-medium text-[#1D4ED8] whitespace-nowrap">{t}</span>
                             ))}
@@ -262,7 +276,9 @@ export default function Home() {
                     </div>
                   </div>
                 </Link>
-              ))}
+                </Fragment>
+                );
+              })}
             </div>
           )}
 
@@ -313,22 +329,22 @@ export default function Home() {
 
             const shown = galleryFilter === "all" ? pieces : pieces.filter((p) => p.cat === galleryFilter);
 
-            // UX design extras — add projects here. Example:
+            // UX design extras - add projects here. Example:
             // { src: "/images/gallery/ux/project-cover.png", title: "Project Name", desc: "One-line description", href: "/project-page" }
             type UxProject = { src: string; title: string; desc: string; href?: string; video?: string; tags?: string[]; hoverSrc?: string; breakBefore?: boolean };
             const uxProjects: UxProject[] = [
-              { src: "/images/gallery/ux/robbie-meadow-poster.png", video: "/videos/robbie-meadow.mp4", title: "WashUX Club Website Game", desc: "Playable meadow for Robbie, the WashUX mascot — built for the club site", href: "https://washuxclub.com/", tags: ["WashUX", "Interactive"] },
-              { src: "/images/gallery/ux/focusghost-cover.png", video: "/videos/focusghost-cover.mp4", title: "FocusGhost — DevFest '26 Hackathon Project", desc: "Focus-tracking desktop app that visualizes when work becomes ghosted", href: "https://devpost.com/software/focusghost", tags: ["Hackathon", "Desktop"] },
+              { src: "/images/gallery/ux/robbie-meadow-poster.png", video: "/videos/robbie-meadow.mp4", title: "WashUX Club Website Game", desc: "Playable meadow for Robbie, the WashUX mascot, built for the club site", href: "https://washuxclub.com/", tags: ["WashUX", "Interactive"] },
+              { src: "/images/gallery/ux/focusghost-cover.png", video: "/videos/focusghost-cover.mp4", title: "FocusGhost: DevFest '26 Hackathon Project", desc: "Focus-tracking desktop app that visualizes when work becomes ghosted", href: "https://devpost.com/software/focusghost", tags: ["Hackathon", "Desktop"] },
               { src: "/images/gallery/ux/referencepoint-cover.png", video: "/videos/referencepoint-branding.mp4", title: "ReferencePoint Branding", desc: "Brand identity and spring-physics logo reveal for ReferencePoint", tags: ["Branding", "Motion"] },
-              { src: "/images/gallery/ux/atmosense-cover.jpg", title: "Atmosense — Figbuild '26 Hackathon Project", desc: "Sensory-aware navigation app that maps the city by comfort level", href: "https://sensory-compass.vercel.app/", tags: ["Hackathon", "Mobile"] },
+              { src: "/images/gallery/ux/atmosense-cover.jpg", title: "Atmosense: Figbuild '26 Hackathon Project", desc: "Sensory-aware navigation app that maps the city by comfort level", href: "https://sensory-compass.vercel.app/", tags: ["Hackathon", "Mobile"] },
               { src: "/images/gallery/ux/logofolio-poster.png", video: "/videos/logofolio.mp4", title: "Logofolio", desc: "Twelve marks drop, tumble, and lock into a glass grid: an animated logo folio", tags: ["Logos", "Motion"], breakBefore: true },
-              { src: "/images/gallery/ux/amass-logo-skeleton.png", hoverSrc: "/images/gallery/ux/amass-logo-hover.png", title: "AMASS Logo Branding", desc: "Logo construction — the AMASS mark built on a geometric grid system", tags: ["Branding", "Logo"] },
-              { src: "/images/gallery/ux/touchdesigner-hike-process-poster.jpg", video: "/videos/touchdesigner-hike-process.mp4", title: "Touch Designer Hike Video — Process", desc: "Behind the scenes — the node network driving the hike visuals", tags: ["TouchDesigner", "Process"] },
+              { src: "/images/gallery/ux/amass-logo-skeleton.png", hoverSrc: "/images/gallery/ux/amass-logo-hover.png", title: "AMASS Logo Branding", desc: "Logo construction: the AMASS mark built on a geometric grid system", tags: ["Branding", "Logo"] },
+              { src: "/images/gallery/ux/touchdesigner-hike-process-poster.jpg", video: "/videos/touchdesigner-hike-process.mp4", title: "Touch Designer Hike Video: Process", desc: "Behind the scenes: the node network driving the hike visuals", tags: ["TouchDesigner", "Process"] },
             ];
 
             return (
               <div className="pt-2 pb-16">
-                {/* Header row — title + description left, mode toggle right, top-aligned */}
+                {/* Header row - title + description left, mode toggle right, top-aligned */}
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
                   <div>
                     <h2 className="text-[26px] font-bold tracking-[-0.02em] text-[#1d1d1f]">Gallery</h2>
@@ -351,7 +367,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Art filter chips — own row below the header */}
+                {/* Art filter chips - own row below the header */}
                 {galleryMode === "art" && (
                   <div className="flex flex-wrap gap-2 mb-8 -mt-2">
                     {filters.map((f) => (
@@ -385,7 +401,7 @@ export default function Home() {
                     ))}
                   </div>
                 ) : uxProjects.length > 0 ? (
-                  /* UX extras — masonry columns so rows don't force-match heights */
+                  /* UX extras - masonry columns so rows don't force-match heights */
                   <div className="columns-1 sm:columns-2 gap-6">
                     {uxProjects.map((p) => {
                       const card = (
@@ -430,7 +446,7 @@ export default function Home() {
                     })}
                   </div>
                 ) : (
-                  /* UX extras — empty state until projects are added */
+                  /* UX extras - empty state until projects are added */
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
                     {Array.from({ length: 6 }).map((_, i) => (
                       <div
@@ -509,7 +525,7 @@ export default function Home() {
                         onClick={() => setExpandedExp(expandedExp === name ? null : name)}
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-[#e8e8ed] overflow-hidden" style={{ background: "#f5f5f7" }}>
+                          <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 border border-[#e8e8ed] overflow-hidden" style={{ background: "var(--surface-2)" }}>
                             {logo ? (
                               // eslint-disable-next-line @next/next/no-img-element
                               <img src={logo} alt={name} className={contain ? "w-8 h-8 object-contain" : "w-full h-full object-cover"} />
@@ -628,7 +644,7 @@ export default function Home() {
               <span className="ml-auto text-xs text-[#c0c0c0]">{lightbox.index + 1} / {lightbox.images.length}</span>
             </div>
 
-            {/* Image area — fixed height, black bg, image centered */}
+            {/* Image area - fixed height, black bg, image centered */}
             <div className="relative flex items-center justify-center bg-black" style={{ height: "65vh" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -637,14 +653,14 @@ export default function Home() {
                 style={{ maxWidth: "calc(100% - 100px)", maxHeight: "65vh", objectFit: "contain", display: "block" }}
               />
 
-              {/* Left arrow — centered, always visible */}
+              {/* Left arrow - centered, always visible */}
               <button
                 onClick={() => setLightbox(l => l && l.index > 0 ? { ...l, index: l.index - 1 } : l)}
                 className="absolute left-3 w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm border border-[#e5e5e7] flex items-center justify-center hover:bg-white shadow-sm transition-all"
                 style={{ top: "50%", transform: "translateY(-50%)", opacity: lightbox.index === 0 ? 0.3 : 1, cursor: lightbox.index === 0 ? "default" : "pointer" }}
               ><svg width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M8 2L2 8L8 14" stroke="#1D4ED8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
 
-              {/* Right arrow — centered, always visible */}
+              {/* Right arrow - centered, always visible */}
               <button
                 onClick={() => setLightbox(l => l && l.index < l.images.length - 1 ? { ...l, index: l.index + 1 } : l)}
                 className="absolute right-3 w-9 h-9 rounded-full bg-white/80 backdrop-blur-sm border border-[#e5e5e7] flex items-center justify-center hover:bg-white shadow-sm transition-all"
@@ -681,7 +697,7 @@ export default function Home() {
             <button onClick={() => { setActiveTab("about");   scrollToTabs(); }} className="text-left text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">(about)</button>
           </div>
 
-          {/* Right: tagline, email, icons — right-aligned on desktop */}
+          {/* Right: tagline, email, icons - right-aligned on desktop */}
           <div className="sm:text-right">
             <p className="text-xs text-[#8e8e93] mb-1">Let&apos;s work together!</p>
             <a href="mailto:liapaark@gmail.com"
@@ -705,8 +721,8 @@ export default function Home() {
 
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-gray-100 pt-5 text-center">
+        {/* Bottom: copyright */}
+        <div className="border-t border-gray-100 pt-5 flex flex-col items-center gap-1 sm:items-start">
           <p className="text-[11px] text-gray-400">Designed &amp; built with Next.js</p>
           <p className="text-[11px] text-gray-400">© 2026 Lydia Park</p>
         </div>

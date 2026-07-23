@@ -115,7 +115,7 @@ export default function AmcCaseStudy() {
             <p className="text-sm font-semibold text-[#1D4ED8] mb-4">Designer Impact</p>
             <ul className="space-y-3">
               {[
-                "Delivered a full logo rebrand for AMC's name change — replacing the informal panel C motif with a bold, scalable modern mark",
+                "Delivered a full logo rebrand for AMC's name change, replacing the informal panel C motif with a bold, scalable modern mark",
                 "Increased visual consistency across 30+ annual events by providing a unified brand system with clear usage guidelines",
                 "Designed 3 logo variants (primary, secondary, emblem) giving AMC flexibility across digital, print, and merchandise formats",
                 "Strengthened AMC's identity alongside WashU's visual standards while preserving its distinct cultural energy",
@@ -147,7 +147,7 @@ export default function AmcCaseStudy() {
                   With the name change as the driver, I knew we needed to start fresh with our main logo.
                 </p>
                 <p>
-                  This also stemmed from the online-going discussion of how the <strong className="text-black">"panel C" motif</strong> was confusing and distracting from the AMC's mission and identity — both students and faculty agreed this needed a refresh.
+                  This also stemmed from the online-going discussion of how the <strong className="text-black">"panel C" motif</strong> was confusing and distracting from the AMC's mission and identity; both students and faculty agreed this needed a refresh.
                 </p>
               </div>
             </div>
@@ -169,9 +169,9 @@ export default function AmcCaseStudy() {
                 height={200}
                 className="w-40 h-auto"
               />
-              <p className="text-xs text-gray-400 text-center">Circular hand-drawn style — felt informal and unscalable</p>
+              <p className="text-xs text-gray-400 text-center">Circular hand-drawn style, which felt informal and unscalable</p>
             </div>
-            <div className="rounded-2xl p-8 flex flex-col items-center gap-4" style={{ background: "#fdf0ee" }}>
+            <div className="rounded-2xl p-8 flex flex-col items-center gap-4" style={{ background: "var(--card-red)" }}>
               <p className="text-xs font-semibold text-[#c0392b] uppercase tracking-widest">After Logo</p>
               <Image
                 src="/images/amc/Amc-logo-new-1-2x.png"
@@ -192,7 +192,7 @@ export default function AmcCaseStudy() {
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Sketches + Iterations</p>
               <h2 className="text-2xl font-semibold text-black mb-6">The design process</h2>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Starting from circular form studies and letterform explorations, each iteration pushed toward a more confident, graphic mark that could live anywhere — digital, print, or merch.
+                Starting from circular form studies and letterform explorations, each iteration pushed toward a more confident, graphic mark that could live anywhere: digital, print, or merch.
               </p>
             </div>
             <div className="flex justify-end">
@@ -213,7 +213,7 @@ export default function AmcCaseStudy() {
         <section id="final-designs" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Final Design / Mocking</p>
           <p className="text-sm text-gray-600 leading-relaxed mb-10 max-w-xl">
-            The final mark across its full range of applications — light, dark, and gradient — showing how the logo holds across every AMC touchpoint.
+            The final mark across its full range of applications (light, dark, and gradient), showing how the logo holds across every AMC touchpoint.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="rounded-2xl overflow-hidden">
@@ -267,7 +267,7 @@ export default function AmcCaseStudy() {
           </div>
           <div className="rounded-2xl p-8 border-2 border-[#c0392b]/30 bg-white">
             <p className="text-sm text-gray-600 leading-relaxed">
-              The redesigned logo was well-received by both students and faculty. The cleaner, bolder mark felt more at home alongside WashU's visual identity while still carrying AMC's distinct energy. It's now being used across social media, event materials, and merchandise — a full rollout for the 2025–26 year.
+              The redesigned logo was well-received by both students and faculty. The cleaner, bolder mark felt more at home alongside WashU's visual identity while still carrying AMC's distinct energy. It's now being used across social media, event materials, and merchandise, a full rollout for the 2025–26 year.
             </p>
           </div>
         </section>

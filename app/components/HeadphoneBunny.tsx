@@ -24,7 +24,7 @@ export default function HeadphoneBunny({ className = "" }: { className?: string 
     "반가워요",
     "i'm a product + brand designer",
     "check out my work below",
-    "psst — try the tabs up top",
+    "psst... try the tabs up top",
     "i also paint & sculpt",
     "let's build something",
     "thanks for stopping by!",
@@ -107,7 +107,7 @@ export default function HeadphoneBunny({ className = "" }: { className?: string 
     position: "absolute",
     width: "3%",
     height: "4.2%",
-    background: "#15171e",
+    background: "var(--bunny-eye)",
     borderRadius: "50%",
     transform: "translate(-50%,-50%)",
     pointerEvents: "none",
@@ -117,7 +117,7 @@ export default function HeadphoneBunny({ className = "" }: { className?: string 
   return (
     <div className={`bunny-float ${className}`}>
       <div ref={innerRef} onClick={hop} className="relative w-full cursor-pointer select-none">
-        {/* speech bubble — tucked by the right ear so the bunny looks like it's talking */}
+        {/* speech bubble - tucked by the right ear so the bunny looks like it's talking */}
         {greet && (
           <span
             key={bubbleKey}
@@ -134,7 +134,7 @@ export default function HeadphoneBunny({ className = "" }: { className?: string 
           </span>
         )}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/keychain/bunny-headphones-noeyes.png" alt="lydia park bunny" className="w-full h-auto" draggable={false} />
+        <img src="/keychain/bunny-headphones-noeyes.png" alt="lydia park bunny" className="bunny-ink w-full h-auto" draggable={false} />
         <span ref={eyeL} style={{ ...eyeStyle, left: "53.5%", top: "79%" }} />
         <span ref={eyeR} style={{ ...eyeStyle, left: "68.2%", top: "79.2%" }} />
         {hint && <span className="click-hint">click me!</span>}

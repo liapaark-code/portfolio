@@ -27,7 +27,7 @@ export default function CoverVideo({ src, poster, label, className = "" }: { src
       loop
       playsInline
       // React doesn't serialize `muted` into SSR HTML, so Chrome blocks the
-      // pre-hydration autoplay attempt — re-kick playback on mount
+      // pre-hydration autoplay attempt - re-kick playback on mount
       ref={(el) => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
       aria-label={label}
       className={className}

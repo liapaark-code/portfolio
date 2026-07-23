@@ -35,7 +35,7 @@ const RAIL: RailSection[] = [
   { id: "reflection", label: "Reflection" },
 ];
 
-/** Brand-blue keyword highlight — used sparingly for the words that carry the product. */
+/** Brand-blue keyword highlight - used sparingly for the words that carry the product. */
 function Hl({ children }: { children: React.ReactNode }) {
   return <span className="bg-[#e8edff] text-[#1D4ED8] font-medium px-1 rounded">{children}</span>;
 }
@@ -84,7 +84,7 @@ export default function BlumiinCaseStudy() {
           </div>
         </section>
 
-        {/* ── HERO — looping cover animation ── */}
+        {/* ── HERO - looping cover animation ── */}
         <section className="max-w-5xl mx-auto px-4 sm:px-8 pb-0 border-t border-gray-200 pt-8">
           <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#365a3d]">
             <CoverVideo
@@ -98,7 +98,7 @@ export default function BlumiinCaseStudy() {
 
         {/* ── THE BRIEF: the hackathon prompt, first thing the reader sees ── */}
         <section id="overview" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 mt-6 scroll-mt-24">
-          <div className="rounded-[2rem] px-8 py-12 sm:px-14 sm:py-14 text-center" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
+          <div className="rounded-[2rem] px-8 py-12 sm:px-14 sm:py-14 text-center" style={{ background: "var(--card-blue)", border: "1px solid var(--card-blue-border)" }}>
             <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-5">The Brief</p>
             <h2 className="text-2xl sm:text-3xl font-semibold text-black leading-snug [text-wrap:balance]">
               Make Blumiin <span className="text-[#1D4ED8]">the trusted home for herbal discovery</span>: a product
@@ -165,7 +165,7 @@ export default function BlumiinCaseStudy() {
 
         {/* ── FEATURES ── */}
         <section id="features" className="max-w-5xl mx-auto px-4 sm:px-8 py-16 border-t border-gray-100 scroll-mt-24">
-          <div className="rounded-[2rem] px-8 py-12 sm:px-14 sm:py-14 text-center mb-14" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
+          <div className="rounded-[2rem] px-8 py-12 sm:px-14 sm:py-14 text-center mb-14" style={{ background: "var(--card-blue)", border: "1px solid var(--card-blue-border)" }}>
             <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-5">Features</p>
             <h2 className="text-2xl sm:text-3xl font-semibold text-black leading-snug [text-wrap:balance]">
               Four surfaces, each answering one goal from the brief: <span className="hl-hover">try it</span>,{" "}
@@ -174,7 +174,7 @@ export default function BlumiinCaseStudy() {
             </h2>
           </div>
 
-          {/* Row 1 — text left, media right */}
+          {/* Row 1 - text left, media right */}
           <div id="f-search" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4d7a52] mb-2">Goal · Try it</p>
@@ -193,7 +193,7 @@ export default function BlumiinCaseStudy() {
             </div>
           </div>
 
-          {/* Row 2 — media left, text right */}
+          {/* Row 2 - media left, text right */}
           <div id="f-evidence" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div className="flex justify-center order-2 sm:order-1">
               <div className="rounded-[1.6rem] bg-[#0e1a14] p-[14px] max-w-[300px] w-full">
@@ -212,7 +212,7 @@ export default function BlumiinCaseStudy() {
             </div>
           </div>
 
-          {/* Row 3 — text left, media right */}
+          {/* Row 3 - text left, media right */}
           <div id="f-community" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#4d7a52] mb-2">Goal · Prefer it</p>
@@ -234,7 +234,7 @@ export default function BlumiinCaseStudy() {
             </div>
           </div>
 
-          {/* Row 4 — media left, text right */}
+          {/* Row 4 - media left, text right */}
           <div id="f-allergies" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center scroll-mt-24">
             <div className="flex justify-center order-2 sm:order-1">
               <div className="rounded-[1.6rem] overflow-hidden max-w-[300px]">
@@ -262,7 +262,7 @@ export default function BlumiinCaseStudy() {
           <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-4">Design Decisions</p>
           <h2 className="text-2xl font-semibold text-black mb-14">Two calls I&rsquo;d defend in any review</h2>
 
-          {/* Decision 1 — text left, swatches right */}
+          {/* Decision 1 - text left, swatches right */}
           <div id="d-clinical" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center mb-20 scroll-mt-24">
             <div>
               <h3 className="text-xl font-semibold text-black mb-4">Finding the right direction fast</h3>
@@ -292,7 +292,7 @@ export default function BlumiinCaseStudy() {
             </div>
           </div>
 
-          {/* Decision 2 — text left, outcome right */}
+          {/* Decision 2 - text left, outcome right */}
           <div id="d-qa" className="grid grid-cols-1 sm:grid-cols-2 gap-12 items-center scroll-mt-24">
             <div>
               <h3 className="text-xl font-semibold text-black mb-4">Deleting a working Q&amp;A tab</h3>
@@ -301,7 +301,7 @@ export default function BlumiinCaseStudy() {
                 the tab went. The recordings above still show the old five-tab nav, days before the cut.
               </p>
             </div>
-            <div className="rounded-2xl p-6" style={{ background: "#e8edff", border: "1px solid #d0daff" }}>
+            <div className="rounded-2xl p-6" style={{ background: "var(--card-blue)", border: "1px solid var(--card-blue-border)" }}>
               <p className="text-sm text-gray-600 leading-relaxed">
                 <strong className="text-[#1D4ED8]">OUTCOME:</strong>{" "}
                 one fewer destination, same capability. Subtraction is a design move.

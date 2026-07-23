@@ -19,7 +19,7 @@ export default function Footer() {
           <Link href="/?tab=about"   className="text-xs text-[#8e8e93] hover:text-[#1D4ED8] transition-colors">about</Link>
         </div>
 
-        {/* Right: tagline, email, icons — right-aligned on desktop */}
+        {/* Right: tagline, email, icons - right-aligned on desktop */}
         <div className="sm:text-right">
           <p className="text-xs text-[#8e8e93] mb-1">Let&apos;s work together!</p>
           <a href="mailto:liapaark@gmail.com"
@@ -43,8 +43,8 @@ export default function Footer() {
 
       </div>
 
-      {/* Bottom */}
-      <div className="border-t border-gray-100 pt-5 text-center">
+      {/* Bottom: copyright */}
+      <div className="border-t border-gray-100 pt-5 flex flex-col items-center gap-1 sm:items-start">
         <p className="text-[11px] text-gray-400">Designed &amp; built with Next.js</p>
         <p className="text-[11px] text-gray-400">© 2026 Lydia Park</p>
       </div>

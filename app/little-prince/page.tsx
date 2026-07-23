@@ -198,10 +198,10 @@ export default function LittlePrinceCaseStudy() {
             <p className="text-sm font-semibold text-[#1D4ED8] mb-4">Designer Impact</p>
             <ul className="space-y-3">
               {[
-                "Designed a location-based storytelling experience mapping 7 real village sites to The Little Prince narrative — blending literature, art, and technology",
+                "Designed a location-based storytelling experience mapping 7 real village sites to The Little Prince narrative, blending literature, art, and technology",
                 "Improved user navigation by adding a structured homepage and entry flow after user testing revealed visitors were skipping the intended story path",
                 "Created a complete visual identity including a custom crown character logo, Poppins + ink typography pairing, and storybook color system",
-                "Delivered all 4 core app flows — loading screen, home, planet selection, and village guide — within a 5-week design sprint",
+                "Delivered all 4 core app flows (loading screen, home, planet selection, and village guide) within a 5-week design sprint",
               ].map((point, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
                   <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#1D4ED8] shrink-0" />
@@ -299,7 +299,7 @@ export default function LittlePrinceCaseStudy() {
           {/* Quote cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
 
-            {/* User 1 — pill overlaps top-left */}
+            {/* User 1 - pill overlaps top-left */}
             <div className="relative pt-5">
               <div className="absolute top-0 left-3 z-10">
                 <span className="inline-block bg-[#f0f4ff] border border-[#d0daff] text-[#1D4ED8] text-xs font-semibold px-3 py-1 rounded-full" style={{ transform: "rotate(-4deg)" }}>
@@ -313,7 +313,7 @@ export default function LittlePrinceCaseStudy() {
               </div>
             </div>
 
-            {/* User 2 — pill overlaps bottom-right */}
+            {/* User 2 - pill overlaps bottom-right */}
             <div className="relative pt-5 pb-5">
               <div className="bg-[#f0f4ff] rounded-2xl p-6 pb-8">
                 <p className="text-sm font-medium text-gray-800 leading-relaxed">
@@ -360,7 +360,7 @@ export default function LittlePrinceCaseStudy() {
               </div>
             </div>
 
-            {/* Right: phone gif — same size as Final Designs gifs */}
+            {/* Right: phone gif - same size as Final Designs gifs */}
             <div className="flex justify-center">
               <div
                 className="rounded-[20px] overflow-hidden"
@@ -396,7 +396,7 @@ export default function LittlePrinceCaseStudy() {
               />
             </div>
 
-            {/* Typography label + description — between the two images */}
+            {/* Typography label + description - between the two images */}
             <div>
               <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-2">Typography, Brand &amp; Logo</p>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -439,7 +439,7 @@ export default function LittlePrinceCaseStudy() {
                 id:      "lp-loading",
                 src:     "/images/little-prince/app-loadingscreen-cropped.mp4",
                 label:   "Loading Screen",
-                desc:    "The app opens with a splash animation introducing Le Petite Route — setting the storybook tone before the journey begins.",
+                desc:    "The app opens with a splash animation introducing Le Petite Route, setting the storybook tone before the journey begins.",
                 align:   "left",
               },
               {
@@ -460,7 +460,7 @@ export default function LittlePrinceCaseStudy() {
                 id:      "lp-guide",
                 src:     "/images/little-prince/recording-2.mp4",
                 label:   "Village Guide",
-                desc:    "Each location unlocks a narrative, photo spots, and achievement badges — blending literature, art, and real-world exploration.",
+                desc:    "Each location unlocks a narrative, photo spots, and achievement badges, blending literature, art, and real-world exploration.",
                 align:   "right",
               },
             ].map((v, i) => (
@@ -483,10 +483,10 @@ export default function LittlePrinceCaseStudy() {
                   />
                 </div>
 
-                {/* Description — highlights when scrolled into view */}
+                {/* Description - highlights when scrolled into view */}
                 <div
                   className="flex-1 rounded-[20px] p-6 transition-colors duration-[1500ms]"
-                  style={{ backgroundColor: activeRows.has(i) ? "#f0f4ff" : "transparent" }}
+                  style={{ backgroundColor: activeRows.has(i) ? "var(--row-active)" : "transparent" }}
                 >
                   <p className="text-[11px] uppercase tracking-[0.14em] font-medium text-[#1D4ED8] mb-3">{v.label}</p>
                   <p className="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
@@ -509,7 +509,7 @@ export default function LittlePrinceCaseStudy() {
                 {[
                   {
                     title: "Iterate through testing",
-                    body: "User testing helped me uncover issues where my design layout charts or inconsistency in spacing feedback — refined my design process and improved the overall flow to create a smoother user experience.",
+                    body: "User testing helped me uncover issues where my design layout charts or inconsistency in spacing feedback, which refined my design process and improved the overall flow to create a smoother user experience.",
                   },
                   {
                     title: "Visualization",

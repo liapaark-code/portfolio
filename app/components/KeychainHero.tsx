@@ -5,7 +5,7 @@ import Image from "next/image";
 
 /**
  * Hero keychain that swings from its ring like a real acrylic keychain.
- * - Follows the cursor with a damped spring (premium, springy — not linear).
+ * - Follows the cursor with a damped spring (premium, springy - not linear).
  * - On mouse-leave it swings back through gravity + a small damped bounce.
  * - Crossfades to the "hover" pose (keychain 3) while interacting.
  * Respects prefers-reduced-motion.
