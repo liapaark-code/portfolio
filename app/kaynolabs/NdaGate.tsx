@@ -24,7 +24,11 @@ export default function NdaGate({
     return (
       <>
         {rail}
-        {children}
+        <div className="nda-reveal">{children}</div>
+        <style>{`
+          @keyframes nda-reveal { from { opacity: 0; } to { opacity: 1; } }
+          .nda-reveal { animation: nda-reveal 0.6s ease both; }
+        `}</style>
       </>
     );
   }
