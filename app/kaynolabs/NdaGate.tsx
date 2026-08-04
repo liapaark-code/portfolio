@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const STORAGE_KEY = "kayno-nda-unlocked";
 
 /**
  * NDA gate for the Kayno Labs case study. The preview (title, TL;DR, cover, brief)
  * renders above this; everything passed as `children` stays locked behind a password.
  * When locked, a blurred, clipped peek sits behind a horizontal lock card.
- * Soft client-side gate — appropriate for a portfolio NDA, not real access control.
+ * Soft client-side gate, appropriate for a portfolio NDA, not real access control.
  */
 export default function NdaGate({
   children,
@@ -19,6 +21,13 @@ export default function NdaGate({
   const [unlocked, setUnlocked] = useState(false);
   const [entry, setEntry] = useState("");
   const [error, setError] = useState(false);
+
+  // Remember the unlock across reloads and future visits.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(STORAGE_KEY) === "1") setUnlocked(true);
+    } catch {}
+  }, []);
 
   if (unlocked) {
     return (
@@ -37,6 +46,7 @@ export default function NdaGate({
     e.preventDefault();
     if (entry.trim().toLowerCase() === password.toLowerCase()) {
       setUnlocked(true);
+      try { localStorage.setItem(STORAGE_KEY, "1"); } catch {}
       window.scrollTo({ top: 0, behavior: "auto" });
     } else {
       setError(true);
@@ -52,7 +62,7 @@ export default function NdaGate({
       {/* Fade the peek into white so nothing readable leaks past the card */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/65 to-white" />
 
-      {/* Horizontal lock card — centered over the peek, portfolio blue system */}
+      {/* Horizontal lock card, centered over the peek, portfolio blue system */}
       <div className="absolute inset-0 flex items-center justify-center px-4">
         <div className="w-full max-w-2xl rounded-[1.6rem] px-6 py-6 sm:px-9 sm:py-7 shadow-[0_30px_80px_-38px_rgba(30,64,175,0.4)]" style={{ background: "var(--card-blue)", border: "1px solid var(--card-blue-border)" }}>
           <div className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
