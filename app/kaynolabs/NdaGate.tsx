@@ -19,21 +19,30 @@ export default function NdaGate({
   password: string;
 }) {
   const [unlocked, setUnlocked] = useState(false);
+  const [ready, setReady] = useState(false);       // localStorage checked yet?
+  const [animate, setAnimate] = useState(false);    // only fade in on a fresh unlock
   const [entry, setEntry] = useState("");
   const [error, setError] = useState(false);
 
-  // Remember the unlock across reloads and future visits.
+  // Restore the unlock across reloads and future visits before first paint.
   useEffect(() => {
     try {
       if (localStorage.getItem(STORAGE_KEY) === "1") setUnlocked(true);
     } catch {}
+    setReady(true);
   }, []);
+
+  // While we haven't checked storage yet, render a neutral spacer so a
+  // returning (already-unlocked) visitor never sees the lock screen flash.
+  if (!ready) {
+    return <div className="mb-24 sm:mb-32" style={{ minHeight: 520 }} aria-hidden="true" />;
+  }
 
   if (unlocked) {
     return (
       <>
         {rail}
-        <div className="nda-reveal">{children}</div>
+        <div className={animate ? "nda-reveal" : undefined}>{children}</div>
         <style>{`
           @keyframes nda-reveal { from { opacity: 0; } to { opacity: 1; } }
           .nda-reveal { animation: nda-reveal 0.6s ease both; }
@@ -45,6 +54,7 @@ export default function NdaGate({
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (entry.trim().toLowerCase() === password.toLowerCase()) {
+      setAnimate(true);
       setUnlocked(true);
       try { localStorage.setItem(STORAGE_KEY, "1"); } catch {}
       window.scrollTo({ top: 0, behavior: "auto" });
