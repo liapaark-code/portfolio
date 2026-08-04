@@ -675,35 +675,35 @@ export default function KaynoLabsCaseStudy() {
             <div className="rounded-2xl px-10 py-10 space-y-8">
               {[
                 {
-                  title: "A number ends a debate a feeling only starts",
+                  title: "Saying “it feels off” wasn’t enough",
                   body: (
                     <>
-                      For most of this project I defended choices with &ldquo;this feels cluttered&rdquo; or
-                      &ldquo;this reads long.&rdquo; The moment I started <Hl>counting</Hl> &mdash; words on a page,
-                      taps to a result, options in a menu &mdash; every cut turned into something I could stand
-                      behind instead of an opinion about my own taste.
+                      For most of this project I defended my choices with things like &ldquo;this feels cluttered&rdquo;
+                      or &ldquo;this reads long.&rdquo; That never really convinced anyone, including me. The second I
+                      started <Hl>counting</Hl> the words on a page, the taps it took to get an answer, the options in
+                      a menu, every cut I made became something I could actually explain instead of just a hunch.
                     </>
                   ),
                 },
                 {
-                  title: "You can borrow rigor before you’ve earned experience",
+                  title: "I didn’t need years of experience to be rigorous",
                   body: (
                     <>
-                      I don&rsquo;t have ten years of judgment yet. What I could do was study the clearest work I
-                      could find and write down <Hl>the actual mechanics</Hl> behind why it worked &mdash; the moves,
-                      not the mood &mdash; then turn that into a checklist I reused. Copying the reasoning instead of
-                      the look was the fastest I grew on this project.
+                      I was worried I didn&rsquo;t have the judgment to make big calls yet. So I did the next best
+                      thing: I studied the clearest work I could find and wrote down <Hl>why it actually worked</Hl>,
+                      the specific moves and not just the vibe, then kept that as a checklist I came back to. Copying
+                      the thinking instead of the look was honestly the fastest I&rsquo;ve grown.
                     </>
                   ),
                 },
                 {
-                  title: "The marketing page and the product are one promise",
+                  title: "The landing page and the product are the same thing",
                   body: (
                     <>
-                      I started out treating them as two separate jobs and learned they&rsquo;re the same design
-                      system. When the answer card looks and behaves identically on the homepage and inside the
-                      product, <Hl>the promise and the experience agree</Hl> &mdash; and that agreement is what
-                      earns trust before any metric does.
+                      I used to think of them as two separate jobs. Building both taught me they&rsquo;re really one
+                      system. When the answer card looks and works the exact same way on the homepage and inside the
+                      product, <Hl>what you promise and what you deliver line up</Hl>, and that&rsquo;s what makes
+                      people trust it before you can show them a single number.
                     </>
                   ),
                 },
@@ -722,10 +722,10 @@ export default function KaynoLabsCaseStudy() {
           <div className="rounded-2xl p-8 border-2 border-[#4d7a52]/30 bg-white">
             <p className="text-sm font-semibold text-[#4d7a52] mb-3">What I&rsquo;d do differently</p>
             <p className="text-[15px] text-gray-600 leading-relaxed">
-              If I did it again, I&rsquo;d earn the proof instead of reasoning around it. I made a lot of calls on
-              logic alone &mdash; the confidence dot, the card anatomy, the order of the page are all{" "}
-              <Hl>reasoned calls, not validated ones</Hl>. The honest version of this case study is that I trust the
-              thinking and still owe it the receipts: real users in front of it before I trust the outcome.
+              If I did this again, I&rsquo;d test my decisions instead of just reasoning my way to them. A lot of the
+              calls I made, like the confidence dot, the card layout, and the order of the page, are{" "}
+              <Hl>things I argued for, not things I proved</Hl>. The honest truth is that I believe in the thinking,
+              but I&rsquo;d want to put it in front of real users before I fully trust the outcome.
             </p>
           </div>
         </section>
