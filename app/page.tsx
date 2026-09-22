@@ -217,17 +217,12 @@ export default function Home() {
                 { href: "/blumiin",       cover: "/images/blumiin/cover-poster.png",          video: "/videos/blumiin-cover.mp4", bg: "#365a3d",                        title: "Blumiin",           label: "Product Concept", tags: ["Hackathon Winner", "Concept", "Mobile", "ClaudeCode"],  desc: "Designed an evidence-first herbal remedy app in a 2-hour sprint, winning the Skandalaris intern pitch", cta: "view case study!", meta: [["Role", "Designer, team of 5"], ["Context", "Skandalaris Hackathon"], ["Timeframe", "June 2026"]] },
                 { href: "/little-prince", cover: "/images/little-prince/lp-card-cover-v2.png", video: null,                     bg: "#1a1a2e",                          title: "Le Petite Route",   label: "Mobile Concept", tags: ["Concept", "Mobile"],  desc: "Mapped 7 real village sites to The Little Prince narrative in a location-based storytelling app",    cta: "view the journey!", meta: [["Timeframe", "March 2025"], ["Duration", "5 Weeks"], ["Tools", "Figma, Photoshop, Procreate"]] },
                 { href: "/amc",           cover: "/images/amc/amc-card-cover.png",            video: null,                      bg: "linear-gradient(135deg, #c0392b 0%, #e8a598 100%)", title: "Asian Multicultural Collective Club Rebrand", label: "Brand Identity", tags: ["Shipped", "Brand"],   desc: "Rebranded AMC from a hand-drawn mark to a scalable identity, now on social, events, and merch",                             cta: "view rebrand!", meta: [["Role", "Brand Designer"], ["Client", "AMC @ WashU"], ["Timeframe", "August 2025"]] },
-              ].map((p, i, arr) => {
-                const isArchived = p.href === "/little-prince" || p.href === "/amc";
-                const prevArchived = i > 0 && (arr[i - 1].href === "/little-prince" || arr[i - 1].href === "/amc");
+              ]
+                // Le Petite Route and AMC are archived: kept here as data but hidden from the public work grid.
+                .filter((p) => p.href !== "/little-prince" && p.href !== "/amc")
+                .map((p, i) => {
                 return (
                 <Fragment key={p.href}>
-                  {isArchived && !prevArchived && (
-                    <div className="md:col-span-2 mt-8 sm:mt-10 mb-2 flex items-center gap-4">
-                      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9aa0ad]">Archived</span>
-                      <span className="h-px flex-1 bg-[#e5e7f1]" />
-                    </div>
-                  )}
                 <Link
                   href={p.href}
                   className="group relative block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform hover:-translate-y-1"
